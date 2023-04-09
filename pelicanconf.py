@@ -4,7 +4,7 @@ SITEURL = ''
 
 PATH = 'articles'
 THEME = 'assets'
-OUTPUT_PATH = 'dist/'
+OUTPUT_PATH = 'docs/'
 DIRECT_TEMPLATES = ['index']
 CATEGORY_SAVE_AS = AUTHOR_SAVE_AS = ''
 
