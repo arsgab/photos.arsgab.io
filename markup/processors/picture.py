@@ -1,9 +1,11 @@
 from html.parser import HTMLParser
 from re import compile as re_compile, Pattern
-from xml.etree.ElementTree import Element, SubElement
+from xml.etree.ElementTree import Element, fromstring
 
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
+
+from ..renderers import render_template_partial
 
 
 class Picture(HTMLParser):
@@ -13,9 +15,11 @@ class Picture(HTMLParser):
         if tag == 'pic':
             self.attrs = dict(attrs)
 
-    def create_element(self, parent: Element) -> SubElement:
-        # TODO: render template, create SubElement from string
-        return SubElement(parent, 'ag-picture', attrib=self.attrs)
+    def create_element(self, parent: Element) -> Element:
+        rendered = render_template_partial('picture', self.attrs)
+        element = fromstring(rendered)
+        parent.append(element)
+        return element
 
 
 class PictureBlockProcessor(BlockProcessor):
