@@ -26,6 +26,7 @@ THEME = 'assets'
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
 
+# Processors/renderers setup
 MARKDOWN = {
     'extension_configs': {
         'markdown.extensions.meta': {},
@@ -33,3 +34,8 @@ MARKDOWN = {
     },
     'output_format': 'html5',
 }
+
+# Media processing setup
+IMGPROXY_KEY = env.get('IMGPROXY_KEY')
+IMGPROXY_SALT = env.get('IMGPROXY_SALT')
+IMGPROXY_FQDN = env.get('IMGPROXY_FQDN', 'img.arsgab.io')

@@ -2,9 +2,43 @@
 
 {% block meta_title %}{{ article.meta_title or article.title }}{% endblock %}
 
+{% block styles %}
+  <style>
+      picture {
+          position: relative;
+          overflow: hidden;
+          border-radius: 3px;
+          opacity: 0;
+          transition: opacity .15s ease-out;
+      }
+
+      picture[data-loaded=true] {
+          opacity: 1;
+      }
+
+      picture img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: auto;
+      }
+  </style>
+{% endblock %}
+
 {% block content %}
   <article>
     <header><h1>{{ article.title }}</h1></header>
     {{ article.content }}
   </article>
 {% endblock content %}
+
+{% block scripts %}
+  <script>
+    let images = document.querySelectorAll('picture img');
+    images.forEach(img => {
+      img.parentElement.dataset.loaded = img.complete ? 'true' : 'false';
+      img.onload = () => img.parentElement.dataset.loaded = 'true';
+    });
+  </script>
+{% endblock %}

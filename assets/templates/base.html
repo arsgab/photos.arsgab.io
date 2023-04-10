@@ -10,12 +10,13 @@
   <link rel="dns-prefetch" href="https://stat.arsgab.io/">
   <link rel="dns-prefetch" href="https://unpkg.com/">
   <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm_theme_black.min.css">
+  {% block styles %}{% endblock %}
 </head>
 <body>
 <main>
-  {% block content %}
-  {% endblock content %}
+  {% block content %}{% endblock %}
 </main>
+{% block scripts %}{% endblock %}
 {% block stats %}
 {% if STATS_WEBSITE_ID %}
   <script src="https://stat.arsgab.io/stonks.js" async defer data-website-id="{{ STATS_WEBSITE_ID }}"

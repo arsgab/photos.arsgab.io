@@ -23,7 +23,9 @@ concurrency:
 env:
   AUTHOR: ${{ github.repository_owner }}
   SITENAME: ${{ github.event.repository.name }}
-  STATS_WEBSITE_ID: 082c7c3c-4606-42b1-99b3-f30e3c06cd62
+  STATS_WEBSITE_ID: ${{ vars.STATS_WEBSITE_ID }}
+  IMGPROXY_KEY: ${{ secrets.IMGPROXY_KEY }}
+  IMGPROXY_SALT: ${{ secrets.IMGPROXY_SALT }}
 
 jobs:
   deploy:

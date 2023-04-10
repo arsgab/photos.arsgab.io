@@ -1,3 +1,8 @@
-<ag-picture>
-  <pre>TODO: {{ src }}</pre>
-</ag-picture>
+<figure data-src="{{ src }}">
+  <picture style="padding-top: {{ padding }}%">
+    <img src="{{ url }}" alt="{{ alt }}" loading="{{ loading }}" />
+  </picture>
+{% if caption %}
+  <figcaption>{{ caption|safe }}</figcaption>
+{% endif %}
+</figure>
