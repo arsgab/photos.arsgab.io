@@ -23,6 +23,7 @@ concurrency:
 env:
   AUTHOR: ${{ github.repository_owner }}
   SITENAME: ${{ github.event.repository.name }}
+  STATS_WEBSITE_ID: 082c7c3c-4606-42b1-99b3-f30e3c06cd62
 
 jobs:
   deploy:

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block meta_title %}{{ SITENAME or '~' }}{% endblock %}</title>
+  <link rel="preconnect" href="https://img.arsgab.io/" crossorigin>
+  <link rel="preconnect" href="https://stat.arsgab.io/" crossorigin>
+  <link rel="dns-prefetch" href="https://img.arsgab.io/">
+  <link rel="dns-prefetch" href="https://stat.arsgab.io/">
+  <link rel="dns-prefetch" href="https://unpkg.com/">
+  <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm_theme_black.min.css">
+</head>
+<body>
+<main>
+  {% block content %}
+  {% endblock content %}
+</main>
+{% block stats %}
+{% if STATS_WEBSITE_ID %}
+  <script src="https://stat.arsgab.io/stonks.js" async defer data-website-id="{{ STATS_WEBSITE_ID }}"
+          data-do-not-track="true"></script>
+{% endif %}
+{% endblock stats %}
+</body>
+</html>

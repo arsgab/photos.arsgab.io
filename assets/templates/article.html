@@ -1,1 +1,10 @@
-Hello, world
+{% extends "base.html" %}
+
+{% block meta_title %}{{ article.meta_title or article.title }}{% endblock %}
+
+{% block content %}
+  <article>
+    <header><h1>{{ article.title }}</h1></header>
+    {{ article.content }}
+  </article>
+{% endblock content %}
