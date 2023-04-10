@@ -3,7 +3,7 @@ name: Build articles and publish to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ["master", "main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -19,6 +19,10 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
+env:
+  AUTHOR: ${{ github.repository_owner }}
+  SITENAME: ${{ github.event.repository.name }}
 
 jobs:
   deploy:
