@@ -23,3 +23,11 @@ PATH_METADATA = '(?P<path_no_ext>.*)\..*'
 ARTICLE_URL = ARTICLE_SAVE_AS = PAGE_URL = PAGE_SAVE_AS = '{path_no_ext}.html'
 OUTPUT_PATH = 'dist/'
 THEME = 'assets'
+
+MARKDOWN = {
+    'extension_configs': {
+        'processors.picture': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
