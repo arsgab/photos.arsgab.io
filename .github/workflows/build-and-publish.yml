@@ -29,9 +29,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - name: Install requirements
+        run: pip install -r requirements.txt
       - name: Build site
-        run: |
-          mkdir dist && echo 'Hello!' > ./dist/hello.html
+        run: make html
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
