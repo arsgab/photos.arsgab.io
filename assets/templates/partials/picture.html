@@ -3,7 +3,8 @@
   {% for source in sources %}
     <source srcset="{{ source.srcset }}" media="{{ source.media_query }}" />
   {% endfor %}
-    <img src="{{ fallback }}" alt="{{ alt }}" loading="{{ loading }}" />
+    <img src="{{ fallback }}" alt="{{ alt }}" loading="{{ loading }}" width="{{ dimensions.width }}"
+         height="{{ dimensions.height }}"/>
   </picture>
 {% if caption %}
   <figcaption>{{ caption|safe }}</figcaption>

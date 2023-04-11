@@ -8,7 +8,7 @@ from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
 
 from markup.renderers import render_template_partial
-from utils import ImageResize, StrEnum
+from utils import ImageDimensions, ImageResize, StrEnum
 
 
 class Picture(HTMLParser):
@@ -16,6 +16,7 @@ class Picture(HTMLParser):
     DEFAULT_EXT: str = '.jpeg'
     DEFAULT_RATIO: float = 1.777
     attrs: dict[str, str] = None
+    number: int = 1
 
     class Loading(StrEnum):
         LAZY = 'lazy'
@@ -37,11 +38,16 @@ class Picture(HTMLParser):
         img_base, img_ext = splitext(self.attrs['src'])
         src = img_base + (img_ext or self.DEFAULT_EXT)
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
+        ratio = self._get_ratio()
+        dimensions = ImageDimensions.get_by_ratio(ratio)
+        alt = self.attrs.pop('alt', '') or f'Image {self.number}'
         return {
             'sources': tuple(ImageResize.get_defaults(src)),
             'fallback': ImageResize.get_fallback(src),
             'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
-            'padding': round(100 / self._get_ratio(), 3),
+            'padding': round(100 / ratio, 3),
+            'dimensions': dimensions,
+            'alt': alt,
             **self.attrs,
         }
 
@@ -61,6 +67,7 @@ class Picture(HTMLParser):
 
 class PictureBlockProcessor(BlockProcessor):
     REGEX: Pattern = re_compile(r'\[pic(.+)]')
+    _count: int = 0
 
     def test(self, parent: Element, block: str) -> bool:
         return bool(self.REGEX.match(block))
@@ -71,6 +78,8 @@ class PictureBlockProcessor(BlockProcessor):
         picture.feed(block)
         if not picture.attrs.get('src'):
             return False
+        self._count += 1
+        picture.number = self._count
         parent.append(picture.create_element())
         picture.close()
         return True

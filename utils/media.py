@@ -47,6 +47,15 @@ def get_resized_image_url(
     return get_processed_image_url(source_url, w=max_width, ext=ext, **extra)
 
 
+class ImageDimensions(NamedTuple):
+    width: int = 0
+    height: int = 0
+
+    @classmethod
+    def get_by_ratio(cls, ratio: float) -> 'ImageDimensions':
+        return cls(MAX_IMAGE_WIDTH, int(MAX_IMAGE_WIDTH / ratio))
+
+
 class ImageResize(NamedTuple):
     width: int
     srcset: str
