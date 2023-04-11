@@ -30,7 +30,6 @@ picture img {
     transition: opacity .15s ease-out;
     color: rgba(255, 255, 255, .2);
     font-size: .75em;
-    padding: 1em;
 }
 
 picture[data-loaded=true] img {
