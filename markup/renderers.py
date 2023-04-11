@@ -1,28 +1,21 @@
-from jinja2.filters import do_mark_safe
+from jinja2 import Environment
 from pelican import signals, ArticlesGenerator
 
 from markup import renderer_ref
-
-__all__ = ('render_template', 'render_template_partial', 'renderer_ref')
-
-
-def render_template(template_name: str, ctx: dict = None) -> str:
-    if not template_name.endswith('.html'):
-        template_name = f'{template_name}.html'
-    ctx = ctx or {}
-    renderer = renderer_ref.get()
-    template = renderer.get_template(template_name)
-    rendered = template.render(ctx)
-    return do_mark_safe(rendered)
+from utils.staticfiles import get_static_url
 
 
-def render_template_partial(partial_name: str, ctx: dict = None) -> str:
-    return render_template(f'partials/{partial_name}', ctx=ctx)
+GLOBALS = {
+    'static': get_static_url,
+}
 
 
-def _get_pelikan_jinja_env(generator: ArticlesGenerator) -> None:
+def setup_jinja_env(generator: ArticlesGenerator) -> Environment:
+    generator.env.globals.update(GLOBALS)
     renderer_ref.set(generator.env)
+    return generator.env
 
 
 def register() -> None:
-    signals.article_generator_init.connect(_get_pelikan_jinja_env)
+    signals.article_generator_preread.connect(setup_jinja_env)
+    signals.page_generator_preread.connect(setup_jinja_env)

@@ -19,12 +19,13 @@ DISPLAY_PAGES_ON_MENU = DISPLAY_CATEGORIES_ON_MENU = False
 # Build setup
 DIRECT_TEMPLATES = ['index']
 PATH = 'articles'
-PATH_METADATA = '(?P<path_no_ext>.*)\..*'
-ARTICLE_URL = ARTICLE_SAVE_AS = PAGE_URL = PAGE_SAVE_AS = '{path_no_ext}.html'
+ARTICLE_SAVE_AS = PAGE_SAVE_AS = '{slug}.html'
+ARTICLE_URL = PAGE_URL = '/{slug}'
 OUTPUT_PATH = 'dist/'
 THEME = 'assets'
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
+STATIC_PATHS = []
 
 # Processors/renderers setup
 MARKDOWN = {

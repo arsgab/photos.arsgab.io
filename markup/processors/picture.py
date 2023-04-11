@@ -7,8 +7,7 @@ from xml.etree.ElementTree import Element, fromstring
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
 
-from markup.renderers import render_template_partial
-from utils import ImageDimensions, ImageResize, StrEnum
+from utils import ImageDimensions, ImageResize, render_template_partial, StrEnum
 
 
 class Picture(HTMLParser):

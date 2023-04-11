@@ -1,0 +1,69 @@
+figure {
+    position: relative;
+}
+
+figure::before {
+    content: attr(data-index);
+    position: absolute;
+    top: 0;
+    right: 100%;
+    margin-right: 10px;
+    opacity: .5;
+    font-size: .8em;
+    font-weight: 200;
+}
+
+picture {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, .1);
+}
+
+picture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity .15s ease-out;
+    color: rgba(255, 255, 255, .2);
+    font-size: .75em;
+    padding: 1em;
+}
+
+picture[data-loaded=true] img {
+    opacity: 1;
+}
+
+picture::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    opacity: .8;
+    animation: loader 1s linear infinite alternate;
+    z-index: -1;
+}
+
+picture[data-loaded=true]::after {
+    display: none;
+}
+
+@keyframes loader {
+    0% {
+        box-shadow: 0 0, 0 0;
+        color: rgba(255, 255, 255, .1);
+    }
+    100% {
+        box-shadow: -24px 0, 24px 0;
+        color: rgba(255, 255, 255, 1);
+    }
+}
