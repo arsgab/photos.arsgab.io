@@ -1,5 +1,15 @@
 figure {
     position: relative;
+    margin-bottom: 3rem;
+    transition: opacity .5s ease-out .25s;
+}
+
+figure:not(:first-of-type) {
+    opacity: 0;
+}
+
+figure[data-visible=true] {
+    opacity: 1;
 }
 
 figure::before {
