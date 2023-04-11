@@ -2,7 +2,7 @@ from os import environ as env
 
 
 AUTHOR = env.get('AUTHOR')
-SITENAME = env.get('SITENAME')
+SITENAME = env.get('SITENAME') or 'ag•photos'
 TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
 DEFAULT_DATE = 'fs'
 STATS_WEBSITE_ID = env.get('STATS_WEBSITE_ID')
@@ -23,6 +23,7 @@ ARTICLE_SAVE_AS = PAGE_SAVE_AS = '{slug}.html'
 ARTICLE_URL = PAGE_URL = '/{slug}'
 OUTPUT_PATH = 'dist/'
 THEME = 'assets'
+THEME_STATIC_DIR = 'static'
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
 STATIC_PATHS = []
