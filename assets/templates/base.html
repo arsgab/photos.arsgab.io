@@ -3,13 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block meta_title %}{{ SITENAME or '~' }}{% endblock %}</title>
+  <title>{% block meta_title %}{{ SITENAME }}{% endblock %}</title>
   <link rel="preconnect" href="https://img.arsgab.io/" crossorigin>
   <link rel="preconnect" href="https://stat.arsgab.io/" crossorigin>
   <link rel="dns-prefetch" href="https://img.arsgab.io/">
   <link rel="dns-prefetch" href="https://stat.arsgab.io/">
-  <link rel="dns-prefetch" href="https://unpkg.com/">
-  <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm_theme_black.min.css">
   <link rel="stylesheet" href="{{ static('style.css') }}">
   {% block styles %}{% endblock %}
 </head>

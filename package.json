@@ -1,0 +1,20 @@
+{
+  "name": "photos.arsgab.io",
+  "version": "1.0.0",
+  "description": "",
+  "author": "@arsgab",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.0",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0"
+  },
+  "dependencies": {
+    "awsm.css": "^3.0.7"
+  },
+  "scripts": {
+    "build": "postcss assets/styles/style.css --dir dist/static",
+    "watch": "postcss assets/styles/style.css --dir dist/static --watch"
+  }
+}

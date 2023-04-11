@@ -36,12 +36,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - name: Install Node requirements
+        run: npm ci
+      - name: Build static assets
+        run: npm run build
       - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'pip'
-      - name: Install requirements
+      - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Build site
         run: make html
