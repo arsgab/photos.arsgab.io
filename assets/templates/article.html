@@ -8,20 +8,19 @@
           position: relative;
           overflow: hidden;
           border-radius: 3px;
-          opacity: 0;
-          transition: opacity .15s ease-out;
+          background: rgba(255,255,255,.1);
       }
-
-      picture[data-loaded=true] {
-          opacity: 1;
-      }
-
       picture img {
           position: absolute;
           top: 0;
           left: 0;
-          height: 100%;
-          width: auto;
+          width: 100%;
+          height: auto;
+          opacity: 0;
+          transition: opacity .15s ease-out;
+      }
+      picture[data-loaded=true] img {
+          opacity: 1;
       }
   </style>
 {% endblock %}

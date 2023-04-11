@@ -1,6 +1,9 @@
 <figure data-src="{{ src }}">
   <picture style="padding-top: {{ padding }}%">
-    <img src="{{ url }}" alt="{{ alt }}" loading="{{ loading }}" />
+  {% for source in sources %}
+    <source srcset="{{ source.srcset }}" media="{{ source.media_query }}" />
+  {% endfor %}
+    <img src="{{ fallback }}" alt="{{ alt }}" loading="{{ loading }}" />
   </picture>
 {% if caption %}
   <figcaption>{{ caption|safe }}</figcaption>

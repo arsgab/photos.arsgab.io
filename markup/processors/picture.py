@@ -8,7 +8,7 @@ from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
 
 from markup.renderers import render_template_partial
-from utils import get_processed_image_url, StrEnum
+from utils import ImageResize, StrEnum
 
 
 class Picture(HTMLParser):
@@ -36,13 +36,12 @@ class Picture(HTMLParser):
     def get_context(self) -> dict:
         img_base, img_ext = splitext(self.attrs['src'])
         src = img_base + (img_ext or self.DEFAULT_EXT)
-        url = get_processed_image_url(src, ext='webp')
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
-        ratio = self._get_ratio()
         return {
-            'url': url,
+            'sources': tuple(ImageResize.get_defaults(src)),
+            'fallback': ImageResize.get_fallback(src),
             'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
-            'padding': round(100 / ratio, 2),
+            'padding': round(100 / self._get_ratio(), 3),
             **self.attrs,
         }
 

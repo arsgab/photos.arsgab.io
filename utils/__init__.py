@@ -1,2 +1,2 @@
 from .datastructures import StrEnum
-from .media import get_processed_image_url
+from .media import get_processed_image_url, ImageResize
