@@ -16,7 +16,7 @@ class Picture(HTMLParser):
     DEFAULT_EXT: str = '.jpeg'
     DEFAULT_RATIO: float = 1.777
     attrs: dict[str, str] = None
-    number: int = 1
+    index: int = 1
 
     class Loading(StrEnum):
         LAZY = 'lazy'
@@ -40,15 +40,17 @@ class Picture(HTMLParser):
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
         ratio = self._get_ratio()
         dimensions = ImageDimensions.get_by_ratio(ratio)
-        alt = self.attrs.pop('alt', '') or f'Image {self.number}'
+        alt = self.attrs.get('alt') or f'Image {self.index}'
         return {
+            'index': self.index,
             'sources': tuple(ImageResize.get_defaults(src)),
             'fallback': ImageResize.get_fallback(src),
             'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
             'padding': round(100 / ratio, 3),
             'dimensions': dimensions,
             'alt': alt,
-            **self.attrs,
+            'src': src,
+            'caption': self.attrs.get('caption', ''),
         }
 
     def _get_ratio(self) -> float:
@@ -79,7 +81,7 @@ class PictureBlockProcessor(BlockProcessor):
         if not picture.attrs.get('src'):
             return False
         self._count += 1
-        picture.number = self._count
+        picture.index = self._count
         parent.append(picture.create_element())
         picture.close()
         return True

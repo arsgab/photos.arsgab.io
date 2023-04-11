@@ -1,4 +1,4 @@
-<figure data-src="{{ src }}">
+<figure data-src="{{ src }}" data-index="{{ index }}">
   <picture style="padding-top: {{ padding }}%">
   {% for source in sources %}
     <source srcset="{{ source.srcset }}" media="{{ source.media_query }}" />
