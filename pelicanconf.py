@@ -25,6 +25,7 @@ ARTICLE_SAVE_AS = PAGE_SAVE_AS = '{slug}.html'
 ARTICLE_URL = PAGE_URL = '/{slug}'
 OUTPUT_PATH = 'dist'
 THEME = 'assets'
+THEME_STATIC_PATHS = ['favicons', 'manifest.webmanifest']
 THEME_STATIC_DIR = 'static'
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
