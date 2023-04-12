@@ -2,16 +2,21 @@
 
 {% block meta_title %}{{ article.meta_title or article.title }}{% endblock %}
 
+{% set text_color = article.color or 'yellow' %}
+
 {% block styles %}
   <style>
       body article, body footer, body header, body main {
           max-width: 60rem;
       }
+      article {
+          color: var(--text-color);
+      }
   </style>
 {% endblock %}
 
 {% block content %}
-  <article>
+  <article style="--text-color: {{ text_color }};">
     <header>
       <h1>{{ article.title }}</h1>
       {% if article.subtitle %}<p>{{ article.subtitle }}</p>{% endif %}
@@ -21,22 +26,5 @@
 {% endblock content %}
 
 {% block scripts %}
-  <script>
-    window.addEventListener('load', () => {
-      document.querySelectorAll('picture img').forEach(img => {
-        img.parentElement.dataset.loaded = img.complete ? 'true' : 'false';
-        img.onload = () => img.parentElement.dataset.loaded = 'true';
-      });
-
-      document.querySelectorAll('article figure').forEach(figure => {
-        let observer = new IntersectionObserver(e => {
-          if (e[0].isIntersecting) {
-            figure.dataset.visible = 'true';
-            observer.unobserve(figure);
-          }
-        }, {threshold: [0.25]});
-        observer.observe(figure);
-      });
-    });
-  </script>
+  <script defer>{% include "lazyload.js" %}</script>
 {% endblock %}

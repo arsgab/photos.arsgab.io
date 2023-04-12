@@ -2,6 +2,7 @@
 title: Türkiye
 subtitle: Karadeniz, Istanbul, Marmara, Ege, Izmir, Ankara
 permalink: /turkiye
+color: rgb(253,225,52)
 ---
 
 [pic src=turkiye/IMG_1793 eager]
