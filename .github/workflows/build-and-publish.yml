@@ -28,7 +28,7 @@ env:
   IMGPROXY_SALT: ${{ secrets.IMGPROXY_SALT }}
 
 jobs:
-  deploy:
+  build-and-publish:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -44,7 +44,7 @@ jobs:
       - name: Install Node requirements
         run: npm ci
       - name: Build static assets
-        run: npm run build
+        run: make static
       - name: Install Python
         uses: actions/setup-python@v4
         with:

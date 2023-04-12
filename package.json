@@ -9,13 +9,16 @@
     "cssnano": "^6.0.0",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
-    "postcss-hash": "^3.0.0"
+    "postcss-hash": "^3.0.0",
+    "postcss-import": "^15.1.0",
+    "postcss-load-config": "^4.0.1",
+    "postcss-nesting": "^11.2.2"
   },
   "dependencies": {
     "awsm.css": "^3.0.7"
   },
   "scripts": {
-    "build": "postcss assets/styles/style.css --dir=dist/static --config=assets",
-    "watch": "postcss assets/styles/style.css --dir=dist/static --config=assets --watch"
+    "build": "postcss assets/styles/style.css --dir=dist/static --env=production",
+    "watch": "postcss assets/styles/style.css --dir=dist/static --env=development --watch --verbose"
   }
 }
