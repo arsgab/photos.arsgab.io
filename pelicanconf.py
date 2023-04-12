@@ -5,6 +5,7 @@ AUTHOR = env.get('AUTHOR')
 SITENAME = env.get('SITENAME') or 'ag•photos'
 TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
 DEFAULT_DATE = 'fs'
+STATS_SCRIPTS_URL = 'https://stat.arsgab.io/stonks.js'
 STATS_WEBSITE_ID = env.get('STATS_WEBSITE_ID')
 
 # Disable category/author/feeds pages build

@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block meta_title %}{{ SITENAME }}{% endblock %}</title>
+  <link rel="preload" href="{{ static('style.css') }}" as="style">
   <link rel="preconnect" href="https://img.arsgab.io/" crossorigin>
   <link rel="preconnect" href="https://stat.arsgab.io/" crossorigin>
   <link rel="dns-prefetch" href="https://img.arsgab.io/">
@@ -19,7 +20,7 @@
 {% block scripts %}{% endblock %}
 {% block stats %}
 {% if STATS_WEBSITE_ID %}
-  <script src="https://stat.arsgab.io/stonks.js" async defer data-website-id="{{ STATS_WEBSITE_ID }}"
+  <script async defer src="{{ STATS_SCRIPTS_URL }}" data-website-id="{{ STATS_WEBSITE_ID }}"
           data-do-not-track="true"></script>
 {% endif %}
 {% endblock stats %}
