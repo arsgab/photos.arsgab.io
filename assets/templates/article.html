@@ -4,17 +4,6 @@
 
 {% set text_color = article.color or 'yellow' %}
 
-{% block styles %}
-  <style>
-      body article, body footer, body header, body main {
-          max-width: 60rem;
-      }
-      article {
-          color: var(--text-color);
-      }
-  </style>
-{% endblock %}
-
 {% block content %}
   <article style="--text-color: {{ text_color }};">
     <header>
