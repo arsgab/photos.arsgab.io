@@ -1,4 +1,5 @@
 from os import environ as env
+from pathlib import Path
 
 
 AUTHOR = env.get('AUTHOR')
@@ -22,12 +23,15 @@ DIRECT_TEMPLATES = ['index']
 PATH = 'articles'
 ARTICLE_SAVE_AS = PAGE_SAVE_AS = '{slug}.html'
 ARTICLE_URL = PAGE_URL = '/{slug}'
-OUTPUT_PATH = 'dist/'
+OUTPUT_PATH = 'dist'
 THEME = 'assets'
 THEME_STATIC_DIR = 'static'
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
 STATIC_PATHS = []
+BASE_DIR = Path('.')
+STATIC_BUILD_DIR = BASE_DIR / OUTPUT_PATH / THEME_STATIC_DIR
+STATIC_URL = f'/{THEME_STATIC_DIR}/'
 
 # Processors/renderers setup
 MARKDOWN = {
