@@ -6,6 +6,7 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.14",
+    "browser-sync": "^2.29.1",
     "cssnano": "^6.0.0",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
@@ -19,6 +20,7 @@
   },
   "scripts": {
     "build": "postcss assets/styles/style.css --dir=dist/static --env=production",
-    "watch": "postcss assets/styles/style.css --dir=dist/static --env=development --watch --verbose"
+    "watch": "postcss assets/styles/style.css --dir=dist/static --env=development --watch --verbose",
+    "bs": "browser-sync start --config .browsersyncrc.js"
   }
 }

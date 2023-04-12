@@ -46,9 +46,6 @@ help:
 html:
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(CONFFILE)" $(PELICANOPTS)
 
-static:
-	npm run build
-
 clean:
 	[ ! -d "$(OUTPUTDIR)" ] || rm -rf "$(OUTPUTDIR)"
 
@@ -67,5 +64,15 @@ devserver:
 devserver-global:
 	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS) -b 0.0.0.0
 
+static:
+	npm run build
+
+watch:
+	npm run watch &
+	npm run bs
+
+edit:
+	make devserver &
+	npm run bs
 
 .PHONY: html help clean regenerate serve serve-global devserver publish 
