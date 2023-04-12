@@ -46,6 +46,7 @@ figure {
 
 picture {
   position: relative;
+  padding-top: calc(100% / var(--ratio));
 
   & img {
     position: absolute;

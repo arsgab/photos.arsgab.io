@@ -1,10 +1,10 @@
 <figure data-src="{{ src }}" data-index="{{ index }}">
-  <picture style="padding-top: {{ padding }}%">
+  <picture style="--ratio: {{ ratio }};">
   {% for source in sources %}
-    <source srcset="{{ source.srcset }}" media="{{ source.media_query }}" />
+    <source srcset="{{ source.srcset|join(', ') }}" media="{{ source.media_query }}" />
   {% endfor %}
     <img src="{{ fallback }}" alt="{{ alt }}" loading="{{ loading }}" width="{{ dimensions.width }}"
-         height="{{ dimensions.height }}"/>
+         height="{{ dimensions.height }}" />
   </picture>
 {% if caption %}
   <figcaption>{{ caption|safe }}</figcaption>

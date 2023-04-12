@@ -58,7 +58,7 @@ class ImageDimensions(NamedTuple):
 
 class ImageResize(NamedTuple):
     width: int
-    srcset: str
+    srcset: Iterable[str]
     condition: str = 'max-width'
     previous: Optional['ImageResize'] = None
 
@@ -101,7 +101,7 @@ class ImageResize(NamedTuple):
                     source_url, source_width, width * scale, factors or (), **params
                 ),
             )
-            last_resize = ImageResize(width, ', '.join(srcset), previous=last_resize)
+            last_resize = ImageResize(width, srcset, previous=last_resize)
             yield last_resize
 
         srcset = (
@@ -116,7 +116,7 @@ class ImageResize(NamedTuple):
         )
         yield ImageResize(
             last_resize.width + 1 if last_resize else 1,
-            ', '.join(srcset),
+            srcset,
             condition='min-width',
         )
 

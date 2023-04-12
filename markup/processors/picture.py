@@ -13,8 +13,8 @@ from utils import ImageDimensions, ImageResize, render_template_partial, StrEnum
 class Picture(HTMLParser):
     TAG: str = 'pic'
     DEFAULT_EXT: str = '.jpeg'
-    DEFAULT_RATIO: float = 1.777
-    attrs: dict[str, str] = None
+    DEFAULT_RATIO: float = 1.777  # 16:9
+    attrs: dict[str, str] | None = None
     index: int = 1
 
     class Loading(StrEnum):
@@ -45,8 +45,8 @@ class Picture(HTMLParser):
             'sources': tuple(ImageResize.get_defaults(src)),
             'fallback': ImageResize.get_fallback(src),
             'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
-            'padding': round(100 / ratio, 3),
             'dimensions': dimensions,
+            'ratio': ratio,
             'alt': alt,
             'src': src,
             'caption': self.attrs.get('caption', ''),
