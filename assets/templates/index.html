@@ -1,24 +1,5 @@
 {% extends "base.html" %}
 
-{% block styles %}
-  <style>
-      body > header h1 {
-        text-transform: uppercase;
-        font-size: .8em;
-        line-height: 5;
-        letter-spacing: .4em;
-        opacity: .75;
-        font-weight: 300;
-      }
-  </style>
-{% endblock %}
-
-{% block header %}
-  <header>
-    <h1>ag•photos</h1>
-  </header>
-{% endblock %}
-
 {% block content %}
   {% for article in articles %}
     <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>

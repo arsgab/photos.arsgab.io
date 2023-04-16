@@ -5,15 +5,15 @@ permalink: /turkiye
 color: rgb(253,225,52)
 ---
 
-[pic src=turkiye/IMG_1793 eager]
+[pic src=turkiye/IMG_1864 eager w=7]
 
-[pic src=turkiye/IMG_1846]
+[pic src=turkiye/IMG_1793 grid=6|2]
 
-[pic src=turkiye/IMG_1864]
+[pic src=turkiye/IMG_1846 w=7 x=1]
 
 [pic src=turkiye/IMG_1960]
 
-[pic src=turkiye/IMG_2095]
+[pic src=turkiye/IMG_2095 w=7 x=2]
 
 [pic src=turkiye/IMG_2096]
 

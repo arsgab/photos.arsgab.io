@@ -1,4 +1,4 @@
-<figure data-src="{{ src }}" data-index="{{ index }}">
+<figure data-src="{{ src }}" data-index="{{ index }}" data-width="{{ columns }}" data-offset="{{ offset }}">
   <picture style="--ratio: {{ ratio }};">
   {% for source in sources %}
     <source srcset="{{ source.srcset|join(', ') }}" media="{{ source.media_query }}" />

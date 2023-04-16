@@ -40,6 +40,9 @@ class Picture(HTMLParser):
         ratio = self._get_ratio()
         dimensions = ImageDimensions.get_by_ratio(ratio)
         alt = self.attrs.get('alt') or f'Image {self.index}'
+        columns, offset = self.attrs.get('grid', '|').split('|')
+        columns = self.attrs.get('w') or columns
+        offset = self.attrs.get('x') or offset
         return {
             'index': self.index,
             'sources': tuple(ImageResize.get_defaults(src)),
@@ -50,6 +53,8 @@ class Picture(HTMLParser):
             'alt': alt,
             'src': src,
             'caption': self.attrs.get('caption', ''),
+            'columns': columns or '*',
+            'offset': offset or '*',
         }
 
     def _get_ratio(self) -> float:

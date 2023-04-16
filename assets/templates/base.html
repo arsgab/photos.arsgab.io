@@ -15,18 +15,33 @@
   <link rel="manifest" href="{{ static('manifest.webmanifest') }}">
   <link rel="stylesheet" href="{{ static('style.css') }}">
   {% block styles %}{% endblock %}
-</head>
-<body>
-{% block header %}{% endblock %}
-<main>
-  {% block content %}{% endblock %}
-</main>
-{% block scripts %}{% endblock %}
-{% block stats %}
-{% if STATS_WEBSITE_ID %}
+  {% block scripts %}{% endblock %}
+
+  {% block stats %}
+  {% if STATS_WEBSITE_ID %}
   <script async defer src="{{ STATS_SCRIPTS_URL }}" data-website-id="{{ STATS_WEBSITE_ID }}"
           data-do-not-track="true"></script>
-{% endif %}
-{% endblock stats %}
+  {% endif %}
+  {% endblock stats %}
+
+</head>
+<body style="--text-color: {{ text_color or 'white' }};">
+
+{% block site_header %}
+  <header role="banner">
+  {% if page_name == 'index' %}
+    <h1>{{ SITENAME }}</h1>
+  {% else %}
+    <a href="/">{{ SITENAME }}</a>
+  {% endif %}
+  </header>
+{% endblock site_header %}
+
+{% block main %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+{% endblock main %}
+
 </body>
 </html>

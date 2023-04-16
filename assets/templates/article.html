@@ -2,15 +2,17 @@
 
 {% block meta_title %}{{ article.meta_title or article.title }}{% endblock %}
 
-{% set text_color = article.color or 'yellow' %}
+{% set text_color = article.color or 'white' %}
 
 {% block content %}
-  <article style="--text-color: {{ text_color }};">
+  <article>
     <header>
       <h1>{{ article.title }}</h1>
       {% if article.subtitle %}<p>{{ article.subtitle }}</p>{% endif %}
     </header>
-    {{ article.content }}
+    <div class="grid">
+      {{ article.content }}
+    </div>
   </article>
 {% endblock content %}
 
