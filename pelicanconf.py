@@ -1,7 +1,6 @@
 from os import environ as env
 from pathlib import Path
 
-
 AUTHOR = env.get('AUTHOR')
 SITENAME = env.get('SITENAME') or 'photos•arsgab•io'
 TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')

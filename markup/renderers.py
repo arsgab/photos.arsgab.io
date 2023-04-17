@@ -1,9 +1,8 @@
 from jinja2 import Environment
-from pelican import signals, ArticlesGenerator
+from pelican import ArticlesGenerator, signals
 
 from markup import renderer_ref
 from utils.staticfiles import get_static_url
-
 
 GLOBALS = {
     'static': get_static_url,

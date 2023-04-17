@@ -1,5 +1,6 @@
 PY?=
-PELICAN?=.venv/bin/pelican
+VENV?=.venv
+PELICAN?=$(VENV)/bin/pelican
 PELICANOPTS=
 
 BASEDIR=$(CURDIR)
@@ -63,6 +64,9 @@ devserver:
 
 devserver-global:
 	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS) -b 0.0.0.0
+
+fmt:
+	$(VENV)/bin/isort .
 
 static:
 	npm run build

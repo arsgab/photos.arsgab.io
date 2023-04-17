@@ -1,13 +1,13 @@
 from contextlib import suppress
 from html.parser import HTMLParser
 from os.path import splitext
-from re import compile as re_compile, Pattern
+from re import Pattern, compile as re_compile
 from xml.etree.ElementTree import Element, fromstring
 
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
 
-from utils import ImageDimensions, ImageResize, render_template_partial, StrEnum
+from utils import ImageDimensions, ImageResize, StrEnum, render_template_partial
 
 
 class Picture(HTMLParser):

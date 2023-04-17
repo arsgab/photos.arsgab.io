@@ -4,7 +4,7 @@ from hmac import new as hmac_new
 from textwrap import wrap
 from typing import Any, Iterable, Iterator, NamedTuple, Optional
 
-from pelicanconf import IMGPROXY_KEY, IMGPROXY_SALT, IMGPROXY_FQDN
+from pelicanconf import IMGPROXY_FQDN, IMGPROXY_KEY, IMGPROXY_SALT
 
 assert bool(IMGPROXY_KEY), '`IMGPROXY_KEY` not set'
 assert bool(IMGPROXY_SALT), '`IMGPROXY_SALT` not set'
@@ -27,23 +27,15 @@ def get_processed_image_url(
 
     source_url = _qualify_source_image_url(source_url_or_path)
     source_url = _encode_source_image_url(source_url) if encode else f'plain/{source_url}'
-    processing_options = '/'.join(
-        f'{k}:{v}' for k, v in options.items() if v is not None
-    )
-    path = (
-        f'/{processing_options}/{source_url}'
-        if processing_options
-        else f'/{source_url}'
-    )
+    processing_options = '/'.join(f'{k}:{v}' for k, v in options.items() if v is not None)
+    path = f'/{processing_options}/{source_url}' if processing_options else f'/{source_url}'
     if ext is not None:
         path = f'{path}.{ext}' if encode else f'{path}@{ext}'
     signature = _generate_image_path_signature(path).decode()
     return f'https://{IMGPROXY_FQDN}/{signature}{path}'
 
 
-def get_resized_image_url(
-    source_url: str, max_width: int, ext: str = 'webp', **extra: Any
-) -> str:
+def get_resized_image_url(source_url: str, max_width: int, ext: str = 'webp', **extra: Any) -> str:
     return get_processed_image_url(source_url, w=max_width, ext=ext, **extra)
 
 
@@ -88,18 +80,13 @@ class ImageResize(NamedTuple):
         for width in BREAKPOINTS:
             if source_width < width:
                 break
-            params = {
-                **extra,
-                'q': extra.get('q') or DEFAULT_IMAGE_QUALITY
-            }
+            params = {**extra, 'q': extra.get('q') or DEFAULT_IMAGE_QUALITY}
             # Use max. quality for threshold small/large images
             if width < 480 or width > 1024:
                 params.update(q=100)
             srcset = (
                 get_resized_image_url(source_url, max_width=width * scale, **params),
-                *cls._get_factors(
-                    source_url, source_width, width * scale, factors or (), **params
-                ),
+                *cls._get_factors(source_url, source_width, width * scale, factors or (), **params),
             )
             last_resize = ImageResize(width, srcset, previous=last_resize)
             yield last_resize
@@ -153,4 +140,3 @@ def _encode_source_image_url(source_url: str) -> str:
 def _generate_image_path_signature(path: str) -> bytes:
     digest = hmac_new(KEY, msg=SALT + path.encode(), digestmod=sha256).digest()
     return urlsafe_b64encode(digest).rstrip(b'=')
-
