@@ -8,30 +8,53 @@ body {
   font-family: var(--font-family);
   color: var(--text-color);
   line-height: 1.5;
-  margin: var(--page-margin);
+  padding: var(--page-margin);
   -webkit-font-smoothing: antialiased;
 }
 
 a {
   color: var(--text-color);
   text-decoration: none;
+  transition: color .25s ease-in-out;
 }
 
 header[role=banner] {
-  opacity: .5;
-  text-transform: uppercase;
-  font-size: .75em;
-  letter-spacing: .25em;
+  text-align: center;
   margin-bottom: .5rem;
 
-  & a {
+  & a, & h1 {
+    opacity: .5;
     display: inline-block;
-    padding: 5px 8px;
-    margin: -5px 0 0 -8px;
-    border-radius: 3px;
+    font-size: .75em;
+    text-transform: uppercase;
+    letter-spacing: .25em;
+    position: relative;
+  }
+
+  & a {
+    &::before {
+      content: "←";
+      display: block;
+      line-height: 1.1;
+      border-radius: 3px;
+      opacity: .3;
+      text-align: left;
+      position: absolute;
+      z-index: -1;
+      width: calc(100% + 2em);
+      height: calc(100% + 6px);
+      padding: 6px 3px 4px 3px;
+      top: -3px;
+      left: -1.5em;
+    }
 
     &:hover {
-      background: rgba(255,255,255,.2);
+      opacity: .75;
+    }
+
+    &:hover::before {
+      background: var(--text-color);
+      color: var(--bg-color);
     }
   }
 }

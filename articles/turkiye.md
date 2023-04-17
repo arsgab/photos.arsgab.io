@@ -1,7 +1,8 @@
 ---
 title: Türkiye
 subtitle: Karadeniz, Istanbul, Marmara, Ege, Izmir, Ankara
-permalink: /turkiye
+slug: turkiye
+date: 2023
 color: rgb(253,225,52)
 ---
 
