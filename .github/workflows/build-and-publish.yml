@@ -36,6 +36,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      # Static assets stuff
       - name: Install Node
         uses: actions/setup-node@v3
         with:
@@ -45,15 +47,38 @@ jobs:
         run: npm ci
       - name: Build static assets
         run: make static
+
+      # Python stuff
       - name: Install Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
-          cache: 'pip'
-      - name: Install Python requirements
-        run: pip install -r requirements.txt
+          python-version: '3.11'
+      - name: Load cached Poetry installation
+        id: cached-poetry
+        uses: actions/cache@v3
+        with:
+          path: ~/.local
+          key: poetry-cached
+      - name: Install Poetry
+        if: steps.cached-poetry.outputs.cache-hit != 'true'
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+      - name: Load cached Python dependencies
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Install Python dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
       - name: Build site
         run: make html
+
+      # Publish
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

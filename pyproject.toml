@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "arsgab-io-photos"
+version = "0.1.0"
+description = "Static site generator for personal photos archive"
+authors = ["Arseny Gabdullin <me@arsgab.io>"]
+readme = "README.md"
+packages = [{include = "arsgab_io_photos"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pelican = {extras = ["markdown"], version = "^4.8.0"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
