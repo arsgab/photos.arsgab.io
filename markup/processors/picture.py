@@ -1,13 +1,13 @@
+from collections import Iterable
 from contextlib import suppress
 from html.parser import HTMLParser
-from os.path import splitext
 from re import Pattern, compile as re_compile
 from xml.etree.ElementTree import Element, fromstring
 
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
 
-from utils import ImageDimensions, ImageResize, StrEnum, render_template_partial
+from utils import ImageDimensions, ImageResizeSet, StrEnum, render_template_partial
 
 
 class Picture(HTMLParser):
@@ -34,24 +34,23 @@ class Picture(HTMLParser):
         return fromstring(rendered)
 
     def get_context(self) -> dict:
-        img_base, img_ext = splitext(self.attrs['src'])
-        src = img_base + (img_ext or self.DEFAULT_EXT)
+        resizes = ImageResizeSet(self.attrs['src'])
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
         ratio = self._get_ratio()
-        dimensions = ImageDimensions.get_by_ratio(ratio)
+        dimensions = ImageDimensions.fake_from_ratio(ratio)
         alt = self.attrs.get('alt') or f'Image {self.index}'
         columns, offset = self.attrs.get('grid', '|').split('|')
         columns = self.attrs.get('w') or columns
         offset = self.attrs.get('x') or offset
         return {
             'index': self.index,
-            'sources': tuple(ImageResize.get_defaults(src)),
-            'fallback': ImageResize.get_fallback(src),
+            'sources': resizes.sources,
+            'fallback': resizes.fallback,
             'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
             'dimensions': dimensions,
             'ratio': ratio,
             'alt': alt,
-            'src': src,
+            'src': self.attrs['src'],
             'caption': self.attrs.get('caption', ''),
             'columns': columns or '*',
             'offset': offset or '*',
@@ -98,3 +97,14 @@ class PictureExtension(Extension):
 
 def makeExtension(**kwargs) -> PictureExtension:  # noqa
     return PictureExtension(**kwargs)
+
+
+def render_picture_tag(
+    src: str, max_width: int | None = None, breakpoints: Iterable[int] | None = None
+) -> str:
+    resizes = ImageResizeSet(src, max_width=max_width, breakpoints=breakpoints)
+    ctx = {
+        'sources': resizes.sources,
+        'fallback': resizes.fallback,
+    }
+    return render_template_partial('picture-tag', ctx)

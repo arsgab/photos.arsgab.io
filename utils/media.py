@@ -1,6 +1,7 @@
 from base64 import urlsafe_b64encode
 from hashlib import sha256
 from hmac import new as hmac_new
+from os.path import splitext
 from textwrap import wrap
 from typing import Any, Iterable, Iterator, NamedTuple, Optional
 
@@ -11,9 +12,10 @@ assert bool(IMGPROXY_SALT), '`IMGPROXY_SALT` not set'
 KEY = bytes.fromhex(IMGPROXY_KEY)
 SALT = bytes.fromhex(IMGPROXY_SALT)
 
+IMAGE_DEFAULT_EXT = '.jpeg'
 MAX_IMAGE_WIDTH = 1400
 DEFAULT_IMAGE_QUALITY = 80
-BREAKPOINTS: tuple[int, ...] = (320, 480, 640, 800, 960, 1024, 1280)
+DEFAULT_BREAKPOINTS: tuple[int, ...] = (320, 480, 640, 800, 960, 1024, 1280)
 
 
 def get_processed_image_url(
@@ -44,7 +46,7 @@ class ImageDimensions(NamedTuple):
     height: int = 0
 
     @classmethod
-    def get_by_ratio(cls, ratio: float) -> 'ImageDimensions':
+    def fake_from_ratio(cls, ratio: float) -> 'ImageDimensions':
         return cls(MAX_IMAGE_WIDTH, int(MAX_IMAGE_WIDTH / ratio))
 
 
@@ -67,36 +69,54 @@ class ImageResize(NamedTuple):
             )
         return self.media_query
 
-    @classmethod
-    def get_defaults(
-        cls,
+
+class ImageResizeSet:
+    source_url: str
+    source_width: int = 9999
+    max_width: int = MAX_IMAGE_WIDTH
+    sources: Iterable[ImageResize] = ()
+    fallback: str | None = None
+
+    def __init__(
+        self,
         source_url: str,
-        source_width: int = 9999,
+        source_width: int = None,
+        max_width: int = None,
+        breakpoints: Iterable[int] = DEFAULT_BREAKPOINTS,
+    ):
+        img_base, img_ext = splitext(source_url)
+        self.source_url = img_base + (img_ext or IMAGE_DEFAULT_EXT)
+        self.source_width = source_width or self.source_width
+        self.max_width = max_width or self.max_width
+        self.sources = tuple(self.get_resizes(breakpoints=breakpoints))
+        self.fallback = self.get_fallback(max_width=max_width)
+
+    def get_resizes(
+        self,
+        breakpoints: Iterable[int] = DEFAULT_BREAKPOINTS,
         factors: Iterable[int] = (2,),
         scale: int = 1,
         **extra: Any,
-    ) -> Iterator['ImageResize']:
+    ) -> Iterator[ImageResize]:
         last_resize = None
-        for width in BREAKPOINTS:
-            if source_width < width:
+        for width in breakpoints:
+            if self.source_width < width:
                 break
             params = {**extra, 'q': extra.get('q') or DEFAULT_IMAGE_QUALITY}
             # Use max. quality for threshold small/large images
             if width < 480 or width > 1024:
                 params.update(q=100)
             srcset = (
-                get_resized_image_url(source_url, max_width=width * scale, **params),
-                *cls._get_factors(source_url, source_width, width * scale, factors or (), **params),
+                get_resized_image_url(self.source_url, max_width=width * scale, **params),
+                *self._get_factors(width * scale, factors or (), **params),
             )
             last_resize = ImageResize(width, srcset, previous=last_resize)
             yield last_resize
 
         srcset = (
-            get_resized_image_url(source_url, max_width=MAX_IMAGE_WIDTH * scale, **extra),
-            *cls._get_factors(
-                source_url,
-                source_width,
-                MAX_IMAGE_WIDTH * scale,
+            get_resized_image_url(self.source_url, max_width=MAX_IMAGE_WIDTH * scale, **extra),
+            *self._get_factors(
+                self.max_width * scale,
                 factors or (),
                 **extra,
             ),
@@ -107,23 +127,20 @@ class ImageResize(NamedTuple):
             condition='min-width',
         )
 
-    @staticmethod
     def _get_factors(
-        source_url: str,
-        source_width: int,
+        self,
         width: int,
         factors: Iterable[int],
         **extra: Any,
     ) -> Iterator[str]:
         for factor in factors:
             extra_width = width * factor
-            if source_width > extra_width:
-                src = get_resized_image_url(source_url, max_width=extra_width, **extra)
+            if self.source_width > extra_width:
+                src = get_resized_image_url(self.source_url, max_width=extra_width, **extra)
                 yield f'{src} {factor}x'
 
-    @classmethod
-    def get_fallback(cls, source_url: str, max_width: int = 1200, **kwargs: Any) -> str:
-        return get_resized_image_url(source_url, max_width=max_width, **kwargs)
+    def get_fallback(self, max_width: int | None = None, **kwargs: Any) -> str:
+        return get_resized_image_url(self.source_url, max_width=max_width or 1200, **kwargs)
 
 
 def _qualify_source_image_url(source_url: str) -> str:

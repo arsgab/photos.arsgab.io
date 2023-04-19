@@ -1,12 +1,4 @@
 <figure data-src="{{ src }}" data-index="{{ index }}" data-width="{{ columns }}" data-offset="{{ offset }}">
-  <picture style="--ratio: {{ ratio }};">
-  {% for source in sources %}
-    <source srcset="{{ source.srcset|join(', ') }}" media="{{ source.media_query }}" />
-  {% endfor %}
-    <img src="{{ fallback }}" alt="{{ alt }}" loading="{{ loading }}" width="{{ dimensions.width }}"
-         height="{{ dimensions.height }}" />
-  </picture>
-{% if caption %}
-  <figcaption>{{ caption|safe }}</figcaption>
-{% endif %}
+  {% include "partials/picture-tag.html" with context %}
+{% if caption %}<figcaption>{{ caption|safe }}</figcaption>{% endif %}
 </figure>

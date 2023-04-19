@@ -67,6 +67,7 @@ devserver-global:
 
 fmt:
 	$(VENV)/bin/isort .
+	$(VENV)/bin/black .
 
 static:
 	npm run build

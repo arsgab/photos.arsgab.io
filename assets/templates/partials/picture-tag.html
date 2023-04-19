@@ -1,0 +1,8 @@
+<picture style="--ratio: {{ ratio or 1 }};">
+  {% set dimensions = dimensions or (0, 0) %}
+  {% for source in sources %}
+    <source srcset="{{ source.srcset|join(', ') }}" media="{{ source.media_query }}"/>
+  {% endfor %}
+  <img src="{{ fallback }}" alt="{{ alt }}" loading="{{ loading }}" width="{{ dimensions.width }}"
+       height="{{ dimensions.height }}"/>
+</picture>
