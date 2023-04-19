@@ -1,4 +1,4 @@
-from collections import Iterable
+from collections.abc import Iterable
 from contextlib import suppress
 from html.parser import HTMLParser
 from re import Pattern, compile as re_compile

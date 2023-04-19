@@ -1,9 +1,23 @@
+:root {
+  --highlight-pic-size: 160px;
+}
+
 [data-item] {
+  width: 300px;
   position: relative;
-  font-weight: 400;
-  font-size: 2em;
   display: inline-block;
-  padding: 1em;
+  vertical-align: top;
+  opacity: 0;
+  transition: opacity .5s ease-in-out var(--delay, 0s);
+  padding: 2rem;
+
+  [data-loaded=true] & {
+    opacity: 1;
+  }
+
+  & h2 {
+    font-size: 1.5em;
+  }
 
   & a {
     &::after {
@@ -15,6 +29,7 @@
       top: 0;
       left: 0;
     }
+
     &:hover {
       color: white;
     }
