@@ -1,9 +1,18 @@
 article header {
+  text-align: center;
   margin-bottom: 2rem;
 
   & h1 {
     font-size: 6em;
     font-weight: 800;
+    position: relative;
+    &::before {
+      content: attr(data-icon);
+      position: absolute;
+      font-size: .6em;
+      opacity: .5;
+      transform: translateX(-80%) rotate(-15deg);
+    }
   }
 
   & p {

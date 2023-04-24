@@ -4,6 +4,8 @@ subtitle: Karadeniz, Istanbul, Marmara, Ege, Izmir, Ankara
 slug: turkiye
 date: 2023
 color: rgb(253,225,52)
+icon: 🇹🇷
+cover: turkiye/IMG_2119.jpeg
 ---
 
 [pic src=turkiye/IMG_1864 eager w=7]

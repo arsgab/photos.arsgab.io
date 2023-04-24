@@ -3,6 +3,7 @@ from pathlib import Path
 
 AUTHOR = env.get('AUTHOR')
 SITENAME = env.get('SITENAME') or 'photos•arsgab•io'
+SITEDESC = env.get('SITEDESC') or 'Personal photos archive'
 TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
 DEFAULT_DATE = 'fs'
 STATS_SCRIPTS_URL = 'https://stat.arsgab.io/stonks.js'

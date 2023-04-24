@@ -2,12 +2,14 @@
 
 {% block meta_title %}{{ article.meta_title or article.title }}{% endblock %}
 
+{% block meta_description %}{{ article.meta_desc or article.subtitle or SITEDESC }}{% endblock %}
+
 {% set text_color = article.color or 'white' %}
 
 {% block content %}
   <article>
     <header>
-      <h1>{{ article.title }}</h1>
+      <h1 data-icon="{{ article.icon }}">{{ article.title }}</h1>
       {% if article.subtitle %}<p>{{ article.subtitle }}</p>{% endif %}
     </header>
     <div class="grid">
