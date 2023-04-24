@@ -9,7 +9,10 @@ body {
   color: var(--text-color);
   line-height: 1.5;
   padding: var(--page-margin);
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-ligatures: common-ligatures contextual;
 }
 
 a {
