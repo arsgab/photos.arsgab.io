@@ -86,8 +86,7 @@ class ImageResizeSet:
         breakpoints: Iterable[int] = DEFAULT_BREAKPOINTS,
         **processing_options: Any,
     ):
-        img_base, img_ext = splitext(source_url)
-        self.source_url = img_base + (img_ext or IMAGE_DEFAULT_EXT)
+        self.source_url = source_url
         self.source_width = source_width or self.source_width
         self.max_width = max_width or self.max_width
         self.sources = tuple(self.get_resizes(breakpoints=breakpoints, **processing_options))
@@ -150,6 +149,8 @@ class ImageResizeSet:
 
 
 def _qualify_source_image_url(source_url: str) -> str:
+    img_base, img_ext = splitext(source_url)
+    source_url = img_base + (img_ext or IMAGE_DEFAULT_EXT)
     if source_url.startswith('http'):
         return source_url
     source_url = f'{URL_NAMESPACE}/{source_url}' if URL_NAMESPACE else source_url

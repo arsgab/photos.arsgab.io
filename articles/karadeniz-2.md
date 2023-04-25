@@ -1,6 +1,6 @@
 ---
 title: Karadeniz: pt. 2
-og_title: Karadeniz. Part 2
+meta_title: Karadeniz. Part 2
 location: Türkiye
 subtitle: Black sea region • Trabzon, Sumela, Sera Gölü
 slug: karadeniz-2

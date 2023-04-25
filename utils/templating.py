@@ -7,9 +7,18 @@ from jinja2.runtime import Context
 from markup import renderer_ref
 from pelicanconf import DEFAULT_OG_IMAGE, SITEDESC, SITENAME
 
-from .media import get_resized_image_url
+from .media import get_processed_image_url
 
-OG_IMAGE_WIDTH = 900
+OG_IMAGE_WIDTH = 1200
+OG_IMAGE_HEIGHT = 630
+OG_IMAGE_PROCESSING_PARAMS = {
+    'width': OG_IMAGE_WIDTH,
+    'height': OG_IMAGE_HEIGHT,
+    'ext': 'jpg',
+    'gravity': 'so',
+    'rt': 'fill',
+    'q': 75,
+}
 
 
 def render_template(template_name: str, ctx: dict = None) -> str:
@@ -33,11 +42,12 @@ class PageMetadata(NamedTuple):
     og_title: str = SITENAME
     og_description: str = SITEDESC
     og_image: str = DEFAULT_OG_IMAGE
+    og_image_width: int = OG_IMAGE_WIDTH
+    og_image_height: int = OG_IMAGE_HEIGHT
 
     @property
     def og_image_url(self) -> str:
-        # TODO: force Telegram-prefered OG image proportions
-        return get_resized_image_url(self.og_image, max_width=OG_IMAGE_WIDTH, ext='jpg', q=75)
+        return get_processed_image_url(self.og_image, **OG_IMAGE_PROCESSING_PARAMS)
 
     @classmethod
     def from_context(cls, ctx: Context) -> 'PageMetadata':
@@ -45,10 +55,9 @@ class PageMetadata(NamedTuple):
         if not article:
             return cls()
 
-        title = getattr(article, 'meta_title', article.title)
-        description = (
-            getattr(article, 'meta_description', '') or getattr(article, 'subtitle', '') or SITEDESC
-        )
+        title = getattr(article, 'meta_title', '') or article.title
+        description = getattr(article, 'meta_description', '')
+        description = description or getattr(article, 'subtitle', '') or SITEDESC
         og_title = getattr(article, 'og_title', '') or title
         og_description = getattr(article, 'og_desc', '') or description
         og_image = getattr(article, 'og_image', '') or DEFAULT_OG_IMAGE

@@ -1,6 +1,6 @@
 ---
 title: Karadeniz: pt. 1
-og_title: Karadeniz. Part 1
+meta_title: Karadeniz. Part 1
 location: Türkiye
 subtitle: Black sea region • Camlihemsin → Ayder → Rize
 slug: karadeniz-1
