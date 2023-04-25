@@ -29,6 +29,7 @@ THEME = 'assets'
 THEME_TEMPLATES_OVERRIDES = [f'{THEME}/scripts']
 THEME_STATIC_PATHS = ['favicons', 'manifest.webmanifest']
 THEME_STATIC_DIR = 'static'
+IGNORE_FILES = ['*.css']
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
 STATIC_PATHS = []
