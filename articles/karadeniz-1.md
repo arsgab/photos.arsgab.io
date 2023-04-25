@@ -3,9 +3,10 @@ title: Karadeniz: pt. 1
 location: Türkiye
 subtitle: Black sea region • Camlihemsin → Ayder → Rize
 slug: karadeniz-1
-date: 2023
+date: 2023-01-23
 icon: 🇹🇷
 color: #5A7F8C
+cover: karadeniz/IMG_0793
 ---
 
 [pic src=karadeniz/IMG_0726 ratio=3:4 grid=4|4 eager]

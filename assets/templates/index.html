@@ -2,9 +2,13 @@
 
 {% block content %}
   <ul data-items-container>
-  {% for article in articles %}<li data-item="{{ article.slug }}" style="--text-color: {{ article.color or 'white' }}; --delay: {{ loop.index * 0.1 }}s">
-      {% if article.cover %}{{ picture(article.cover, max_width=300, breakpoints=[300]) }}{% endif %}
+  {% for article in articles %}<li data-item="{{ article.slug }}" style="--delay: {{ loop.index * 0.1 }}s">
+  {% set cover = picture(article.cover, max_width=300, breakpoints=[300], height=600, gravity='so', rt='fill') %}
+    <article style="--text-color: {{ article.color or 'white' }}">
+      {{ cover if article.cover else '' }}
       <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+      <time hidden datetime="{{ article.date }}">{{ article.date }}</time>
+    </article>
   </li>{% endfor %}
   </ul>
 {% endblock %}

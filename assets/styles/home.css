@@ -1,25 +1,38 @@
 :root {
-  --highlight-pic-size: 160px;
+  --preview-size: 300px;
+  --preview-padding: 2rem;
+}
+
+[data-items-container] {
+  text-align: center;
 }
 
 [data-item] {
-  width: 300px;
+  width: calc(var(--preview-size) + var(--preview-padding) * 2);
+  padding: var(--preview-padding);
   position: relative;
   display: inline-block;
   vertical-align: top;
   opacity: 0;
   transition: opacity .5s ease-in-out var(--delay, 0s);
-  padding: 2rem;
+  text-align: left;
+  color: var(--text-color);
 
   [data-loaded=true] & {
     opacity: 1;
   }
 
   & h2 {
-    font-size: 1.5em;
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 1rem;
   }
 
   & a {
+    &:hover {
+      color: white;
+    }
+
     &::after {
       content: "";
       display: block;
@@ -28,10 +41,6 @@
       height: 100%;
       top: 0;
       left: 0;
-    }
-
-    &:hover {
-      color: white;
     }
   }
 }

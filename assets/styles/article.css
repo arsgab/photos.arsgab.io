@@ -43,9 +43,9 @@ article header {
     }
   }
 
-  & p[data-prop=subtitle] {
-    font-weight: 300;
-    opacity: .6;
+  & p[data-prop=subtitle],
+  & time {
+    opacity: .75;
   }
 }
 

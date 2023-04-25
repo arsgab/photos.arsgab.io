@@ -83,12 +83,13 @@ class ImageResizeSet:
         source_width: int = None,
         max_width: int = None,
         breakpoints: Iterable[int] = DEFAULT_BREAKPOINTS,
+        **processing_options: Any,
     ):
         img_base, img_ext = splitext(source_url)
         self.source_url = img_base + (img_ext or IMAGE_DEFAULT_EXT)
         self.source_width = source_width or self.source_width
         self.max_width = max_width or self.max_width
-        self.sources = tuple(self.get_resizes(breakpoints=breakpoints))
+        self.sources = tuple(self.get_resizes(breakpoints=breakpoints, **processing_options))
         self.fallback = self.get_fallback(max_width=max_width)
 
     def get_resizes(
@@ -96,13 +97,16 @@ class ImageResizeSet:
         breakpoints: Iterable[int] = DEFAULT_BREAKPOINTS,
         factors: Iterable[int] = (2,),
         scale: int = 1,
-        **extra: Any,
+        **processing_options: Any,
     ) -> Iterator[ImageResize]:
         last_resize = None
         for width in breakpoints:
             if self.source_width < width:
                 break
-            params = {**extra, 'q': extra.get('q') or DEFAULT_IMAGE_QUALITY}
+            params = {
+                **processing_options,
+                'q': processing_options.get('q') or DEFAULT_IMAGE_QUALITY,
+            }
             # Use max. quality for threshold small/large images
             if width < 480 or width > 1024:
                 params.update(q=100)
@@ -113,12 +117,13 @@ class ImageResizeSet:
             last_resize = ImageResize(width, srcset, previous=last_resize)
             yield last_resize
 
+        max_width = MAX_IMAGE_WIDTH * scale
         srcset = (
-            get_resized_image_url(self.source_url, max_width=MAX_IMAGE_WIDTH * scale, **extra),
+            get_resized_image_url(self.source_url, max_width=max_width, **processing_options),
             *self._get_factors(
                 self.max_width * scale,
                 factors or (),
-                **extra,
+                **processing_options,
             ),
         )
         yield ImageResize(
