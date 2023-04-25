@@ -1,4 +1,4 @@
-<figure data-src="{{ src }}" data-index="{{ index }}" data-width="{{ columns }}" data-offset="{{ offset }}">
+<figure data-src="{{ src }}" data-index="{{ index or 0 }}" data-width="{{ columns }}" data-offset="{{ offset or 0 }}">
   {% include "partials/picture-tag.html" with context %}
 {% if caption %}<figcaption>{{ caption|safe }}</figcaption>{% endif %}
 </figure>

@@ -57,8 +57,6 @@ class Picture(HTMLParser):
         }
 
     def _get_ratio(self) -> float:
-        if self.attrs.get('orient') == self.Orientation.PORTRAIT:
-            return round(1 / self.DEFAULT_RATIO, 2)
         ratio = self.attrs.get('ratio')
         if ratio and ':' in ratio:
             width, height = ratio.split(':')
@@ -67,6 +65,8 @@ class Picture(HTMLParser):
         elif ratio:
             with suppress(ValueError):
                 return float(ratio)
+        if self.attrs.get('orient') == self.Orientation.PORTRAIT:
+            return round(1 / self.DEFAULT_RATIO, 2)
         return self.DEFAULT_RATIO
 
 
