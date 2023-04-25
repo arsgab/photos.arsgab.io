@@ -22,6 +22,30 @@ ul[data-list-type="tiles"] {
     }
   }
 
+  & picture {
+    position: relative;
+
+    & img {
+      border-radius: 20%;
+      box-shadow: rgba(0,0,0,.6) 0 2rem 30px -10px;
+      overflow: hidden;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: -1;
+      width: 80%;
+      height: 80%;
+      top: 10%;
+      left: 10%;
+      border-radius: 20%;
+      box-shadow: var(--text-color) 0 1.5rem 30px;
+      opacity: .5;
+    }
+  }
+
   & h2 {
     font-size: 1em;
     font-weight: 600;

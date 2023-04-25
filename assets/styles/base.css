@@ -63,6 +63,7 @@ header[role=banner] {
     &:hover::before {
       background: var(--text-color);
       color: var(--bg-color);
+      box-shadow: var(--text-color) 0 5px 15px -5px;
     }
   }
 }
