@@ -7,7 +7,7 @@
     <article style="--text-color: {{ article.color or 'white' }}">
       {{ cover if article.cover else '' }}
       <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-      <time hidden datetime="{{ article.date }}">{{ article.date }}</time>
+      <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%Y') }}</time>
     </article>
   </li>{% endfor %}
   </ul>

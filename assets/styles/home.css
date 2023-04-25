@@ -28,6 +28,12 @@
     margin-top: 1rem;
   }
 
+  & time {
+    opacity: .5;
+    font-size: .75em;
+    letter-spacing: .15em;
+  }
+
   & a {
     &:hover {
       color: white;
@@ -41,6 +47,7 @@
       height: 100%;
       top: 0;
       left: 0;
+      z-index: 99;
     }
   }
 }
