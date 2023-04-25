@@ -1,25 +1,25 @@
 :root {
-  --preview-size: 300px;
-  --preview-padding: 2rem;
+  --tile-size: 300px;
+  --tile-padding: 2rem;
 }
 
-[data-items-container] {
+ul[data-list-type="tiles"] {
   text-align: center;
-}
 
-[data-item] {
-  width: calc(var(--preview-size) + var(--preview-padding) * 2);
-  padding: var(--preview-padding);
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  opacity: 0;
-  transition: opacity .5s ease-in-out var(--delay, 0s);
-  text-align: left;
-  color: var(--text-color);
+  & li {
+    width: calc(var(--tile-size) + var(--tile-padding) * 2);
+    padding: var(--tile-padding);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    opacity: 0;
+    transition: opacity .5s ease-in-out var(--delay, 0s);
+    text-align: left;
+    color: var(--text-color);
 
-  [data-loaded=true] & {
-    opacity: 1;
+    [data-loaded=true] & {
+      opacity: 1;
+    }
   }
 
   & h2 {

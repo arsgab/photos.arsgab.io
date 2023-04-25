@@ -14,7 +14,7 @@
       {% if article.subtitle %}<p data-prop="subtitle">{{ article.subtitle }}</p>{% endif %}
       <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%Y') }}</time>
     </header>
-    <div class="grid">{{ article.content }}</div>
+    <div data-grid>{{ article.content }}</div>
   </article>
 {% endblock content %}
 

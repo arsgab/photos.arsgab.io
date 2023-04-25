@@ -1,4 +1,4 @@
-.grid {
+[data-grid] {
   position: relative;
 
   & [data-width="1"] {

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <ul data-items-container>
-  {% for article in articles %}<li data-item="{{ article.slug }}" style="--delay: {{ loop.index * 0.1 }}s">
+  <ul data-list-type="tiles">
+  {% for article in articles %}<li data-list-item="{{ article.slug }}" style="--delay: {{ loop.index * 0.1 }}s">
   {% set cover = picture(article.cover, max_width=300, breakpoints=[300], height=600, gravity='so', rt='fill') %}
     <article style="--text-color: {{ article.color or 'white' }}">
       {{ cover if article.cover else '' }}
