@@ -34,10 +34,10 @@ class Picture(HTMLParser):
         return fromstring(rendered)
 
     def get_context(self) -> dict:
+        resizes = ImageResizeSet(self.attrs['src'])
         idx = self.attrs.get('id') or self.index
         # TODO: optionally turn auto-captions on/off
         caption = f'<a href="#{idx}" rel="bookmark">{self.index}</a>'
-        resizes = ImageResizeSet(self.attrs['src'])
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
         ratio = self._get_ratio()
         dimensions = ImageDimensions.fake_from_ratio(ratio)

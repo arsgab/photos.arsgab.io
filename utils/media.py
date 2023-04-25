@@ -12,6 +12,7 @@ assert bool(IMGPROXY_SALT), '`IMGPROXY_SALT` not set'
 KEY = bytes.fromhex(IMGPROXY_KEY)
 SALT = bytes.fromhex(IMGPROXY_SALT)
 
+URL_NAMESPACE = 'photos.arsgab.io'
 IMAGE_DEFAULT_EXT = '.jpeg'
 MAX_IMAGE_WIDTH = 1400
 DEFAULT_IMAGE_QUALITY = 80
@@ -151,6 +152,7 @@ class ImageResizeSet:
 def _qualify_source_image_url(source_url: str) -> str:
     if source_url.startswith('http'):
         return source_url
+    source_url = f'{URL_NAMESPACE}/{source_url}' if URL_NAMESPACE else source_url
     return f'local:///{source_url}'
 
 
