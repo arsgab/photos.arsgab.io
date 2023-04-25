@@ -1,22 +1,51 @@
 article header {
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
   text-align: center;
-  margin-bottom: 2rem;
 
   & h1 {
     font-size: 6em;
+    line-height: 1;
     font-weight: 800;
     position: relative;
+    margin-bottom: 2rem;
+
+    @media (--tablet) {
+      font-size: 4em;
+      margin-bottom: 1rem;
+    }
+
+    @media (--mobile) {
+      font-size: 3em;
+    }
+
+    @media (--mobile-xs) {
+      font-size: 2em;
+      line-height: 2;
+    }
+
     &::before {
       content: attr(data-icon);
       position: absolute;
       font-size: .6em;
       opacity: .5;
-      transform: translateX(-80%) rotate(-15deg);
+      transform: translateX(-80%) rotate(var(--icon-rotation));
     }
   }
 
-  & p {
+  & p[data-prop=location] {
+    font-size: 2em;
+    line-height: .8;
+
+    @media (--tablet) {
+      font-size: 1.2em;
+      line-height: 1;
+    }
+  }
+
+  & p[data-prop=subtitle] {
     font-weight: 300;
+    opacity: .6;
   }
 }
 
@@ -33,9 +62,22 @@ article figure {
     opacity: 1;
   }
 
+  &::after {
+    content: attr(data-index);
+    position: absolute;
+    display: block;
+    width: 100%;
+    text-align: center;
+    opacity: .75;
+    font-size: .75em;
+    line-height: 2;
+    top: 100%;
+  }
+
   & picture {
     position: relative;
     padding-top: calc(100% / var(--ratio));
+    overflow: hidden;
 
     &[data-loaded=true] img {
       opacity: 1;
@@ -51,7 +93,7 @@ article figure {
       top: 50%;
       left: 50%;
       margin: -6px 0 0 -6px;
-      background: white;
+      background: var(--text-color);
       animation: loader 1s ease-in-out infinite alternate;
       z-index: -1;
     }
@@ -59,6 +101,7 @@ article figure {
     &[data-loaded=true]::after {
       display: none;
     }
+
   }
 
   & img {

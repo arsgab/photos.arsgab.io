@@ -8,9 +8,10 @@
 
 {% block content %}
   <article>
-    <header>
+    <header style="--icon-rotation: {{ random(-50, -10) }}deg">
+      {% if article.location %}<p data-prop="location">{{ article.location }}</p>{% endif %}
       <h1 data-icon="{{ article.icon }}">{{ article.title }}</h1>
-      {% if article.subtitle %}<p>{{ article.subtitle }}</p>{% endif %}
+      {% if article.subtitle %}<p data-prop="subtitle">{{ article.subtitle }}</p>{% endif %}
     </header>
     <div class="grid">
       {{ article.content }}

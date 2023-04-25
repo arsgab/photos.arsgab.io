@@ -5,6 +5,10 @@
   --page-margin: 1rem;
 }
 
+@custom-media --mobile-xs (max-width: 360px);
+@custom-media --mobile (max-width: 767px);
+@custom-media --tablet (max-width: 959px);
+
 /* latin-ext */
 @font-face {
   font-family: 'Montserrat';

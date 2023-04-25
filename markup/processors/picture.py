@@ -66,7 +66,7 @@ class Picture(HTMLParser):
             with suppress(ValueError):
                 return float(ratio)
         if self.attrs.get('orient') == self.Orientation.PORTRAIT:
-            return round(1 / self.DEFAULT_RATIO, 2)
+            return round(1 / self.DEFAULT_RATIO, 3)
         return self.DEFAULT_RATIO
 
 

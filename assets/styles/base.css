@@ -8,7 +8,7 @@ body {
   font-family: var(--font-family);
   color: var(--text-color);
   line-height: 1.5;
-  padding: var(--page-margin);
+  padding: var(--page-margin) 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,15 +23,20 @@ a {
 
 header[role=banner] {
   text-align: center;
-  margin-bottom: 1rem;
-
+  margin: 0 var(--page-margin) 2rem var(--page-margin);
+  
   & a, & h1 {
     opacity: .5;
     display: inline-block;
     font-size: .75em;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .25em;
     position: relative;
+
+    @media (--mobile) {
+      font-size: .65em;
+    }
   }
 
   & a {
@@ -40,7 +45,7 @@ header[role=banner] {
       display: block;
       line-height: 1.1;
       border-radius: 3px;
-      opacity: .3;
+      opacity: .4;
       text-align: left;
       position: absolute;
       z-index: -1;
@@ -52,7 +57,7 @@ header[role=banner] {
     }
 
     &:hover {
-      opacity: .75;
+      opacity: 1;
     }
 
     &:hover::before {
