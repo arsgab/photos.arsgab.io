@@ -1,7 +1,7 @@
 {
-  "name": "ag•photos",
-  "background_color": "#222",
-  "theme_color": "#222",
+  "name": "photos•arsgab•io",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
   "icons": [
     { "src": "/static/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/static/icon-512.png", "type": "image/png", "sizes": "512x512" }
