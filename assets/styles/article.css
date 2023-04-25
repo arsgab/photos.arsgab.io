@@ -62,18 +62,6 @@ article figure {
     opacity: 1;
   }
 
-  &::after {
-    content: attr(data-index);
-    position: absolute;
-    display: block;
-    width: 100%;
-    text-align: center;
-    opacity: .75;
-    font-size: .75em;
-    line-height: 2;
-    top: 100%;
-  }
-
   & picture {
     position: relative;
     padding-top: calc(100% / var(--ratio));
@@ -117,9 +105,14 @@ article figure {
   }
 
   & figcaption {
-    font-size: .8em;
-    margin-top: 1rem;
-    opacity: .6;
+    text-align: center;
+    opacity: .75;
+    font-size: .75em;
+    line-height: 2;
+
+    & a:hover {
+      color: white;
+    }
   }
 }
 
