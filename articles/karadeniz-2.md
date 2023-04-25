@@ -1,5 +1,6 @@
 ---
-title: Karadeniz: pt. 2
+title: Karadeniz: pt. 2
+og_title: Karadeniz. Part 2
 location: Türkiye
 subtitle: Black sea region • Trabzon, Sumela, Sera Gölü
 slug: karadeniz-2
@@ -7,6 +8,7 @@ date: 2023-01-24
 icon: 🇹🇷
 color: #D8928D
 cover: karadeniz/IMG_1135
+og_image: karadeniz/IMG_1312
 ---
 
 [pic src=karadeniz/IMG_1042 grid=10|1 eager]

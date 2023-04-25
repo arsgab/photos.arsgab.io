@@ -6,11 +6,13 @@ from pelican import ArticlesGenerator, signals
 from markup import renderer_ref
 from markup.processors.picture import render_picture_tag
 from utils.staticfiles import get_static_url
+from utils.templating import render_page_metadata
 
 GLOBALS = {
     'random': randint,
     'static': get_static_url,
     'picture': render_picture_tag,
+    'pagemeta': render_page_metadata,
 }
 
 

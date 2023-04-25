@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 
-{% block meta_title %}{{ article.meta_title or article.title }}{% endblock %}
-
-{% block meta_description %}{{ article.meta_desc or article.subtitle or SITEDESC }}{% endblock %}
-
 {% set text_color = article.color or 'white' %}
 
 {% block content %}

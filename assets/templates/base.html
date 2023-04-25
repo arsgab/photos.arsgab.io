@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block meta_title %}{{ SITENAME }}{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}{{ SITEDESC }}{% endblock %}">
+  {{ pagemeta() }}
   <link rel="preload" href="{{ static('style.css') }}" as="style">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="dns-prefetch" href="https://img.arsgab.io">

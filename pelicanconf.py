@@ -8,6 +8,7 @@ TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
 DEFAULT_DATE = 'fs'
 STATS_SCRIPTS_URL = 'https://stat.arsgab.io/stonks.js'
 STATS_WEBSITE_ID = env.get('STATS_WEBSITE_ID')
+DEFAULT_OG_IMAGE = env.get('DEFAULT_OG_IMAGE') or 'https://avatars.githubusercontent.com/u/1730172'
 
 # Disable category/author/feeds pages build
 CATEGORY_SAVE_AS = AUTHOR_SAVE_AS = ''
