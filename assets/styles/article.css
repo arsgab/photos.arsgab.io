@@ -29,7 +29,7 @@ article header {
       position: absolute;
       font-size: .6em;
       opacity: .5;
-      transform: translateX(-80%) rotate(var(--icon-rotation));
+      transform: translateX(-80%) rotate(var(--icon-angle));
     }
   }
 

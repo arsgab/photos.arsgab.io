@@ -4,7 +4,7 @@
 
 {% block content %}
   <article>
-    <header style="--icon-rotation: {{ random(-50, -10) }}deg">
+    <header style="--icon-angle: {{ random(-50, -10) }}deg">
       {% if article.location %}<p data-prop="location">{{ article.location }}</p>{% endif %}
       <h1 data-icon="{{ article.icon }}">{{ article.title }}</h1>
       {% if article.subtitle %}<p data-prop="subtitle">{{ article.subtitle }}</p>{% endif %}
