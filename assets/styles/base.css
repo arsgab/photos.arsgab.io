@@ -24,7 +24,7 @@ a {
 header[role=banner] {
   text-align: center;
   margin: 0 var(--page-margin) 2rem var(--page-margin);
-  
+
   & a, & h1 {
     opacity: .5;
     display: inline-block;
@@ -64,6 +64,29 @@ header[role=banner] {
       background: var(--text-color);
       color: var(--bg-color);
       box-shadow: var(--text-color) 0 5px 15px -5px;
+    }
+  }
+
+  & h1 {
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: .8em;
+      height: .8em;
+      background: var(--text-color);
+      right: 100%;
+      top: .22rem;
+      margin-right: .8em;
+      border-radius: 100%;
+      opacity: 0;
+      transform: scale(.8);
+      transition: opacity .25s ease-in-out .25s, transform .25s ease-in-out .25s;
+    }
+
+    [data-loaded="true"] &::before {
+      opacity: .35;
+      transform: scale(1);
     }
   }
 }
