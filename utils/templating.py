@@ -38,12 +38,14 @@ def render_template_partial(partial_name: str, ctx: dict = None) -> str:
 class PageMetadata(NamedTuple):
     title: str = SITENAME
     description: str = SITEDESC
+    canonical_link: str | None = None
     og_type: str = 'website'
     og_title: str = SITENAME
     og_description: str = SITEDESC
     og_image: str = DEFAULT_OG_IMAGE
     og_image_width: int = OG_IMAGE_WIDTH
     og_image_height: int = OG_IMAGE_HEIGHT
+    published_date: str | None = None
 
     @property
     def og_image_url(self) -> str:
@@ -64,10 +66,12 @@ class PageMetadata(NamedTuple):
         return cls(
             title=title,
             description=description,
+            canonical_link=article.url,
             og_type='article',
             og_title=og_title,
             og_description=og_description,
             og_image=og_image,
+            published_date=article.date.strftime('%Y-%m-%d'),
         )
 
 

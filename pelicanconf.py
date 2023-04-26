@@ -7,6 +7,7 @@ load_dotenv()
 
 AUTHOR = env.get('AUTHOR')
 SITENAME = env.get('SITENAME') or 'photos•arsgab•io'
+SITE_FQDN = env.get('SITE_FQDN') or 'photos.arsgab.io'
 SITEDESC = env.get('SITEDESC') or 'Personal photos archive'
 TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
 DEFAULT_DATE = 'fs'
