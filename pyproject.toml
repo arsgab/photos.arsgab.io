@@ -10,6 +10,7 @@ packages = [{include = "arsgab_io_photos"}]
 python = "^3.10"
 pelican = {extras = ["markdown"], version = "^4.8.0"}
 python-dotenv = "^1.0.0"
+flake8 = "^6.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"

@@ -69,6 +69,11 @@ fmt:
 	$(VENV)/bin/isort .
 	$(VENV)/bin/black .
 
+lint:
+	$(VENV)/bin/flake8 .
+	$(VENV)/bin/isort --check-only --diff .
+	$(VENV)/bin/black --check .
+
 static:
 	npm run build
 

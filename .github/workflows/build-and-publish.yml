@@ -74,6 +74,8 @@ jobs:
       - name: Install Python dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
+      - name: Lint code
+        run: VENV=$(poetry env info --path) make lint
       - name: Build site
         run: VENV=$(poetry env info --path) make html
 
