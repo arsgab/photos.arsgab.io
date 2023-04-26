@@ -1,6 +1,10 @@
 from os import environ as env
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 AUTHOR = env.get('AUTHOR')
 SITENAME = env.get('SITENAME') or 'photos•arsgab•io'
 SITEDESC = env.get('SITEDESC') or 'Personal photos archive'
