@@ -7,6 +7,7 @@ date: 2023-02-01
 icon: 🇹🇷
 color: #C79060
 cover: istanbul/IMG_1495
+og_image: istanbul/IMG_1466
 ---
 
 [pic src=istanbul/IMG_1445 ratio=9:16 grid=6|3]

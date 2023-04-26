@@ -5,6 +5,7 @@
 
 ul[data-list-type="tiles"] {
   text-align: center;
+  margin-bottom: 5rem;
 
   & li {
     width: calc(var(--tile-size) + var(--tile-padding) * 2);

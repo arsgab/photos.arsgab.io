@@ -3,10 +3,11 @@ title: Marmara
 location: Türkiye
 subtitle: Marmara sea region • Erdek → Marmara Peninsula → Canakkale
 slug: marmara
-date: 2023-02-02
+date: 2023-02-17
 icon: 🇹🇷
 cover: marmara/IMG_1972
 color: #56706C
+og_image: marmara/IMG_2130
 ---
 [pic src=marmara/IMG_1857 grid=4|4 ratio=9:16 eager]
 
