@@ -4,9 +4,9 @@
 
 {% block content %}
   <article>
-    <header style="--icon-angle: {{ random(-60, 60) }}deg">
-      {% if article.location %}<p data-prop="location">{{ article.location }}</p>{% endif %}
-      <h1 data-icon="{{ article.icon }}">{{ article.title }}</h1>
+    <header style="--icon-angle: {{ random(-60, 60) }}deg" data-columned>
+      {% if article.location %}<p data-prop="location" data-icon="{{ article.icon }}">{{ article.location }}</p>{% endif %}
+      <h1>{{ article.title }}</h1>
       {% if article.subtitle %}<p data-prop="subtitle">{{ article.subtitle }}</p>{% endif %}
       <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%Y') }}</time>
     </header>

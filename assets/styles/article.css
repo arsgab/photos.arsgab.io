@@ -1,14 +1,11 @@
 article header {
-  padding-left: var(--page-margin);
-  padding-right: var(--page-margin);
-  text-align: center;
-
   & h1 {
     font-size: 6em;
     line-height: 1;
     font-weight: 800;
     position: relative;
     margin-bottom: 2rem;
+    margin-left: -.05em;
 
     @media (--tablet) {
       font-size: 4em;
@@ -17,25 +14,37 @@ article header {
 
     @media (--mobile) {
       font-size: 3em;
+      margin-bottom: .5rem;
     }
 
     @media (--mobile-xs) {
       font-size: 2em;
       line-height: 2;
     }
-
-    &::before {
-      content: attr(data-icon);
-      position: absolute;
-      font-size: .6em;
-      opacity: .5;
-      transform: translateX(-80%) rotate(var(--icon-angle));
-    }
   }
 
   & p[data-prop=location] {
+    position: relative;
     font-size: 2em;
     line-height: .8;
+
+    &::after {
+      content: attr(data-icon);
+      position: absolute;
+      left: 0;
+      top: 100%;
+      font-size: 2em;
+      opacity: .5;
+      transform: translateX(-70%) rotate(var(--icon-angle));
+
+      @media (--tablet) {
+        left: auto;
+        top: -.25rem;
+        font-size: 1.2em;
+        transform: none;
+        margin-left: .2em;
+      }
+    }
 
     @media (--tablet) {
       font-size: 1.2em;

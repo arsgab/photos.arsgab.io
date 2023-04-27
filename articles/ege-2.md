@@ -11,7 +11,7 @@ color: #F4AF3F
 og_image: ege/IMG_2733
 ---
 
-[pic src=ege/IMG_2574 ratio=9:16 grid=4|4 eager]
+[pic src=ege/IMG_2574 ratio=9:16 grid=4|3 eager]
 
 [pic src=ege/IMG_2576 ratio=9:16 grid=4|0]
 

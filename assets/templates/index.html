@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block page_subheader %}
+  <p>Photos by Arseny Gabdullin.<br>Shot on iPhone.</p>
+{% endblock %}
+
 {% block content %}
   <ul data-list-type="tiles">
   {% for article in articles %}<li data-list-item="{{ article.slug }}" style="--delay: {{ loop.index * 0.1 }}s">
@@ -11,4 +15,10 @@
     </article>
   </li>{% endfor %}
   </ul>
+{% endblock %}
+
+{% block footer %}
+  <footer role="contentinfo" data-columned>
+    <a href="https://github.com/arsgab/photos.arsgab.io" target="_blank" rel="noopener">Source code</a>
+  </footer>
 {% endblock %}

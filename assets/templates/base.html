@@ -29,12 +29,13 @@
 <body style="--text-color: {{ text_color or 'white' }};">
 
 {% block site_header %}
-  <header role="banner">
+  <header role="banner" data-columned>
   {% if page_name == 'index' %}
     <h1>{{ SITENAME }}</h1>
   {% else %}
     <a href="/">{{ SITENAME }}</a>
   {% endif %}
+    {% block page_subheader %}{% endblock %}
   </header>
 {% endblock site_header %}
 
@@ -43,6 +44,8 @@
     {% block content %}{% endblock %}
   </main>
 {% endblock main %}
+
+{% block footer %}{% endblock %}
 
 </body>
 </html>

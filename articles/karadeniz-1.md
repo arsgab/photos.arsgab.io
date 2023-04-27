@@ -11,7 +11,7 @@ cover: karadeniz/IMG_0793
 og_image: karadeniz/IMG_1015
 ---
 
-[pic src=karadeniz/IMG_0726 ratio=3:4 grid=4|4 eager]
+[pic src=karadeniz/IMG_0726 ratio=3:4 grid=4|3 eager]
 
 [pic src=karadeniz/IMG_0739 ratio=3:4 grid=5|2]
 
