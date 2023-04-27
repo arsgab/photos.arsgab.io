@@ -1,16 +1,23 @@
+const INTERSECTION_THRESHOLDS = [0.25];
+
 window.addEventListener('load', () => {
+  const umami = window.umami || null;
+  const figures = document.querySelectorAll('article figure');
+  const figuresLastIndex = figures.length - 1;
+
   document.querySelectorAll('picture img').forEach(img => {
     img.parentElement.dataset.loaded = img.complete ? 'true' : 'false';
     img.onload = () => img.parentElement.dataset.loaded = 'true';
   });
 
-  document.querySelectorAll('article figure').forEach(figure => {
-    let observer = new IntersectionObserver(e => {
-      if (e[0].isIntersecting) {
-        figure.dataset.visible = 'true';
-        observer.unobserve(figure);
-      }
-    }, {threshold: [0.25]});
+  figures.forEach((figure, index) => {
+    let isLastFigure = index === figuresLastIndex;
+    let observer = new IntersectionObserver(([element, ..._]) => {
+      if (!element.isIntersecting) return false;
+      figure.dataset.visible = 'true';
+      observer.unobserve(figure);
+      if (isLastFigure && umami) umami.trackEvent('page-bottom-viewed', {path: window.location.pathname});
+    }, {threshold: INTERSECTION_THRESHOLDS});
     observer.observe(figure);
   });
 });
