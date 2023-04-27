@@ -2,11 +2,11 @@
 title: Ege: pt. 1
 meta_title: Ege. Part 1
 location: Türkiye
-subtitle: Aegean sea region • Troya → Assos → Ayvalık 
+subtitle: Aegean sea region • Troya → Assos → Ayvalık 
 slug: ege-1
 date: 2023-02-22
 icon: 🇹🇷
-cover: ege/IMG_2756
+cover: ege/IMG_2521
 color: #10E5DA
 og_image: ege/IMG_2241
 ---

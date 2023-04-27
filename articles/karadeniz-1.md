@@ -2,7 +2,7 @@
 title: Karadeniz: pt. 1
 meta_title: Karadeniz. Part 1
 location: Türkiye
-subtitle: Black sea region • Camlihemsin → Ayder → Rize
+subtitle: Black sea region • Camlihemsin → Ayder → Rize
 slug: karadeniz-1
 date: 2023-01-23
 icon: 🇹🇷
