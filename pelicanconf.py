@@ -11,7 +11,7 @@ SITE_FQDN = env.get('SITE_FQDN') or 'photos.arsgab.io'
 SITEDESC = env.get('SITEDESC') or 'Personal photo archive'
 TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
 DEFAULT_DATE = 'fs'
-STATS_SCRIPTS_URL = 'https://stat.arsgab.io/stonks.js'
+STATS_SCRIPTS_URL = 'https://stat.arsgab.io/stonks'
 STATS_WEBSITE_ID = env.get('STATS_WEBSITE_ID')
 DEFAULT_OG_IMAGE = env.get('DEFAULT_OG_IMAGE') or 'share.png'
 

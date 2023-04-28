@@ -20,7 +20,7 @@
 
   {% block stats %}
   {% if STATS_WEBSITE_ID %}
-  <script async defer src="{{ STATS_SCRIPTS_URL }}" data-website-id="{{ STATS_WEBSITE_ID }}"
+  <script async src="{{ STATS_SCRIPTS_URL }}" data-website-id="{{ STATS_WEBSITE_ID }}"
           data-do-not-track="true"></script>
   {% endif %}
   {% endblock stats %}
