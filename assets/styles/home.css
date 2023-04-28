@@ -7,6 +7,10 @@ ul[data-list-type="tiles"] {
   text-align: center;
   margin-bottom: 5rem;
 
+  @media (--mobile) {
+    text-align: left;
+  }
+
   & li {
     width: calc(var(--tile-size) + var(--tile-padding) * 2);
     padding: var(--tile-padding);
@@ -22,6 +26,10 @@ ul[data-list-type="tiles"] {
     [data-loaded=true] & {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    @media (--mobile) {
+      padding: var(--page-margin);
     }
   }
 

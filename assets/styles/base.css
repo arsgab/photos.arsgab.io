@@ -89,16 +89,15 @@ header[role=banner] {
       content: "";
       display: block;
       position: absolute;
-      width: .8em;
-      height: .8em;
-      background: var(--text-color);
-      right: 100%;
-      top: .22rem;
-      margin-right: .8em;
+      width: .6em;
+      height: .6em;
+      left: -.8em;
+      top: .35rem;
       border-radius: 100%;
       opacity: 0;
       transform: scale(.8);
       transition: opacity .25s ease-in-out .25s, transform .25s ease-in-out .25s;
+      background: var(--text-color);
     }
 
     [data-loaded="true"] &::before {
