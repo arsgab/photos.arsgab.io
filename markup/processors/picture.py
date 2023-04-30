@@ -1,5 +1,7 @@
-from collections.abc import Iterable
+from collections import defaultdict, deque
+from collections.abc import Iterable, Iterator
 from contextlib import suppress
+from contextvars import ContextVar
 from html.parser import HTMLParser
 from re import Pattern, compile as re_compile
 from xml.etree.ElementTree import Element, fromstring
@@ -7,7 +9,18 @@ from xml.etree.ElementTree import Element, fromstring
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
 
+from pelicanconf import AUTHOR
 from utils import ImageDimensions, ImageResizeSet, StrEnum, render_template_partial
+
+PICTURE_JSON_LD_BASE = {
+    "@context": "https://schema.org/",
+    "@type": "ImageObject",
+    "creator": {"@type": "Person", "name": AUTHOR},
+}
+PICTURE_JSON_LD_MAX_ITEMS = 10
+picture_processor_context_ref: ContextVar[defaultdict[int, deque['Picture']]] = ContextVar(
+    'picture_processor_context', default=defaultdict(deque)
+)
 
 
 class Picture(HTMLParser):
@@ -16,6 +29,7 @@ class Picture(HTMLParser):
     DEFAULT_RATIO: float = 1.777  # 16:9
     attrs: dict[str, str] | None = None
     index: int = 1
+    resizes: ImageResizeSet
 
     class Loading(StrEnum):
         LAZY = 'lazy'
@@ -30,11 +44,11 @@ class Picture(HTMLParser):
             self.attrs = dict(attrs)
 
     def create_element(self) -> Element:
+        self.resizes = ImageResizeSet(self.attrs['src'])
         rendered = render_template_partial('picture', self.get_context())
         return fromstring(rendered)
 
     def get_context(self) -> dict:
-        resizes = ImageResizeSet(self.attrs['src'])
         idx = self.attrs.get('id') or self.index
         # TODO: optionally turn auto-captions on/off
         caption = f'<a href="#{idx}" rel="bookmark">{self.index}</a>'
@@ -48,8 +62,8 @@ class Picture(HTMLParser):
         return {
             'index': self.index,
             'id': idx,
-            'sources': resizes.sources,
-            'fallback': resizes.fallback,
+            'sources': self.resizes.sources,
+            'fallback': self.resizes.fallback,
             'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
             'dimensions': dimensions,
             'ratio': ratio,
@@ -73,6 +87,16 @@ class Picture(HTMLParser):
             return round(1 / self.DEFAULT_RATIO, 3)
         return self.DEFAULT_RATIO
 
+    @classmethod
+    def create_json_ld(
+        cls, pictures: Iterable['Picture'], max_items: int | None = PICTURE_JSON_LD_MAX_ITEMS
+    ) -> Iterator[dict]:
+        for index, picture in enumerate(pictures):
+            if max_items is not None and index >= max_items:
+                break
+            url = picture.resizes.get_fallback(max_width=1000, ext='jpg', q=80)
+            yield {**PICTURE_JSON_LD_BASE, 'contentUrl': url}
+
 
 class PictureBlockProcessor(BlockProcessor):
     REGEX: Pattern = re_compile(r'\[pic(.+)]')
@@ -91,6 +115,7 @@ class PictureBlockProcessor(BlockProcessor):
         picture.index = self._count
         parent.append(picture.create_element())
         picture.close()
+        picture_processor_context_ref.get()[id(self)].append(picture)
         return True
 
 
