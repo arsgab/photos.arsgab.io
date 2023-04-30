@@ -55,32 +55,27 @@ header[role=banner] {
   }
 
   & a {
-    &::before {
-      content: "←";
-      display: block;
-      font-size: .8em;
-      font-weight: 600;
-      line-height: 1.2;
-      border-radius: 3px;
-      opacity: .4;
-      text-align: left;
-      position: absolute;
-      z-index: -1;
-      width: calc(100% + 2em);
-      height: calc(100% + 6px);
-      padding: 6px 3px 4px 3px;
-      top: -3px;
-      left: -1.6em;
-    }
+    border-radius: 3px;
+    padding: 2px 5px;
+    margin-left: -5px;
+    transition: none;
 
     &:hover {
-      opacity: 1;
+      background: var(--text-color);
+      color: var(--bg-color);
+    }
+
+    &::before {
+      content: "←";
+      position: absolute;
+      right: 100%;
+      color: var(--text-color);
+      font-weight: 600;
+      opacity: .8;
     }
 
     &:hover::before {
-      background: var(--text-color);
-      color: var(--bg-color);
-      box-shadow: var(--text-color) 0 5px 15px -5px;
+      opacity: 1;
     }
   }
 
