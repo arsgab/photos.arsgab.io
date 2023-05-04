@@ -44,9 +44,14 @@ class Picture(HTMLParser):
             self.attrs = dict(attrs)
 
     def create_element(self) -> Element:
-        self.resizes = ImageResizeSet(self.attrs['src'])
-        rendered = render_template_partial('picture', self.get_context())
-        return fromstring(rendered)
+        source = self.attrs['src']
+        version = self.attrs.get('v')
+        processing_options = {
+            'cachebuster': f'v{version}' if version else '',
+        }
+        self.resizes = ImageResizeSet(source, **processing_options)
+        ctx = self.get_context()
+        return fromstring(render_template_partial('picture', ctx))
 
     def get_context(self) -> dict:
         idx = self.attrs.get('id') or self.index

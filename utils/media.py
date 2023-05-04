@@ -81,8 +81,8 @@ class ImageResizeSet:
     def __init__(
         self,
         source_url: str,
-        source_width: int = None,
-        max_width: int = None,
+        source_width: int | None = None,
+        max_width: int | None = None,
         breakpoints: Iterable[int] = DEFAULT_BREAKPOINTS,
         **processing_options: Any,
     ):
