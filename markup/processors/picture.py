@@ -45,10 +45,10 @@ class Picture(HTMLParser):
 
     def create_element(self) -> Element:
         source = self.attrs['src']
+        processing_options = {}
         version = self.attrs.get('v')
-        processing_options = {
-            'cachebuster': f'v{version}' if version else '',
-        }
+        if version:
+            processing_options.update(cachebuster=f'v{version}')
         self.resizes = ImageResizeSet(source, **processing_options)
         ctx = self.get_context()
         return fromstring(render_template_partial('picture', ctx))
