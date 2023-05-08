@@ -8,8 +8,8 @@
     <header style="--icon-angle: {{ random(-60, 60) }}deg" data-columned>
       {% if article.location %}<p data-prop="location" data-icon="{{ article.icon }}">{{ article.location }}</p>{% endif %}
       <h1>{{ article.title }}</h1>
+      <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%b %Y') }}</time>
       {% if article.subtitle %}<p data-prop="subtitle">{{ article.subtitle }}</p>{% endif %}
-      <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%Y') }}</time>
     </header>
     <div data-grid>{{ article.content }}</div>
   </article>

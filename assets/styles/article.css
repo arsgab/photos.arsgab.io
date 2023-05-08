@@ -52,14 +52,12 @@ article header {
     }
   }
 
-  & p[data-prop=subtitle],
   & time {
-    opacity: .75;
-  }
-
-  & time {
-    font-size: .75em;
-    letter-spacing: .15em;
+    text-transform: uppercase;
+    font-size: .7em;
+    letter-spacing: .2em;
+    font-weight: 600;
+    opacity: .6;
   }
 }
 
