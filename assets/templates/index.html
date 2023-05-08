@@ -6,8 +6,12 @@
 
 {% block content %}
   <ul data-list-type="tiles">
-  {% for article in articles %}<li data-list-item="{{ article.slug }}" style="--delay: {{ loop.index * 0.1 }}s">
-  {% set cover = picture(article.cover, max_width=300, breakpoints=[300], height=600, gravity='so', rt='fill') %}
+  {% for article in articles %}<li data-list-item="{{ article.slug }}" style="--delay: {{ loop.index0 * 0.1 }}s">
+  {% set cover = picture(
+    article.cover,
+    max_width=300, breakpoints=[300], loading=('lazy' if loop.index > 1 else 'eager'),
+    height=600, gravity='so', rt='fill'
+  ) %}
     <article style="--text-color: {{ article.color or 'white' }}; --spot-angle: {{ random(-90, 90) }}deg">
       {{ cover if article.cover else '' }}
       <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>

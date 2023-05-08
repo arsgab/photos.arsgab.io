@@ -134,11 +134,16 @@ def makeExtension(**kwargs) -> PictureExtension:  # noqa
 
 
 def render_picture_tag(
-    src: str, max_width: int | None = None, breakpoints: Iterable[int] | None = None, **kwargs
+    src: str,
+    max_width: int | None = None,
+    breakpoints: Iterable[int] | None = None,
+    loading: str = 'lazy',
+    **kwargs,
 ) -> str:
     resizes = ImageResizeSet(src, max_width=max_width, breakpoints=breakpoints, **kwargs)
     ctx = {
         'sources': resizes.sources,
         'fallback': resizes.fallback,
+        'loading': loading,
     }
     return render_template_partial('picture-tag', ctx)
