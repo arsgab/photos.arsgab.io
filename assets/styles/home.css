@@ -93,4 +93,8 @@ ul[data-list-type="tiles"] {
       z-index: 99;
     }
   }
+
+  & b {
+    filter: brightness(1.33) saturate(1.1);
+  }
 }
