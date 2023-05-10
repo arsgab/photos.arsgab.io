@@ -12,7 +12,6 @@ from utils.url import qualify_url
 
 GLOBALS = {
     'random': randint,
-    'round': round,
     'static': get_static_url,
     'picture': render_picture_tag,
     'pagemeta': render_page_metadata,

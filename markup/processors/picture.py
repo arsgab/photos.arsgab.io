@@ -4,13 +4,20 @@ from contextlib import suppress
 from contextvars import ContextVar
 from html.parser import HTMLParser
 from re import Pattern, compile as re_compile
+from typing import Any
 from xml.etree.ElementTree import Element, fromstring
 
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
 
 from pelicanconf import AUTHOR
-from utils import ImageDimensions, ImageResizeSet, StrEnum, render_template_partial
+from utils import (
+    ImageDimensions,
+    ImageResizeSet,
+    StrEnum,
+    get_processed_image_url,
+    render_template_partial,
+)
 
 PICTURE_JSON_LD_BASE = {
     "@context": "https://schema.org/",
@@ -133,17 +140,28 @@ def makeExtension(**kwargs) -> PictureExtension:  # noqa
     return PictureExtension(**kwargs)
 
 
+# TODO: refactor this block
 def render_picture_tag(
     src: str,
-    max_width: int | None = None,
-    breakpoints: Iterable[int] | None = None,
+    width: int,
+    ratio: float = Picture.DEFAULT_RATIO,
     loading: str = 'lazy',
-    **kwargs,
+    **kwargs: Any,
 ) -> str:
-    resizes = ImageResizeSet(src, max_width=max_width, breakpoints=breakpoints, **kwargs)
+    height = int(width * ratio)
+    source = {
+        'srcset': [
+            get_processed_image_url(src, width=width, height=height, **kwargs),
+            get_processed_image_url(src, width=width * 2, height=height * 2, **kwargs) + ' 2x',
+        ],
+        'media_query': '(min-width: 0px)',
+    }
+    fallback = get_processed_image_url(src, width=width, height=height, ext='jpg', **kwargs)
     ctx = {
-        'sources': resizes.sources,
-        'fallback': resizes.fallback,
+        'sources': (source,),
+        'fallback': fallback,
         'loading': loading,
+        'ratio': ratio,
+        'dimensions': (width, height),
     }
     return render_template_partial('picture-tag', ctx)
