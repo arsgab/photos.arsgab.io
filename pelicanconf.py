@@ -39,6 +39,7 @@ IGNORE_FILES = ['*.css']
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
 BASE_DIR = Path('.')
+DATA_BUILD_DIR = BASE_DIR / OUTPUT_PATH / 'data'
 LOAD_CONTENT_CACHE = env.get('LOAD_CONTENT_CACHE') == 'true'
 
 # Staticfiles

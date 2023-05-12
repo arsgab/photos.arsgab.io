@@ -1,3 +1,4 @@
+from json import dumps as json_dumps
 from random import randint
 
 from jinja2 import Environment
@@ -6,6 +7,8 @@ from pelican.contents import Article
 
 from markup import renderer_ref
 from markup.processors.picture import Picture, picture_processor_context_ref, render_picture_tag
+from pelicanconf import DATA_BUILD_DIR
+from utils.datastructures import get_geodata_from_articles
 from utils.staticfiles import get_static_url, inline_static_assets
 from utils.templating import render_page_metadata
 from utils.url import qualify_url
@@ -21,6 +24,9 @@ GLOBALS = {
 FILTERS = {
     'qualify': qualify_url,
 }
+
+DATA_BUILD_DIR.mkdir(exist_ok=True)
+POINTS_GEOJSON = DATA_BUILD_DIR / 'points.json'
 
 
 def setup_jinja_env(generator: ArticlesGenerator) -> Environment:
@@ -40,7 +46,14 @@ def update_article_context(article_generator: ArticlesGenerator, content: Articl
     setattr(content, 'json_ld', list(json_ld))
 
 
+def write_points_geojson(article_generator: ArticlesGenerator) -> None:
+    geodata = get_geodata_from_articles(article_generator.articles)
+    geojson = json_dumps(geodata, ensure_ascii=False)
+    POINTS_GEOJSON.open('w').write(geojson)
+
+
 def register() -> None:
     signals.article_generator_preread.connect(setup_jinja_env)
     signals.page_generator_preread.connect(setup_jinja_env)
     signals.article_generator_write_article.connect(update_article_context)
+    signals.article_generator_finalized.connect(write_points_geojson)
