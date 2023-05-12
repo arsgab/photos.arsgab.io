@@ -1,11 +1,14 @@
+import hashlib
+from collections.abc import Iterable
 from functools import cache
-from json import loads as json_loads
+from json import dumps as json_dumps, loads as json_loads
 from random import choice as rand_choice
 from string import ascii_lowercase
 
-from pelicanconf import STATIC_BUILD_DIR, STATIC_URL
+from pelicanconf import STATIC_ASSETS_DIR, STATIC_BUILD_DIR, STATIC_URL
 
 STATIC_MANIFEST = STATIC_BUILD_DIR / 'manifest.json'
+ALLOWED_INLINE_SUFFIXES = {'.css', '.js', '.json'}
 
 
 def get_static_url(filename: str, randomize: bool = True) -> str:
@@ -18,8 +21,19 @@ def get_static_url(filename: str, randomize: bool = True) -> str:
     return f'{STATIC_URL}{filename}'
 
 
+def inline_static_assets(pattern: str) -> str:
+    contents = get_staticfiles_contents(pattern)
+    return '\n'.join(contents).strip() or ''
+
+
 def get_random_string(length: int = 8) -> str:
     return ''.join(rand_choice(ascii_lowercase) for _ in range(length))
+
+
+def get_staticfiles_contents(pattern: str) -> Iterable[str]:
+    staticfiles = STATIC_ASSETS_DIR.glob(pattern)
+    files = filter(lambda file: file.suffix in ALLOWED_INLINE_SUFFIXES, staticfiles)
+    return [file.read_text() for file in files]
 
 
 @cache
@@ -31,3 +45,16 @@ def get_staticfiles_manifest() -> dict[str, str]:
         return json_loads(manifest_text)
     except ValueError:
         return {}
+
+
+def generate_staticfiles_manifest(hash_digest_size: int = 10) -> dict[str, str]:
+    manifest = {}
+    files = (f.resolve() for f in STATIC_BUILD_DIR.glob('*') if f.suffix in {'.css', '.js'})
+    for file in files:
+        contents = file.read_bytes()
+        hashstring = hashlib.blake2b(contents, digest_size=hash_digest_size).hexdigest()
+        hashed_filename = f'{file.stem}.{hashstring}{file.suffix}'
+        (STATIC_BUILD_DIR / hashed_filename).write_bytes(contents)
+        manifest[file.name] = hashed_filename
+    STATIC_MANIFEST.open('w').write(json_dumps(manifest))
+    return manifest

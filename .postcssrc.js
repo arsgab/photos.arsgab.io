@@ -1,5 +1,3 @@
-const MANIFEST = 'dist/static/manifest.json';
-
 module.exports = ({env}) => ({
   plugins: {
     'postcss-import': {},
@@ -7,6 +5,5 @@ module.exports = ({env}) => ({
     'postcss-custom-media': {},
     'autoprefixer': {},
     'cssnano': env === 'production' ? {} : false,
-    'postcss-hash': env === 'production' ? {manifest: MANIFEST} : false,
   }
 });

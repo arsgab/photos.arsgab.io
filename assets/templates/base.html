@@ -16,6 +16,11 @@
   <link rel="manifest" href="{{ static('manifest.webmanifest') }}">
   <link rel="stylesheet" href="{{ static('style.css') }}">
   <script>window.addEventListener('load', _ => document.documentElement.dataset.loaded = 'true')</script>
+{% if INLINE_SCRIPTS %}
+  <script defer data-inline>{{ static_inline('scripts/*.js') }}</script>
+{% else %}
+  <script defer src="{{ static('script.js') }}"></script>
+{% endif %}
   {% block styles %}{% endblock %}
   {% block scripts %}{% endblock %}
 

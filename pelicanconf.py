@@ -38,11 +38,15 @@ THEME_STATIC_DIR = 'static'
 IGNORE_FILES = ['*.css']
 PLUGIN_PATHS = ['markup']
 PLUGINS = ['renderers']
-STATIC_PATHS = []
 BASE_DIR = Path('.')
+LOAD_CONTENT_CACHE = env.get('LOAD_CONTENT_CACHE') == 'true'
+
+# Staticfiles
+STATIC_PATHS = []
+STATIC_ASSETS_DIR = BASE_DIR / THEME
 STATIC_BUILD_DIR = BASE_DIR / OUTPUT_PATH / THEME_STATIC_DIR
 STATIC_URL = f'/{THEME_STATIC_DIR}/'
-LOAD_CONTENT_CACHE = env.get('LOAD_CONTENT_CACHE') == 'true'
+INLINE_SCRIPTS = env.get('INLINE_SCRIPTS') == 'true'
 
 # Processors/renderers setup
 MARKDOWN = {

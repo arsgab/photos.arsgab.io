@@ -6,13 +6,14 @@ from pelican.contents import Article
 
 from markup import renderer_ref
 from markup.processors.picture import Picture, picture_processor_context_ref, render_picture_tag
-from utils.staticfiles import get_static_url
+from utils.staticfiles import get_static_url, inline_static_assets
 from utils.templating import render_page_metadata
 from utils.url import qualify_url
 
 GLOBALS = {
     'random': randint,
     'static': get_static_url,
+    'static_inline': inline_static_assets,
     'picture': render_picture_tag,
     'pagemeta': render_page_metadata,
 }

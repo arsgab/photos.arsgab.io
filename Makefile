@@ -77,6 +77,9 @@ lint:
 static:
 	npm run build
 
+statichash:
+	$(VENV)/bin/invoke staticfiles
+
 watch:
 	npm run watch &
 	npm run bs

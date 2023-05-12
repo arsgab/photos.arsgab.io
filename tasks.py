@@ -9,6 +9,8 @@ from pelican import main as pelican_main
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 from pelican.settings import DEFAULT_CONFIG, get_settings_from_file
 
+from utils.staticfiles import generate_staticfiles_manifest
+
 OPEN_BROWSER_ON_SERVE = True
 SETTINGS_FILE_BASE = 'pelicanconf.py'
 SETTINGS = {}
@@ -129,3 +131,8 @@ def livereload(c):
 def pelican_run(cmd):
     cmd += ' ' + program.core.remainder  # allows to pass-through args to pelican
     pelican_main(shlex.split(cmd))
+
+
+@task
+def staticfiles(cmd):
+    generate_staticfiles_manifest()

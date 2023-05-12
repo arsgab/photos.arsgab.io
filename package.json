@@ -14,10 +14,13 @@
     "postcss-hash": "^3.0.0",
     "postcss-import": "^15.1.0",
     "postcss-load-config": "^4.0.1",
-    "postcss-nesting": "^11.2.2"
+    "postcss-nesting": "^11.2.2",
+    "uglify-js": "^3.17.4"
   },
   "scripts": {
-    "build": "postcss assets/styles/style.css --dir=dist/static --env=production",
+    "build": "npm run build_styles && npm run build_scripts",
+    "build_styles": "postcss assets/styles/style.css --dir=dist/static --env=production",
+    "build_scripts": "uglifyjs --compress --mangle  --output dist/static/script.js -- assets/scripts/*.js",
     "watch": "postcss assets/styles/style.css --dir=dist/static --env=development --watch --verbose",
     "bs": "browser-sync start --config .browsersyncrc.js"
   }
