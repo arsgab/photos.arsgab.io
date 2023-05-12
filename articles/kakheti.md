@@ -7,6 +7,7 @@ icon: 🇬🇪
 cover: kakheti/IMG_4788
 color: #82351E
 og_image: kakheti/IMG_4817
+coords: 45.9271,41.6111
 ---
 
 [pic src=kakheti/IMG_4693 ratio=9:16 grid=4|3 eager]

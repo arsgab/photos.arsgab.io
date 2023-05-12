@@ -9,6 +9,7 @@ icon: 🇹🇷
 color: #5A7F8C
 cover: karadeniz/IMG_0793
 og_image: karadeniz/IMG_1015
+coords: 41.0148,40.8783; 41.0963,40.9548; 40.5177,41.0255
 ---
 
 [pic src=karadeniz/IMG_0726 ratio=3:4 grid=4|3 eager]

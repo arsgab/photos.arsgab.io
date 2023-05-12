@@ -7,6 +7,7 @@ icon: 🇹🇯
 cover: dushanbe/IMG_3253
 color: #F8FB84
 og_image: dushanbe/IMG_3189
+coords: 68.787,38.5598
 ---
 
 [pic src=dushanbe/IMG_3130 ratio=16:9 grid=9|3 eager]

@@ -8,7 +8,9 @@ icon: 🇹🇷
 cover: marmara/IMG_1972
 color: #56706C
 og_image: marmara/IMG_2130
+coords: 27.7917,40.3983; 26.4086, 40.1467
 ---
+
 [pic src=marmara/IMG_1857 grid=4|3 ratio=9:16 eager]
 
 [pic src=marmara/IMG_1861 grid=4|0 ratio=9:16]

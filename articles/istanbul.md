@@ -8,6 +8,7 @@ icon: 🇹🇷
 color: #C79060
 cover: istanbul/IMG_1495
 og_image: istanbul/IMG_1466
+coords: 28.9784, 41.0082
 ---
 
 [pic src=istanbul/IMG_1445 ratio=9:16 grid=6|3]

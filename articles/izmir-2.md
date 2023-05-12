@@ -7,6 +7,7 @@ icon: 🇹🇷
 cover: izmir/IMG_3176
 color: #7D7B5D
 og_image: izmir/IMG_3254
+coords: 27.337831982,37.937162918; 32.8597,39.9334
 ---
 
 [pic src=izmir/IMG_3143 ratio=9:16 grid=4|3 eager]

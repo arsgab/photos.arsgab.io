@@ -6,6 +6,7 @@ date: 2022-11-15
 cover: izrael/IMG_4284
 color: #B3B851
 og_image: izrael/IMG_4301
+coords: 34.7818,32.0853
 ---
 
 [pic src=izrael/IMG_4283 ratio=3:4 grid=5|3 eager]

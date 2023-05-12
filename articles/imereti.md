@@ -7,6 +7,7 @@ icon: 🇬🇪
 cover: imereti/IMG_5271
 color: #2A6E91
 og_image: imereti/IMG_5350
+coords: 42.7060,42.2718
 ---
 
 [pic src=imereti/IMG_5155 ratio=16:9 grid=8|3 eager]

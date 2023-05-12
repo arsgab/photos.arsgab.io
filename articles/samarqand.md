@@ -8,6 +8,7 @@ icon: 🇺🇿
 cover: samarqand/IMG_3505
 color: #1C5E67
 og_image: samarqand/IMG_3497
+coords: 66.9654,39.6508
 ---
 
 [pic src=samarqand/IMG_3317 ratio=16:9 grid=8|3 eager]

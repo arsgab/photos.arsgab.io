@@ -9,6 +9,7 @@ icon: 🇬🇪
 cover: tbilisi/IMG_0452
 color: #D5846E
 og_image: tbilisi/IMG_0558
+coords: 44.79, 41.7058159
 ---
 
 [pic src=tbilisi/IMG_0494 ratio=3:4 grid=4|3 eager]

@@ -9,6 +9,7 @@ icon: 🇹🇷
 cover: ege/IMG_2756
 color: #F4AF3F
 og_image: ege/IMG_2733
+coords: 27.1799,39.1214
 ---
 
 [pic src=ege/IMG_2574 ratio=9:16 grid=4|3 eager]
