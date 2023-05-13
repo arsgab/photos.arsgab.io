@@ -7,15 +7,16 @@ from pelican.contents import Article
 
 from markup import renderer_ref
 from markup.processors.picture import Picture, picture_processor_context_ref, render_picture_tag
-from pelicanconf import DATA_BUILD_DIR
+from pelicanconf import DATAFILES_PATH
 from utils.datastructures import get_geodata_from_articles
 from utils.staticfiles import get_static_url, inline_static_assets
 from utils.templating import render_page_metadata
-from utils.url import qualify_url
+from utils.url import get_datafile_url, qualify_url
 
 GLOBALS = {
     'random': randint,
     'static': get_static_url,
+    'api': get_datafile_url,
     'static_inline': inline_static_assets,
     'picture': render_picture_tag,
     'pagemeta': render_page_metadata,
@@ -25,8 +26,7 @@ FILTERS = {
     'qualify': qualify_url,
 }
 
-DATA_BUILD_DIR.mkdir(exist_ok=True)
-POINTS_GEOJSON = DATA_BUILD_DIR / 'points.json'
+POINTS_GEOJSON = DATAFILES_PATH / 'points.json'
 
 
 def setup_jinja_env(generator: ArticlesGenerator) -> Environment:
