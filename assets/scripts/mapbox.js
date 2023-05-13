@@ -76,6 +76,9 @@ function onMapLoad({target: map}) {
   map.on('click', 'points', onPointClick);
   map.on('mouseleave', 'points', () => map.getCanvas().style.cursor = '');
   container.dataset.mapLoaded = 'true';
+  let umami = window.umami || null;
+  if (umami)
+    umami.track('map-loaded');
 }
 
 function onPointHover({target: map, features: [point, ..._]}, popup) {
@@ -84,11 +87,19 @@ function onPointHover({target: map, features: [point, ..._]}, popup) {
   let content = `<a href=${url} target=_blank rel=noopener>${title}</a>`;
   map.getCanvas().style.cursor = 'pointer';
   popup.setLngLat(coordinates).setHTML(content).addTo(map);
+  popup.getElement().addEventListener('click', () => trackPointClick(point));
   popup.getElement().style.setProperty('--popup-color', point.properties.color);
 }
 
 function onPointClick({features: [point, ..._]}) {
+  trackPointClick(point);
   window.open(point.properties.url, '_blank', 'noopener');
+}
+
+function trackPointClick(point) {
+  let umami = window.umami || null;
+  if (umami)
+    umami.track('map-point-clicked', {url: point.properties.url});
 }
 
 function loadScript(src, defer = true) {
