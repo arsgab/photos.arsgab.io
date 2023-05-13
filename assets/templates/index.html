@@ -5,6 +5,13 @@
 {% endblock %}
 
 {% block content %}
+  <dl data-map-box-wrapper>
+    <dd id="map" data-map-box data-map-token="{{ MAPBOX_API_TOKEN }}" data-map-zoom="4.5"
+        data-map-src="{{ api('points.json') }}" hidden></dd>
+    <dt data-columned data-close-text="× Hide map">
+      <a href="#map" data-map-toggle>Show photographed locations on map</a>
+    </dt>
+  </dl>
   <ul data-list-type="tiles">
   {% for article in articles %}<li data-list-item="{{ article.slug }}" style="--delay: {{ 100 * loop.index0 }}ms">
   {% set loading = 'lazy' if loop.index > 1 else 'eager' %}

@@ -25,6 +25,7 @@ env:
   STATS_WEBSITE_ID: ${{ vars.STATS_WEBSITE_ID }}
   IMGPROXY_KEY: ${{ secrets.IMGPROXY_KEY }}
   IMGPROXY_SALT: ${{ secrets.IMGPROXY_SALT }}
+  MAPBOX_API_TOKEN: ${{ vars.MAPBOX_API_TOKEN }}
 
 jobs:
   build-and-publish:
