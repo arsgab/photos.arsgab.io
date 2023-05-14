@@ -2,21 +2,34 @@ from base64 import urlsafe_b64encode
 from hashlib import sha256
 from hmac import new as hmac_new
 from os.path import splitext
+from re import VERBOSE, compile as re_compile
 from textwrap import wrap
 from typing import Any, Iterable, Iterator, NamedTuple, Optional
 
-from pelicanconf import IMGPROXY_DEFAULT_QUALITY, IMGPROXY_FQDN, IMGPROXY_KEY, IMGPROXY_SALT
+from pelicanconf import (
+    IMGPROXY_DEFAULT_QUALITY,
+    IMGPROXY_FQDN,
+    IMGPROXY_KEY,
+    IMGPROXY_SALT,
+    IMGPROXY_URL_NAMESPACE as URL_NAMESPACE,
+)
 
 assert bool(IMGPROXY_KEY), '`IMGPROXY_KEY` not set'
 assert bool(IMGPROXY_SALT), '`IMGPROXY_SALT` not set'
 KEY = bytes.fromhex(IMGPROXY_KEY)
 SALT = bytes.fromhex(IMGPROXY_SALT)
 
-URL_NAMESPACE = 'photos.arsgab.io'
 IMAGE_DEFAULT_EXT = '.jpeg'
 MAX_IMAGE_WIDTH = 1400
 MAX_SOURCE_WIDTH = 9999
 DEFAULT_BREAKPOINTS: tuple[int, ...] = (320, 480, 640, 800, 960, 1024, 1280)
+SIZED_IMAGE_FILENAME_PATTERN = re_compile(
+    r'''
+    ^(?P<base>.+)  # base, e.g. istanbul/IMG_1850
+    \.(?P<width>\d+)x(?P<height>\d+)$  # {width}x{height}, e.g. 800x600
+''',
+    flags=VERBOSE,
+)
 
 
 def get_processed_image_url(
@@ -45,6 +58,19 @@ def get_resized_image_url(source_url: str, width: int, ext: str = 'webp', **extr
 class ImageDimensions(NamedTuple):
     width: int = 0
     height: int = 0
+
+    @classmethod
+    def from_filename(cls, filename: str) -> Optional['ImageDimensions']:
+        match = SIZED_IMAGE_FILENAME_PATTERN.match(filename)
+        if match is None:
+            return
+        matched_groups = match.groupdict()
+        try:
+            width = int(matched_groups['width'])
+            height = int(matched_groups['height'])
+        except ValueError:
+            return
+        return cls(width, height)
 
     @classmethod
     def fake_from_ratio(cls, ratio: float) -> 'ImageDimensions':
@@ -153,6 +179,12 @@ class ImageResizeSet:
 
 def _qualify_source_image_url(source_url: str) -> str:
     img_base, img_ext = splitext(source_url)
+
+    # It's not an extension, it's dimensions part...
+    if img_ext and len(img_ext) > 3:
+        img_base = f'{img_base}{img_ext}'
+        img_ext = None
+
     source_url = img_base + (img_ext or IMAGE_DEFAULT_EXT)
     if source_url.startswith('http'):
         return source_url

@@ -61,12 +61,17 @@ class Picture(HTMLParser):
         return fromstring(render_template_partial('picture', ctx))
 
     def get_context(self) -> dict:
+        src = self.attrs['src']
         idx = self.attrs.get('id') or self.index
         # TODO: optionally turn auto-captions on/off
         caption = f'<a href="#{idx}" rel="bookmark">{self.index}</a>'
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
-        ratio = self._get_ratio()
-        dimensions = ImageDimensions.fake_from_ratio(ratio)
+        dimensions = ImageDimensions.from_filename(src)
+        if dimensions:
+            ratio = round(dimensions.width / dimensions.height, 2)
+        else:
+            ratio = self._get_ratio()
+            dimensions = ImageDimensions.fake_from_ratio(ratio)
         alt = self.attrs.get('alt') or f'Image {self.index}'
         columns, offset = self.attrs.get('grid', '|').split('|')
         columns = self.attrs.get('w') or columns
@@ -80,7 +85,7 @@ class Picture(HTMLParser):
             'dimensions': dimensions,
             'ratio': ratio,
             'alt': alt,
-            'src': self.attrs['src'],
+            'src': src,
             'caption': caption,
             'columns': columns or '*',
             'offset': offset or '*',
