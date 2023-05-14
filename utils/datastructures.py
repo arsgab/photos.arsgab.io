@@ -49,7 +49,7 @@ def _generate_geopoints_from_dataset_items(dataset: dict[str, dict]) -> Iterator
             },
             'geometry': {
                 'type': 'Point',
-                'coordinates': coords,
+                'coordinates': list(reversed(coords)),
             },
         }
 

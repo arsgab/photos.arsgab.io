@@ -8,6 +8,170 @@ name = "Valencia"
 coords = [39.4697065,-0.3763353]
 year = 2022
 
+[malaga]
+coords = [36.7213028,-4.4216366]
+year = 2019
+
+[toulouse]
+coords = [43.6044622,1.4442469]
+year = 2019
+
+[bordeaux]
+coords = [44.841225,-0.5800364]
+year = 2019
+
+[marseille]
+coords = [43.2961743,5.3699525]
+year = 2019
+
+[nice]
+coords = [43.7009358,7.2683912]
+year = 2019
+
+[paris]
+coords = [48.8588897,2.320041]
+year = 2021
+
+[amsterdam]
+coords = [52.3730796,4.8924534]
+year = 2018
+
+[dusseldorf]
+name = "Düsseldorf"
+coords = [51.2254018,6.7763137]
+year = 2018
+
+[berlin]
+coords = [52.5170365,13.3888599]
+year = 2016
+
+[cologne]
+coords = [50.938361,6.959974]
+year = 2018
+
+[copenhagen]
+name = "København"
+coords = [55.6867243,12.5700724]
+year = 2019
+
+[stockholm]
+coords = [59.3251172,18.0710935]
+year = 2015
+
+[helsinki]
+coords = [60.1674881,24.9427473]
+year = 2015
+
+[tallinn]
+coords = [59.4372155,24.7453688]
+year = 2015
+
+[tartu]
+coords = [58.3801207,26.72245]
+year = 2014
+
+[saaremaa]
+coords = [58.27382,22.2771058]
+year = 2015
+
+[hiiumaa]
+coords = [58.8901657,22.7096019]
+year = 2015
+
+[riga]
+coords = [56.9493977,24.1051846]
+year = 2016
+
+[vilnius]
+coords = [54.6870458,25.2829111]
+year = 2018
+
+[gdansk]
+coords = [54.3706858,18.6129821]
+year = 2014
+
+[minsk]
+coords = [53.9024716,27.5618225]
+year = 2011
+
+[homyel]
+coords = [52.4238936,31.0131698]
+year = 2010
+
+[prague]
+coords = [50.0874654,14.4212535]
+year = 2018
+
+[budapest]
+coords = [47.4979937,19.0403594]
+year = 2018
+
+[beograd]
+coords = [44.8178131,20.4568974]
+year = 2023
+
+[sofia]
+coords = [42.6977028,23.3217359]
+year = 2021
+
+[antalya]
+coords = [36.8872942,30.7074549]
+year = 2022
+
+[kas]
+name = "Kaś"
+coords = [36.1993752,29.6413365]
+year = 2022
+
+[fethiye]
+name = "Kaś"
+coords = [36.6221019,29.1153234]
+year = 2022
+
+[rhodes]
+coords = [36.17263,27.9194181]
+year = 2022
+
+[denizli]
+coords = [37.7833152,29.0844832]
+year = 2022
+
+[yerevan]
+coords = [40.1777112,44.5126233]
+year = 2022
+
+[baku]
+coords = [40.3755885,49.8328009]
+year = 2016
+
+[milan]
+coords = [45.4641943,9.1896346]
+year = 2021
+
+[bergamo]
+coords = [45.7566557,9.7542192]
+year = 2021
+
+[genova]
+coords = [44.40726,8.9338624]
+year = 2018
+
+[bologna]
+coords = [44.4938203,11.3426327]
+year = 2021
+
+[florence]
+coords = [43.7698712,11.2555757]
+year = 2021
+
+[rome]
+coords = [41.8933203,12.4829321]
+year = 2021
+
+[bari]
+coords = [41.1257843,16.8620293]
+year = 2019
+
 [alicante]
 name = "Alicante"
 coords = [38.3436365,-0.4881708]
@@ -32,3 +196,45 @@ year = 2018
 name = "Porto"
 coords = [41.1494512,-8.6107884]
 year = 2020
+
+[moscow]
+coords = [55.7504461,37.6174943]
+year = 2022
+
+[spb]
+name = "St. Petersburg"
+coords = [59.938732,30.316229]
+year = 2022
+
+[sortavala]
+coords = [61.70274,30.691231]
+year = 2022
+
+[pskov]
+coords = [57.8173923,28.3343465]
+year = 2011
+
+[voronezh]
+coords = [51.6605982,39.2005858]
+year = 2020
+
+[nino]
+name = "Nizhny Novgorod"
+coords = [56.3264816,44.0051395]
+year = 2011
+
+[ufa]
+coords = [54.7261409,55.947499]
+year = 2016
+
+[kazan]
+coords = [55.7823547,49.1242266]
+year = 2021
+
+[krasnodar]
+coords = [45.7684014,39.0261044]
+year = 2014
+
+[kostroma]
+coords = [57.7679158,40.9269141]
+year = 2016

@@ -10,6 +10,13 @@ const MAPBOX = {
     'circle-opacity': 0.9,
     'circle-radius': 8,
   },
+  locationLayout: {
+    'circle-color': 'white',
+    'circle-stroke-width': 1,
+    'circle-stroke-color': 'white',
+    'circle-opacity': 0.55,
+    'circle-radius': 4,
+  },
 };
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (window.location.hash === MAPBOX.selector) {
     container.hidden = false;
     loadScript(MAPBOX.script).then(() => createMap(container));
+    container.parentElement.scrollIntoView({behavior: 'smooth'});
   }
 });
 
@@ -55,8 +63,16 @@ function createMap(container, useWebGL2 = true) {
 }
 
 function onMapLoad({target: map}) {
-  let container = map.getContainer();
-  let dataSource = container.dataset.mapSrc;
+  addMapPoints(map);
+  addMapLocations(map);
+  map.getContainer().dataset.mapLoaded = 'true';
+  let umami = window.umami || null;
+  if (umami)
+    umami.track('map-loaded');
+}
+
+function addMapPoints(map) {
+  let dataSource = map.getContainer().dataset.mapPointsSrc;
   if (!dataSource)
     return;
   map.addSource('points', {type: 'geojson', data: dataSource});
@@ -75,10 +91,19 @@ function onMapLoad({target: map}) {
   map.on('mouseenter', 'points', (evt => onPointHover(evt, popup)));
   map.on('click', 'points', onPointClick);
   map.on('mouseleave', 'points', () => map.getCanvas().style.cursor = '');
-  container.dataset.mapLoaded = 'true';
-  let umami = window.umami || null;
-  if (umami)
-    umami.track('map-loaded');
+}
+
+function addMapLocations(map) {
+  let dataSource = map.getContainer().dataset.mapLocSrc;
+  if (!dataSource)
+    return;
+  map.addSource('locations', {type: 'geojson', data: dataSource});
+  map.addLayer({
+    id: 'locations',
+    source: 'locations',
+    type: 'circle',
+    paint: MAPBOX.locationLayout,
+  });
 }
 
 function onPointHover({target: map, features: [point, ..._]}, popup) {
