@@ -64,6 +64,12 @@ jobs:
       - name: Install Python dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
+      - name: Save Python env ref
+        run: echo "VENV=$(poetry env info --path)" >> $GITHUB_ENV
+
+      # Lint Python code
+      - name: Lint code
+        run: make lint
 
       # Setup Node env
       - name: Install Node
@@ -76,11 +82,9 @@ jobs:
 
       # Build assets
       - name: Build static assets
-        run: make static && VENV=$(poetry env info --path) make statichash
-      - name: Lint code
-        run: VENV=$(poetry env info --path) make lint
+        run: make static
       - name: Build site
-        run: VENV=$(poetry env info --path) make html
+        run: make html
 
       # Publish
       - name: Setup Pages

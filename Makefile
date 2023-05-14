@@ -76,6 +76,7 @@ lint:
 
 static:
 	npm run build
+	make statichash
 
 statichash:
 	$(VENV)/bin/invoke staticfiles
