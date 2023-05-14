@@ -1,0 +1,34 @@
+[barcelona]
+name = "Barcelona"
+coords = [41.385063, 2.173404]
+year = 2022
+
+[valencia]
+name = "Valencia"
+coords = [39.4697065,-0.3763353]
+year = 2022
+
+[alicante]
+name = "Alicante"
+coords = [38.3436365,-0.4881708]
+year = 2022
+
+[cadiz]
+name = "Cádiz"
+coords = [36.5297438,-6.2928976]
+year = 2022
+
+[madrid]
+name = "Madrid"
+coords = [40.4167047,-3.7035825]
+year = 2022
+
+[lisbon]
+name = "Lisbon"
+coords = [38.7077507,-9.1365919]
+year = 2018
+
+[porto]
+name = "Porto"
+coords = [41.1494512,-8.6107884]
+year = 2020

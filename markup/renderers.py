@@ -8,7 +8,7 @@ from pelican.contents import Article
 from markup import renderer_ref
 from markup.processors.picture import Picture, picture_processor_context_ref, render_picture_tag
 from pelicanconf import DATAFILES_PATH
-from utils.datastructures import get_geodata_from_articles
+from utils.datastructures import get_geodata_from_articles, get_geodata_from_dataset
 from utils.staticfiles import get_static_url, inline_static_assets
 from utils.templating import render_page_metadata
 from utils.url import get_datafile_url, qualify_url
@@ -27,6 +27,7 @@ FILTERS = {
 }
 
 POINTS_GEOJSON = DATAFILES_PATH / 'points.json'
+LOCATIONS_GEOJSON = DATAFILES_PATH / 'locations.json'
 
 
 def setup_jinja_env(generator: ArticlesGenerator) -> Environment:
@@ -52,8 +53,15 @@ def write_points_geojson(article_generator: ArticlesGenerator) -> None:
     POINTS_GEOJSON.open('w').write(geojson)
 
 
+def write_locations_geojson(*args) -> None:
+    geodata = get_geodata_from_dataset()
+    geojson = json_dumps(geodata, ensure_ascii=False)
+    LOCATIONS_GEOJSON.open('w').write(geojson)
+
+
 def register() -> None:
     signals.article_generator_preread.connect(setup_jinja_env)
     signals.page_generator_preread.connect(setup_jinja_env)
     signals.article_generator_write_article.connect(update_article_context)
     signals.article_generator_finalized.connect(write_points_geojson)
+    signals.finalized.connect(write_locations_geojson)
