@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block styles %}
+  <style>
+    :root { --dot-gradient-colors: {{ colors(shuffle=True)[:4]|join(',') }} }
+  </style>
+{% endblock %}
+
 {% block page_subheader %}
   <p>Photos by Arseny Gabdullin.<br>Shot on iPhone.</p>
 {% endblock %}

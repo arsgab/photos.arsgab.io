@@ -10,7 +10,7 @@ from markup.processors.picture import Picture, picture_processor_context_ref, re
 from pelicanconf import DATAFILES_PATH
 from utils.datastructures import get_geodata_from_articles, get_geodata_from_dataset
 from utils.staticfiles import get_static_url, inline_static_assets
-from utils.templating import render_page_metadata
+from utils.templating import get_articles_colors_list, render_page_metadata
 from utils.url import get_datafile_url, qualify_url
 
 GLOBALS = {
@@ -20,6 +20,7 @@ GLOBALS = {
     'static_inline': inline_static_assets,
     'picture': render_picture_tag,
     'pagemeta': render_page_metadata,
+    'colors': get_articles_colors_list,
 }
 
 FILTERS = {
