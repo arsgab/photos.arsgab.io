@@ -42,12 +42,12 @@ header[role=banner] {
 
   & a, & h1 {
     opacity: .6;
-    display: inline-block;
     font-size: .75em;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: .25em;
     position: relative;
+    padding-left: 1em;
 
     @media (--mobile) {
       font-size: .65em;
@@ -55,39 +55,35 @@ header[role=banner] {
   }
 
   & a {
-    border-radius: 3px;
-    padding: 2px 5px;
-    margin-left: -5px;
-    transition: none;
+    display: block;
 
     &:hover {
-      background: var(--text-color);
-      color: var(--bg-color);
+      color: white;
+      transition: none;
+      opacity: 1;
     }
 
     &::before {
       content: "←";
       position: absolute;
-      right: 100%;
-      color: var(--text-color);
+      left: -.4em;
       font-weight: 600;
       opacity: .8;
-    }
-
-    &:hover::before {
-      opacity: 1;
     }
   }
 
   & h1 {
+    cursor: default;
+
     &::before {
       content: "";
       display: block;
       position: absolute;
-      width: .6em;
-      height: .6em;
-      left: -.8em;
-      top: .35rem;
+      top: 50%;
+      margin-top: -.26rem;
+      left: -.1em;
+      width: .5rem;
+      height: .5rem;
       border-radius: 100%;
       opacity: 0;
       transform: scale(.8);
