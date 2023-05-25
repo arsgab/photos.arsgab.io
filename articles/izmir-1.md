@@ -4,7 +4,7 @@ location: Türkiye
 slug: izmir-1
 date: 2023-02-23
 icon: 🇹🇷
-cover: izmir/IMG_3196
+cover: izmir/IMG_3027
 color: #586E3A
 og_image: izmir/IMG_3026
 coords: 27.1428,38.4237
