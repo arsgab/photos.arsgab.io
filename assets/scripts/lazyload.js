@@ -17,5 +17,10 @@ window.addEventListener('load', () => {
       if (isLastFigure && umami) umami.track('page-bottom-viewed', {path: window.location.pathname});
     }, {threshold: INTERSECTION_THRESHOLDS});
     observer.observe(figure);
+
+    // Send tracker event if image was not loaded
+    if (umami) {
+      img.onerror = () => umami.track('image-loading-failed', {img: figure.dataset.src || ''});
+    }
   });
 });
