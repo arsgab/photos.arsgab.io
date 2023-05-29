@@ -10,6 +10,7 @@ from pelicanconf import (
     IMGPROXY_DEFAULT_QUALITY,
     IMGPROXY_FQDN,
     IMGPROXY_KEY,
+    IMGPROXY_PLAIN_SOURCE_URL,
     IMGPROXY_SALT,
     IMGPROXY_URL_NAMESPACE as URL_NAMESPACE,
 )
@@ -34,19 +35,22 @@ SIZED_IMAGE_FILENAME_PATTERN = re_compile(
 
 def get_processed_image_url(
     source_url_or_path: str,
+    encode_source_url: bool = not IMGPROXY_PLAIN_SOURCE_URL,
     ext: str = 'webp',
-    encode: bool = True,
     **options: Any,
 ) -> str:
     if not source_url_or_path:
         return ''
 
     source_url = _qualify_source_image_url(source_url_or_path)
-    source_url = _encode_source_image_url(source_url) if encode else f'plain/{source_url}'
+    if encode_source_url:
+        source_url = _encode_source_image_url(source_url)
+    else:
+        source_url = f'plain/{source_url}'
     processing_options = '/'.join(f'{k}:{v}' for k, v in options.items() if v is not None)
     path = f'/{processing_options}/{source_url}' if processing_options else f'/{source_url}'
     if ext is not None:
-        path = f'{path}.{ext}' if encode else f'{path}@{ext}'
+        path = f'{path}.{ext}' if encode_source_url else f'{path}@{ext}'
     signature = _generate_image_path_signature(path).decode()
     return f'https://{IMGPROXY_FQDN}/{signature}{path}'
 
