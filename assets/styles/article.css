@@ -135,7 +135,6 @@ article figure {
     &[data-loaded=true]::after {
       display: none;
     }
-
   }
 
   & img {
@@ -155,9 +154,30 @@ article figure {
     opacity: .75;
     font-size: .75em;
     line-height: 2;
+  }
 
-    & a:hover {
+  & figcaption a {
+    position: relative;
+
+    &:hover {
       color: white;
+    }
+
+    &:focus {
+      outline: none;
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: 25%;
+        width: .6em;
+        height: .6em;
+        margin-right: .5em;
+        border-radius: 100%;
+        background: var(--text-color);
+      }
     }
   }
 }

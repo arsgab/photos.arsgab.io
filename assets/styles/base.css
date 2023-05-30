@@ -15,10 +15,15 @@ body {
   font-variant-ligatures: common-ligatures contextual;
 }
 
+:focus {
+  outline: thin dotted var(--text-color);
+}
+
 a {
   color: var(--text-color);
   text-decoration: none;
   transition: color .25s ease-in-out;
+  border-radius: 3px;
 }
 
 [data-columned] {
