@@ -1,9 +1,9 @@
 <figure
   data-src="{{ src }}"
   data-index="{{ index or 0 }}"
-  data-width="{{ columns }}"
+  data-span="{{ span }}"
   data-offset="{{ offset or 0 }}"
-  {% if id %}id="{{ id }}"{% endif %}
+  id="{{ id or uuid() }}"
 >
   {% include "partials/picture-tag.html" with context %}
 {% if caption %}<figcaption>{{ caption|safe }}</figcaption>{% endif %}

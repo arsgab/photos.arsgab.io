@@ -98,8 +98,8 @@ class Picture(HTMLParser):
 
     def get_context(self) -> dict:
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
-        columns, offset = self.attrs.get('grid', '|').split('|')
-        columns = self.attrs.get('w') or columns
+        span, offset = self.attrs.get('grid', '|').split('|')
+        span = self.attrs.get('w') or span
         offset = self.attrs.get('x') or offset
         return {
             'src': self.src,
@@ -112,7 +112,7 @@ class Picture(HTMLParser):
             'ratio': self.ratio,
             'alt': self.html_alt,
             'caption': self.html_caption,
-            'columns': columns or '*',
+            'span': span or '*',
             'offset': offset or '*',
         }
 

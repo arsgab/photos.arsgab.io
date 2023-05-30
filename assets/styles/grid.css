@@ -1,47 +1,47 @@
 [data-grid] {
   position: relative;
 
-  & [data-width="1"] {
+  & [data-span="1"] {
     width: 8.333%;
   }
 
-  & [data-width="2"] {
+  & [data-span="2"] {
     width: 16.666%;
   }
 
-  & [data-width="3"] {
+  & [data-span="3"] {
     width: 25%;
   }
 
-  & [data-width="4"] {
+  & [data-span="4"] {
     width: 33.333%;
   }
 
-  & [data-width="5"] {
+  & [data-span="5"] {
     width: 41.666%;
   }
 
-  & [data-width="6"] {
+  & [data-span="6"] {
     width: 50%;
   }
 
-  & [data-width="7"] {
+  & [data-span="7"] {
     width: 58.333%;
   }
 
-  & [data-width="8"] {
+  & [data-span="8"] {
     width: 66.666%;
   }
 
-  & [data-width="9"] {
+  & [data-span="9"] {
     width: 75%;
   }
 
-  & [data-width="10"] {
+  & [data-span="10"] {
     width: 83.333%;
   }
 
-  & [data-width="11"] {
+  & [data-span="11"] {
     width: 91.666%;
   }
 
@@ -90,13 +90,13 @@
   }
 
   @media (--mobile) {
-    & [data-width] {
+    & [data-span] {
       width: 91.666%;
     }
 
-    & [data-width="10"],
-    & [data-width="11"],
-    & [data-width="12"] {
+    & [data-span="10"],
+    & [data-span="11"],
+    & [data-span="12"] {
       width: 100%;
     }
 
@@ -108,9 +108,9 @@
       margin-left: 8.333%;
     }
 
-    & [data-offset][data-width="10"],
-    & [data-offset][data-width="11"],
-    & [data-offset][data-width="12"] {
+    & [data-offset][data-span="10"],
+    & [data-offset][data-span="11"],
+    & [data-offset][data-span="12"] {
       margin-left: 0;
     }
   }

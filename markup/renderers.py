@@ -1,5 +1,6 @@
 from json import dumps as json_dumps
 from random import randint
+from uuid import uuid4
 
 from jinja2 import Environment
 from pelican import ArticlesGenerator, signals
@@ -15,6 +16,7 @@ from utils.url import get_datafile_url, qualify_url
 
 GLOBALS = {
     'random': randint,
+    'uuid': uuid4,
     'static': get_static_url,
     'api': get_datafile_url,
     'static_inline': inline_static_assets,
