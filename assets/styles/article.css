@@ -74,6 +74,40 @@ article figure {
     opacity: 1;
   }
 
+  &::before {
+    content: "🤍";
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 99;
+    text-shadow: rgba(0, 0, 0, .8) 0 0 12px;
+    font-size: 1.2em;
+    opacity: 0;
+    transition: transform ease-in-out .25s, opacity ease-in-out .25s;
+    transform: scale(.8);
+  }
+
+  [data-stat-enabled=true] &[data-loaded=true]::before {
+    display: block;
+  }
+
+  &:hover::before {
+    opacity: .5;
+    transform: scale(1);
+
+    @media (--mobile) {
+      opacity: .3;
+    }
+  }
+
+  &[data-liked=true]::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
   & picture {
     position: relative;
     padding-top: calc(100% / var(--ratio));

@@ -20,7 +20,7 @@
   "scripts": {
     "build": "npm run build_styles && npm run build_scripts",
     "build_styles": "postcss assets/styles/style.css --dir=dist/static --env=production",
-    "build_scripts": "uglifyjs --compress --mangle  --output dist/static/script.js -- assets/scripts/*.js",
+    "build_scripts": "uglifyjs --compress --mangle --output dist/static/script.js -- assets/scripts/*.js",
     "watch": "postcss assets/styles/style.css --dir=dist/static --env=development --watch --verbose",
     "bs": "browser-sync start --config .browsersyncrc.js"
   }
