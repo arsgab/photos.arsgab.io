@@ -64,7 +64,7 @@ class ImageDimensions(NamedTuple):
     height: int = 0
 
     @classmethod
-    def from_filename(cls, filename: str) -> Optional['ImageDimensions']:
+    def extract_from_filename(cls, filename: str) -> Optional['ImageDimensions']:
         match = SIZED_IMAGE_FILENAME_PATTERN.match(filename)
         if match is None:
             return

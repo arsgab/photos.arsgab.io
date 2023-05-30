@@ -5,7 +5,7 @@ from contextvars import ContextVar
 from html.parser import HTMLParser
 from re import Pattern, compile as re_compile
 from typing import Any
-from xml.etree.ElementTree import Element, fromstring
+from xml.etree.ElementTree import Element, fromstring as xml_from_string
 
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
@@ -19,6 +19,8 @@ from utils import (
     render_template_partial,
 )
 
+PICTURE_DEFAULT_RATIO = 1.777  # 16:9
+PICTURE_RATIO_PRECISION = 3
 PICTURE_JSON_LD_BASE = {
     "@context": "https://schema.org/",
     "@type": "ImageObject",
@@ -32,11 +34,12 @@ picture_processor_context_ref: ContextVar[defaultdict[int, deque['Picture']]] = 
 
 class Picture(HTMLParser):
     TAG: str = 'pic'
-    DEFAULT_EXT: str = '.jpeg'
-    DEFAULT_RATIO: float = 1.777  # 16:9
-    attrs: dict[str, str] | None = None
     index: int = 1
+    ratio: float = PICTURE_DEFAULT_RATIO
+    dimensions: ImageDimensions
     resizes: ImageResizeSet
+    attrs: dict[str, str]
+    src: str
 
     class Loading(StrEnum):
         LAZY = 'lazy'
@@ -47,62 +50,84 @@ class Picture(HTMLParser):
         PORTRAIT = 'portrait'
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str]]) -> None:
-        if tag == self.TAG:
-            self.attrs = dict(attrs)
+        self.attrs = dict(attrs) if tag == self.TAG else {}
 
-    def create_element(self) -> Element:
-        source = self.attrs['src']
-        processing_options = {}
-        version = self.attrs.get('v')
-        if version:
-            processing_options.update(cachebuster=f'v{version}')
-        self.resizes = ImageResizeSet(source, **processing_options)
-        ctx = self.get_context()
-        return fromstring(render_template_partial('picture', ctx))
+    def feed(self, data: str) -> None:
+        super().feed(data)
+        self.src = self.attrs.get('src')
+        if not self.src:
+            return
 
-    def get_context(self) -> dict:
-        src = self.attrs['src']
-        idx = self.attrs.get('id') or self.index
-        # TODO: optionally turn auto-captions on/off
-        caption = f'<a href="#{idx}" rel="bookmark">{self.index}</a>'
-        eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
-        dimensions = ImageDimensions.from_filename(src)
+        # Extract dimensions from filename or create fake from predefined ratio
+        dimensions = ImageDimensions.extract_from_filename(self.src)
         if dimensions:
-            ratio = round(dimensions.width / dimensions.height, 2)
+            ratio = round(dimensions.width / dimensions.height, PICTURE_RATIO_PRECISION)
         else:
-            ratio = self._get_ratio()
+            ratio = self._extract_ratio_value()
             dimensions = ImageDimensions.fake_from_ratio(ratio)
-        alt = self.attrs.get('alt') or f'Image {self.index}'
-        columns, offset = self.attrs.get('grid', '|').split('|')
-        columns = self.attrs.get('w') or columns
-        offset = self.attrs.get('x') or offset
-        return {
-            'index': self.index,
-            'id': idx,
-            'sources': self.resizes.sources,
-            'fallback': self.resizes.fallback,
-            'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
-            'dimensions': dimensions,
-            'ratio': ratio,
-            'alt': alt,
-            'src': src,
-            'caption': caption,
-            'columns': columns or '*',
-            'offset': offset or '*',
-        }
+        self.ratio = ratio
+        self.dimensions = dimensions
 
-    def _get_ratio(self) -> float:
+        # Create image resizes set
+        self.resizes = self.get_resizes()
+
+    def _extract_ratio_value(self, precision: int = PICTURE_RATIO_PRECISION) -> float:
         ratio = self.attrs.get('ratio')
         if ratio and ':' in ratio:
             width, height = ratio.split(':')
             with suppress(ValueError):
-                return int(width) / int(height)
+                ratio_value = int(width) / int(height)
+                return round(ratio_value, precision)
         elif ratio:
             with suppress(ValueError):
                 return float(ratio)
         if self.attrs.get('orient') == self.Orientation.PORTRAIT:
-            return round(1 / self.DEFAULT_RATIO, 3)
-        return self.DEFAULT_RATIO
+            return round(1 / PICTURE_DEFAULT_RATIO, precision)
+        return PICTURE_DEFAULT_RATIO
+
+    def create_element(self) -> Element:
+        rendered = render_template_partial('picture', self.get_context())
+        return xml_from_string(rendered)
+
+    def get_resizes(self) -> ImageResizeSet:
+        processing_options = {}
+        version = self.attrs.get('v')
+        if version:
+            processing_options.update(cachebuster=f'v{version}')
+        return ImageResizeSet(self.src, source_width=self.dimensions.width, **processing_options)
+
+    def get_context(self) -> dict:
+        eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
+        columns, offset = self.attrs.get('grid', '|').split('|')
+        columns = self.attrs.get('w') or columns
+        offset = self.attrs.get('x') or offset
+        return {
+            'src': self.src,
+            'index': self.index,
+            'id': self.html_id,
+            'sources': self.resizes.sources,
+            'fallback': self.resizes.fallback,
+            'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
+            'dimensions': self.dimensions,
+            'ratio': self.ratio,
+            'alt': self.html_alt,
+            'caption': self.html_caption,
+            'columns': columns or '*',
+            'offset': offset or '*',
+        }
+
+    @property
+    def html_id(self) -> str:
+        return self.attrs.get('id') or str(self.index)
+
+    @property
+    def html_alt(self) -> str:
+        return self.attrs.get('alt') or f'Image {self.index}'
+
+    @property
+    def html_caption(self) -> str:
+        # TODO: optionally turn auto-captions on/off
+        return f'<a href="#{self.html_id}" rel="bookmark">{self.index}</a>'
 
     @classmethod
     def create_json_ld(
@@ -126,13 +151,15 @@ class PictureBlockProcessor(BlockProcessor):
         block = blocks.pop(0).replace('[', '<').replace(']', '>')
         picture = Picture()
         picture.feed(block)
-        if not picture.attrs.get('src'):
+        if not picture.src:
             return False
+
         self._count += 1
         picture.index = self._count
         parent.append(picture.create_element())
         picture.close()
-        picture_processor_context_ref.get()[id(self)].append(picture)
+        refs = picture_processor_context_ref.get()
+        refs[id(self)].append(picture)
         return True
 
 
@@ -149,7 +176,7 @@ def makeExtension(**kwargs) -> PictureExtension:  # noqa
 def render_picture_tag(
     src: str,
     width: int,
-    ratio: float = Picture.DEFAULT_RATIO,
+    ratio: float = PICTURE_DEFAULT_RATIO,
     loading: str = 'lazy',
     **kwargs: Any,
 ) -> str:
