@@ -91,9 +91,21 @@ class Picture(HTMLParser):
 
     def get_resizes(self) -> ImageResizeSet:
         processing_options = {}
+
+        # Crop before processing
+        crop_params = self.attrs.get('crop', '').split(':')[:3]
+        if len(crop_params) == 2:
+            width, height = crop_params
+            processing_options.update(crop=f'{width}:{height}:nowe')
+        elif len(crop_params) == 3:
+            width, height, gravity = crop_params
+            processing_options.update(crop=f'{width}:{height}:{gravity}')
+
+        # `version` value for cache bustling
         version = self.attrs.get('v')
         if version:
             processing_options.update(cachebuster=f'v{version}')
+
         return ImageResizeSet(self.src, source_width=self.dimensions.width, **processing_options)
 
     def get_context(self) -> dict:
