@@ -185,7 +185,7 @@ def _qualify_source_image_url(source_url: str) -> str:
     img_base, img_ext = splitext(source_url)
 
     # It's not an extension, it's dimensions part...
-    if img_ext and len(img_ext) > 3:
+    if img_ext and len(img_ext) > 5:
         img_base = f'{img_base}{img_ext}'
         img_ext = None
 
