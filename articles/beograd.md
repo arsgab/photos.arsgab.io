@@ -94,7 +94,7 @@ coords: 20.4568974,44.8178131
 
 [pic src="beograd/IMG_4214.2268x4032" grid=4|2]
 
-[pic src="beograd/IMG_4227.3750x2110" grid=12|0]
+[pic src="beograd/IMG_4227.3362x1892" grid=12|0 v=2]
 
 [pic src="beograd/IMG_4382.1985x3528" grid=4|2]
 
