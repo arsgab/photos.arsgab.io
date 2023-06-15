@@ -26,7 +26,13 @@
 {% endif %}
   {% block styles %}{% endblock %}
   {% block scripts %}{% endblock %}
-
+  <noscript><style>
+    article figure,
+    article figure picture img,
+    ul[data-list-type=tiles] li {
+      opacity: 1 !important;
+    }
+  </style></noscript>
   {% block stats %}
   {% if STATS_WEBSITE_ID %}
   <script async src="{{ STATS_SCRIPTS_URL }}" data-website-id="{{ STATS_WEBSITE_ID }}"
