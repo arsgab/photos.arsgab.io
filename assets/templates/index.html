@@ -21,9 +21,10 @@
   <ul data-list-type="tiles">
   {% for article in articles %}<li data-list-item="{{ article.slug }}" style="--delay: {{ 100 * loop.index0 }}ms">
   {% set loading = 'lazy' if loop.index > 1 else 'eager' %}
+  {% set fetch_priority = 'auto' if loop.index > 1 else 'high' %}
   {% set cover = picture(
     article.cover,
-    width=300, ratio=1.0, loading=loading,
+    width=300, ratio=1.0, loading=loading, fetch_priority=fetch_priority,
     gravity='so', rt='fill-down'
   ) if article.cover else '' %}
   {% set color = article.color or 'white' %}

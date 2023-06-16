@@ -110,6 +110,7 @@ class Picture(HTMLParser):
 
     def get_context(self) -> dict:
         eager = self.attrs.get('lazy') == 'false' or 'eager' in self.attrs
+        fetch_priority = 'high' if self.index == 1 and eager else 'auto'
         span, offset = self.attrs.get('grid', '|').split('|')
         span = self.attrs.get('w') or span
         offset = self.attrs.get('x') or offset
@@ -120,6 +121,7 @@ class Picture(HTMLParser):
             'sources': self.resizes.sources,
             'fallback': self.resizes.fallback,
             'loading': self.Loading.EAGER if eager else self.Loading.LAZY,
+            'fetch_priority': fetch_priority,
             'dimensions': self.dimensions,
             'ratio': self.ratio,
             'alt': self.html_alt,
@@ -190,6 +192,7 @@ def render_picture_tag(
     width: int,
     ratio: float = PICTURE_DEFAULT_RATIO,
     loading: str = 'lazy',
+    fetch_priority: str = 'auto',
     **kwargs: Any,
 ) -> str:
     height = int(width * ratio)
@@ -205,6 +208,7 @@ def render_picture_tag(
         'sources': (source,),
         'fallback': fallback,
         'loading': loading,
+        'fetch_priority': fetch_priority,
         'ratio': ratio,
         'dimensions': (width, height),
     }
