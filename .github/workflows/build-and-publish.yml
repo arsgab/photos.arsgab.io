@@ -23,6 +23,7 @@ concurrency:
 env:
   AUTHOR: ${{ github.repository_owner }}
   STATS_WEBSITE_ID: ${{ vars.STATS_WEBSITE_ID }}
+  IMGPROXY_URL_SOURCE_FQDN: ${{ vars.IMGPROXY_URL_SOURCE_FQDN }}
   IMGPROXY_KEY: ${{ secrets.IMGPROXY_KEY }}
   IMGPROXY_SALT: ${{ secrets.IMGPROXY_SALT }}
   MAPBOX_API_TOKEN: ${{ vars.MAPBOX_API_TOKEN }}

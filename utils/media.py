@@ -13,6 +13,7 @@ from pelicanconf import (
     IMGPROXY_PLAIN_SOURCE_URL,
     IMGPROXY_SALT,
     IMGPROXY_URL_NAMESPACE as URL_NAMESPACE,
+    IMGPROXY_URL_SOURCE_FQDN as URL_SOURCE_FQDN,
 )
 
 assert bool(IMGPROXY_KEY), '`IMGPROXY_KEY` not set'
@@ -193,7 +194,12 @@ def _qualify_source_image_url(source_url: str) -> str:
     if source_url.startswith('http'):
         return source_url
     source_url = f'{URL_NAMESPACE}/{source_url}' if URL_NAMESPACE else source_url
-    return f'local:///{source_url}'
+    # Use remote source for images
+    if URL_SOURCE_FQDN:
+        return f'https://{URL_SOURCE_FQDN}/{source_url}'
+    # Use local (filesystem) source for images
+    else:
+        return f'local:///{source_url}'
 
 
 def _encode_source_image_url(source_url: str) -> str:
