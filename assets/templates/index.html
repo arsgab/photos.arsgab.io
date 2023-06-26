@@ -19,16 +19,20 @@
     </dt>
   </dl>
   <ul data-list-type="tiles">
-  {% for article in articles %}<li data-list-item="{{ article.slug }}" style="--delay: {{ 100 * loop.index0 }}ms">
-  {% set loading = 'lazy' if loop.index > 1 else 'eager' %}
-  {% set fetch_priority = 'auto' if loop.index > 1 else 'high' %}
+  {% for article in articles %}{% set styles = {
+    'delay': (100 * loop.index0)|string + 'ms',
+    'text-color': article.color or 'white',
+    'fallback': 'url({})'.format(img(article.cover, w=100, h=100, blur=30)),
+    'spot-angle': random(-90, 90)|string + 'deg',
+  } %}<li data-list-item="{{ article.slug }}" {{ styles|cssvars }}>
   {% set cover = picture(
     article.cover,
-    width=300, ratio=1.0, loading=loading, fetch_priority=fetch_priority,
+    width=300, ratio=1.0, loading=loading, fetch_priority=fetch_priority, alt=article.title,
     gravity='so', rt='fill-down'
   ) if article.cover else '' %}
-  {% set color = article.color or 'white' %}
-    <article style="--text-color: {{ color }}; --spot-angle: {{ random(-90, 90) }}deg">
+  {% set loading = 'lazy' if loop.index > 1 else 'eager' %}
+  {% set fetch_priority = 'auto' if loop.index > 1 else 'high' %}
+    <article>
       {{ cover }}
       <h2><a href="{{ article.url }}"><b>{{ article.title }}</b></a></h2>
       <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%Y') }}</time>

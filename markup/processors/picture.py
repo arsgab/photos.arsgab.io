@@ -193,6 +193,7 @@ def render_picture_tag(
     ratio: float = PICTURE_DEFAULT_RATIO,
     loading: str = 'lazy',
     fetch_priority: str = 'auto',
+    alt: str = '',
     **kwargs: Any,
 ) -> str:
     height = int(width * ratio)
@@ -211,5 +212,6 @@ def render_picture_tag(
         'fetch_priority': fetch_priority,
         'ratio': ratio,
         'dimensions': (width, height),
+        'alt': alt,
     }
     return render_template_partial('picture-tag', ctx)

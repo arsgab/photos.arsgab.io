@@ -15,10 +15,13 @@
   <link rel="apple-touch-icon" href="{{ static('apple-touch-icon.png') }}">
   <link rel="manifest" href="{{ static('manifest.webmanifest') }}">
   <link rel="stylesheet" href="{{ static('style.css') }}">
-  <script>window.addEventListener('load', () => {
-    document.documentElement.dataset.loaded = 'true';
-    document.documentElement.dataset.statEnabled = 'umami' in window ? 'true' : 'false';
-  })</script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => document.documentElement.dataset.domLoaded = 'true');
+    window.addEventListener('load', () => {
+      document.documentElement.dataset.loaded = 'true';
+      document.documentElement.dataset.statEnabled = 'umami' in window ? 'true' : 'false';
+    });
+  </script>
 {% if INLINE_SCRIPTS %}
   <script defer data-inline>{{ static_inline('scripts/*.js') }}</script>
 {% else %}

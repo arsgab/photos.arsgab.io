@@ -12,6 +12,11 @@ PointData = tuple[Article, Coords]
 LOCATIONS_DATASET = STATIC_ASSETS_PATH / 'locations.toml'
 
 
+def dict_to_css_variables(values: dict, only_values: bool = False) -> str:
+    variables = '; '.join(f'--{var}: {value}' for var, value in values.items())
+    return variables if only_values else f'style="{variables}"'
+
+
 class StrEnum(str, Enum):
     def __str__(self) -> str:
         return self.value
