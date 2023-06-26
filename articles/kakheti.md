@@ -1,5 +1,6 @@
 ---
 title: Kakheti
+subtitle: Bicycle trip from Tbilisi
 location: Saqartvelo
 slug: kakheti
 date: 2022-12-13
