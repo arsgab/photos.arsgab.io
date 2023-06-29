@@ -110,20 +110,6 @@ year = 2018
 coords = [42.6977028,23.3217359]
 year = 2021
 
-[antalya]
-coords = [36.8872942,30.7074549]
-year = 2022
-
-[kas]
-name = "Kaś"
-coords = [36.1993752,29.6413365]
-year = 2022
-
-[fethiye]
-name = "Kaś"
-coords = [36.6221019,29.1153234]
-year = 2022
-
 [rhodes]
 coords = [36.17263,27.9194181]
 year = 2022
