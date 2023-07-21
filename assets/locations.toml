@@ -3,6 +3,11 @@ name = "Barcelona"
 coords = [41.385063, 2.173404]
 year = 2022
 
+[bastia]
+name = "Bastia"
+coords = [42.6993979,9.4509187]
+year = 2017
+
 [valencia]
 name = "Valencia"
 coords = [39.4697065,-0.3763353]
