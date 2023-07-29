@@ -4,7 +4,7 @@ meta_title: Ege. Part 2
 location: Türkiye
 subtitle: Aegean sea region • Ayvalık → Bergama 
 slug: ege-2
-date: 2023-02-22
+date: 2023-02-23
 icon: 🇹🇷
 cover: ege/IMG_2756
 color: #F4AF3F

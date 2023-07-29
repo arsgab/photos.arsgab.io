@@ -2,7 +2,7 @@
 title: İzmir • Efes
 location: Türkiye
 slug: izmir-1
-date: 2023-02-23
+date: 2023-02-24
 icon: 🇹🇷
 cover: izmir/IMG_3027
 color: #586E3A
