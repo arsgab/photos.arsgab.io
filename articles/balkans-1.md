@@ -1,5 +1,5 @@
 ---
-title: Balkans
+title: Balkans: pt. 1
 subtitle: Sremska Mitrovica, Bogatić, Subotica, Novi Sad, Užice
 location: Srbija
 slug: balkans-1
