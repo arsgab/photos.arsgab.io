@@ -25,14 +25,6 @@ year = 2019
 coords = [44.841225,-0.5800364]
 year = 2019
 
-[marseille]
-coords = [43.2961743,5.3699525]
-year = 2019
-
-[nice]
-coords = [43.7009358,7.2683912]
-year = 2019
-
 [paris]
 coords = [48.8588897,2.320041]
 year = 2021
@@ -134,10 +126,6 @@ year = 2021
 [bergamo]
 coords = [45.7566557,9.7542192]
 year = 2021
-
-[genova]
-coords = [44.40726,8.9338624]
-year = 2018
 
 [bologna]
 coords = [44.4938203,11.3426327]
