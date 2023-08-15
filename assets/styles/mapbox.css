@@ -1,13 +1,14 @@
 :root {
   --map-height: calc(100vh - 4rem);
+  --map-padding: 2rem;
   --map-bg-color: #29292A;
   --popup-color: inherit;
 }
 
 [data-map-box-wrapper] {
   position: relative;
-  padding: 2rem;
-  margin-top: -2rem;
+  padding: var(--map-padding);
+  margin-top: calc(-1 * var(--map-padding));
 
   @media (--tablet) {
     padding: 1rem;
@@ -57,25 +58,16 @@ a[data-map-toggle] {
   overflow: hidden;
 
   &:not([hidden]) + dt {
-    top: 3rem;
-    overflow: hidden;
-    background: rgba(255, 255, 255, .75);
-    color: black;
-    font-weight: 600;
-    width: auto;
-    left: 3rem;
+    width: calc(var(--map-padding) * 2);
+    height: calc(var(--map-padding) * 2);
+    top: 0;
+    left: 0;
     right: auto;
-    padding: 4px 10px 4px 5px;
-    border-radius: 3px;
-    opacity: .5;
-    box-shadow: rgba(0, 0, 0, .75) 0 3px 12px;
-    border: 2px solid white;
-    white-space: nowrap;
+    opacity: .8;
 
     @media (--tablet) {
-      top: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
+      top: -.5rem;
+      left: -.5rem;
     }
 
     &::first-letter {
@@ -88,7 +80,18 @@ a[data-map-toggle] {
     }
 
     &::before {
-      content: attr(data-close-text);
+      content: "×";
+      display: block;
+      background: white;
+      color: var(--map-bg-color);
+      margin: 1rem auto 0 auto;
+      text-align: center;
+      width: var(--map-padding);
+      height: var(--map-padding);
+      border-radius: 50%;
+      font-size: 2em;
+      line-height: 1;
+      box-shadow: rgba(0, 0, 0, .75) 0 3px 10px;
     }
 
     & a {
