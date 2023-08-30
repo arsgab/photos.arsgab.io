@@ -1,10 +1,11 @@
 ---
-title: Marseille • Nice • Cannes • Genova
-location: Provence-Alpes-Côte d'Azur, Liguria
+title: Côte d'Azur • Liguria
+subtitle: Marseille → Nice → Cannes → Genova
+location: Francé, Italia
 slug: azur-liguria
 date: 2019-11-06
 cover: azur-liguria/IMG_2093.1187x2111
-color: #07573A
+color: #608853
 og_image: azur-liguria/IMG_2293.3031x2273
 coords: 5.3699525,43.2961743;7.2683912,43.7009358;8.9338624,44.40726
 ---

@@ -25,10 +25,6 @@ year = 2019
 coords = [44.841225,-0.5800364]
 year = 2019
 
-[paris]
-coords = [48.8588897,2.320041]
-year = 2021
-
 [amsterdam]
 coords = [52.3730796,4.8924534]
 year = 2018
@@ -99,14 +95,6 @@ year = 2010
 coords = [50.0874654,14.4212535]
 year = 2018
 
-[budapest]
-coords = [47.4979937,19.0403594]
-year = 2018
-
-[sofia]
-coords = [42.6977028,23.3217359]
-year = 2021
-
 [rhodes]
 coords = [36.17263,27.9194181]
 year = 2022
@@ -118,26 +106,6 @@ year = 2022
 [baku]
 coords = [40.3755885,49.8328009]
 year = 2016
-
-[milan]
-coords = [45.4641943,9.1896346]
-year = 2021
-
-[bergamo]
-coords = [45.7566557,9.7542192]
-year = 2021
-
-[bologna]
-coords = [44.4938203,11.3426327]
-year = 2021
-
-[florence]
-coords = [43.7698712,11.2555757]
-year = 2021
-
-[rome]
-coords = [41.8933203,12.4829321]
-year = 2021
 
 [bari]
 coords = [41.1257843,16.8620293]
