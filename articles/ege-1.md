@@ -100,12 +100,8 @@ coords: 26.3344,39.4926; 26.6924,39.3192
 
 [pic src=ege/IMG_2561 orient=landscape grid=7|0]
 
-[pic src=ege/IMG_2574 ratio=9:16 grid=4|5]
-
 [pic src=ege/IMG_2564 orient=landscape grid=6|6]
 
 [pic src=ege/IMG_2568 orient=landscape grid=7|1]
-
-[pic src=ege/IMG_2576 ratio=9:16 grid=4|3]
 
 [pic src=ege/IMG_2572 orient=landscape grid=8|2]
