@@ -12,7 +12,7 @@
 
 {% block content %}
   <dl data-map-box-wrapper>
-    <dd id="map" data-map-box data-map-token="{{ MAPBOX_API_TOKEN }}" data-map-zoom="4.3"
+    <dd id="map" data-map-box data-map-token="{{ MAPBOX_API_TOKEN }}"
         data-map-points-src="{{ api('points.json') }}" data-map-loc-src="{{ api('locations.json') }}" hidden></dd>
     <dt data-columned data-close-text="× Hide map">
       <a href="#map" data-map-toggle>Show photographed locations on map</a>

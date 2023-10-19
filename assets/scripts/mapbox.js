@@ -1,8 +1,10 @@
+const MAP_CENTER_COORDS = [20.4568974, 44.8178131];  // Belgrade
+const MAP_DEFAULT_ZOOM = 4.3;
 const MAPBOX = {
   selector: '#map',
   script: 'https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js',
   style: 'mapbox://styles/mapbox/dark-v11',
-  center: [46.6020, 39.3465],
+  center: MAP_CENTER_COORDS,
   pointLayout: {
     'circle-color': ['get', 'color'],
     'circle-stroke-width': 2,
@@ -55,7 +57,7 @@ function createMap(container, useWebGL2 = true) {
     container: container,
     style: MAPBOX.style,
     center: MAPBOX.center,
-    zoom: parseFloat(container.dataset.mapZoom || '9.0'),
+    zoom: parseFloat(container.dataset.mapZoom) || MAP_DEFAULT_ZOOM,
     attributionControl: false,
   });
   map.on('load', onMapLoad);
