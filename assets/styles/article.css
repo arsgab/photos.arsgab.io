@@ -30,20 +30,17 @@ article header {
     }
   }
 
+  & time,
   & p[data-prop=location] {
     display: inline-block;
     white-space: nowrap;
+  }
 
-    & + time {
-      display: inline-block;
-    }
-
-    &::after {
-      content: " /";
-      margin-left: .25em;
-      margin-right: .25em;
-      opacity: .5;
-    }
+  & p[data-prop=location]::before {
+    content: "/";
+    margin-left: .25em;
+    margin-right: .25em;
+    opacity: .5;
   }
 }
 

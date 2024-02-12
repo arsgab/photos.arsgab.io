@@ -7,8 +7,8 @@
   <article>
     <header style="--icon-angle: {{ random(-60, 60) }}deg" data-columned>
       <h1>{{ article.title|bulletify|safe }}</h1>
+      <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%B %Y') }}</time>
       {% if article.location %}<p data-prop="location" data-icon="{{ article.icon }}">{{ article.location }}</p>{% endif %}
-      <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%b %Y') }}</time>
       {% if article.subtitle %}<p data-prop="subtitle">{{ article.subtitle }}</p>{% endif %}
     </header>
     <div data-grid>{{ article.content }}</div>
