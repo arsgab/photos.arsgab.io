@@ -41,7 +41,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - name: Load cached Poetry installation
         id: cached-poetry
         uses: actions/cache@v3
@@ -75,7 +75,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '21'
           cache: 'npm'
       - name: Install Node requirements
         run: npm ci
