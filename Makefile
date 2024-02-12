@@ -1,13 +1,11 @@
-PY?=
-VENV?=.venv
-PELICAN?=$(VENV)/bin/pelican
-PELICANOPTS=
+VENV ?= $(poetry env info --path)
+PELICAN ?= $(VENV)/bin/pelican
+PELICANOPTS =
 
-BASEDIR=$(CURDIR)
-INPUTDIR=$(BASEDIR)/articles
-OUTPUTDIR=$(BASEDIR)/dist
-CONFFILE=$(BASEDIR)/pelicanconf.py
-
+BASEDIR = $(CURDIR)
+INPUTDIR = $(BASEDIR)/articles
+OUTPUTDIR = $(BASEDIR)/dist
+CONFFILE = $(BASEDIR)/pelicanconf.py
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
@@ -26,7 +24,6 @@ ifneq ($(PORT), 0)
 	PELICANOPTS += -p $(PORT)
 endif
 
-
 help:
 	@echo 'Makefile for a pelican Web site                                           '
 	@echo '                                                                          '
@@ -34,7 +31,6 @@ help:
 	@echo '   make html                           (re)generate the web site          '
 	@echo '   make clean                          remove the generated files         '
 	@echo '   make regenerate                     regenerate files upon modification '
-	@echo '   make publish                        generate using production settings '
 	@echo '   make serve [PORT=8000]              serve site at http://localhost:8000'
 	@echo '   make serve-global [SERVER=0.0.0.0]  serve (as root) to $(SERVER):80    '
 	@echo '   make devserver [PORT=8000]          serve and regenerate together      '
@@ -89,4 +85,4 @@ edit:
 	make devserver &
 	npm run bs
 
-.PHONY: html help clean regenerate serve serve-global devserver publish 
+.PHONY: html help clean regenerate serve serve-global devserver fmt lint static statichash watch edit
