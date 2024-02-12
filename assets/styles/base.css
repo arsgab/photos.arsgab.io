@@ -43,12 +43,12 @@ a {
 }
 
 header[role=banner] {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 
   & a, & h1 {
-    opacity: .6;
+    opacity: .55;
     font-size: .75em;
-    font-weight: 400;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .25em;
     position: relative;
@@ -72,7 +72,7 @@ header[role=banner] {
       content: "←";
       position: absolute;
       left: -.4em;
-      font-weight: 600;
+      font-weight: 400;
       opacity: .8;
     }
   }
@@ -107,9 +107,9 @@ header[role=banner] {
   }
 
   & p {
-    font-size: 1.5em;
-    font-weight: 600;
-    line-height: 1.5;
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 1.25;
     margin: 1rem 0;
   }
 }

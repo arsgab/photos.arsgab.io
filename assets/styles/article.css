@@ -1,15 +1,22 @@
 article header {
   & h1 {
-    font-size: 6em;
+    font-size: 8em;
     line-height: 1;
-    font-weight: 800;
-    position: relative;
-    margin-bottom: 2rem;
-    margin-left: -.05em;
+    font-weight: 700;
+    letter-spacing: -.05em;
+    margin-bottom: 1rem;
+    margin-left: -.07em;
+
+    & b {
+      font-weight: 300;
+      position: relative;
+      top: .05em;
+      opacity: .5;
+      user-select: none;
+    }
 
     @media (--tablet) {
       font-size: 4em;
-      margin-bottom: 1rem;
     }
 
     @media (--mobile) {
@@ -24,40 +31,19 @@ article header {
   }
 
   & p[data-prop=location] {
-    position: relative;
-    font-size: 2em;
-    line-height: .8;
+    display: inline-block;
+    white-space: nowrap;
+
+    & + time {
+      display: inline-block;
+    }
 
     &::after {
-      content: attr(data-icon);
-      position: absolute;
-      left: 0;
-      top: 100%;
-      font-size: 2em;
+      content: " /";
+      margin-left: .25em;
+      margin-right: .25em;
       opacity: .5;
-      transform: translateX(-70%) rotate(var(--icon-angle));
-
-      @media (--tablet) {
-        left: auto;
-        top: -.25rem;
-        font-size: 1.2em;
-        transform: none;
-        margin-left: .2em;
-      }
     }
-
-    @media (--tablet) {
-      font-size: 1.2em;
-      line-height: 1;
-    }
-  }
-
-  & time {
-    text-transform: uppercase;
-    font-size: .7em;
-    letter-spacing: .2em;
-    font-weight: 600;
-    opacity: .6;
   }
 }
 

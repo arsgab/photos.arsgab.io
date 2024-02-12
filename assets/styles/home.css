@@ -76,15 +76,16 @@ ul[data-list-type="tiles"] {
   }
 
   & h2 {
-    font-size: 1em;
-    font-weight: 600;
+    font-size: 1.2em;
+    line-height: 1;
+    font-weight: 700;
     margin-top: 1rem;
   }
 
   & time {
     opacity: .5;
     font-size: .75em;
-    letter-spacing: .15em;
+    letter-spacing: .2em;
   }
 
   & a {

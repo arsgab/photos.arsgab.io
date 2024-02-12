@@ -6,8 +6,8 @@
   {% if article.json_ld %}<script type="application/ld+json">{{ article.json_ld|tojson }}</script>{% endif %}
   <article>
     <header style="--icon-angle: {{ random(-60, 60) }}deg" data-columned>
+      <h1>{{ article.title|bulletify|safe }}</h1>
       {% if article.location %}<p data-prop="location" data-icon="{{ article.icon }}">{{ article.location }}</p>{% endif %}
-      <h1>{{ article.title }}</h1>
       <time datetime="{{ article.date|strftime('%Y-%m-%d') }}">{{ article.date|strftime('%b %Y') }}</time>
       {% if article.subtitle %}<p data-prop="subtitle">{{ article.subtitle }}</p>{% endif %}
     </header>

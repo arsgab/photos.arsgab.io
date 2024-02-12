@@ -97,3 +97,8 @@ def extract_all_articles_colors(articles: Iterable[Article]) -> Iterator[str]:
         color = article.metadata.get('color')
         if color:
             yield color.lower()
+
+
+def wrap_bullets(text: str) -> str:
+    text = text.replace('•', '<b>•</b>')
+    return text

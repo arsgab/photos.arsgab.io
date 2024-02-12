@@ -126,7 +126,7 @@ a[data-map-toggle] {
   & a {
     display: block;
     padding: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-shadow: black 0 1px 10px, rgba(0, 0, 0, .9) 0 3px 15px, rgba(0, 0, 0, .8) 0 5px 20px;
 
     &:after {

@@ -16,7 +16,7 @@ from utils.datastructures import (
 )
 from utils.media import get_processed_image_url
 from utils.staticfiles import get_static_url, inline_static_assets
-from utils.templating import get_articles_colors_list, render_page_metadata
+from utils.templating import get_articles_colors_list, render_page_metadata, wrap_bullets
 from utils.url import get_datafile_url, qualify_url
 
 GLOBALS = {
@@ -34,6 +34,7 @@ GLOBALS = {
 FILTERS = {
     'qualify': qualify_url,
     'cssvars': dict_to_css_variables,
+    'bulletify': wrap_bullets,
 }
 
 POINTS_GEOJSON = DATAFILES_PATH / 'points.json'
