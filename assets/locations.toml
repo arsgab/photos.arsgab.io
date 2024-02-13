@@ -149,6 +149,10 @@ year = 2022
 coords = [57.8173923,28.3343465]
 year = 2011
 
+[kaliningrad]
+coords = [54.710128,20.5105838]
+year = 2021
+
 [voronezh]
 coords = [51.6605982,39.2005858]
 year = 2020
