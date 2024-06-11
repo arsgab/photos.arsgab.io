@@ -1,4 +1,4 @@
-VENV ?= $(poetry env info --path)
+VENV ?= $(shell poetry env info --path)
 PELICAN ?= $(VENV)/bin/pelican
 PELICANOPTS =
 
