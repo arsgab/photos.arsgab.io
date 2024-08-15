@@ -1,6 +1,7 @@
 ---
 title: Balkans: pt. 2
 subtitle: Šarganska osmica, Tara, Smederevo, Višegrad
+meta_title: Balkans. Part 2
 location: Srbija, Republika Srpska
 slug: balkans-2
 date: 2023-07-17
