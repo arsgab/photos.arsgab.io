@@ -1,5 +1,6 @@
 ---
-title: Bosna i Hercegovina
+title: Bosna i Hercegovina: pt. 1
+meta_title: Bosna i Hercegovina. Part 1
 subtitle: Zvornik → Sarajevo → Jablanica
 slug: bih-1
 date: 2024-07-04
