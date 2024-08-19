@@ -56,7 +56,7 @@ coords: 19.4795213,44.8343025;19.6653273,46.1002058;19.8451756,45.2551338;19.842
 
 [pic src="balkans/IMG_5850.1644x2922" grid=4|3]
 
-[pic src="balkans/IMG_5854.2148x3819" grid=4|4]
+[pic src="balkans/IMG_5854.2570x3427" grid=5|4]
 
 [pic src="balkans/IMG_5855.1204x2139" grid=3|1]
 
