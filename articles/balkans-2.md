@@ -1,17 +1,18 @@
 ---
 title: Balkans: pt. 2
-subtitle: Šarganska osmica, Tara, Smederevo, Višegrad
+subtitle: Šarganska osmica, Tara, Smederevo, Višegrad, Valjevo
 meta_title: Balkans. Part 2
 location: Srbija, Republika Srpska
 slug: balkans-2
 date: 2023-07-17
+date_end: 2024-03-09
 cover: balkans/IMG_6188.1415x2515
 color: #66852D
 og_image: balkans/IMG_6162.2820x1586
 coords: 20.9271115,44.6651048;19.3997094,43.8823606;19.294097,43.7864291
 ---
 
-[pic src=balkans/IMG_6146.2109x3750 grid=4|3]
+[pic src=balkans/IMG_6146.2109x3750 grid=4|3 eager]
 
 [pic src=balkans/IMG_6132.2031x3611 grid=4|7]
 
@@ -134,3 +135,17 @@ coords: 20.9271115,44.6651048;19.3997094,43.8823606;19.294097,43.7864291
 [pic src=balkans/IMG_6918.2268x4032 grid=4|1]
 
 [pic src=balkans/IMG_6920.2516x1415 grid=8|4]
+
+[pic src="balkans/IMG_1945.1629x2896" grid=4|3]
+
+[pic src="balkans/IMG_1942.1858x3302" grid=4|3]
+
+[pic src="balkans/IMG_1941.1574x2798" grid=4|3]
+
+[pic src="balkans/IMG_1926.1953x3472" grid=4|3]
+
+[pic src="balkans/IMG_1907.2913x3884" grid=4|3]
+
+[pic src="balkans/IMG_1906.4018x2260" grid=4|3]
+
+[pic src="balkans/IMG_2216.2085x3706" grid=4|3]

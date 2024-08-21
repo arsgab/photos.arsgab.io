@@ -1,8 +1,10 @@
 ---
-title: Beograd
+title: Beograd: pt. 1
+meta_title: Beograd. Part 1
 location: Srbija
 slug: beograd
 date: 2023-03-15
+date_end: 2023-05-30
 icon: 🇷🇸
 cover: beograd/IMG_3913.1751x3111
 color: #D65549
