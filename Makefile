@@ -1,4 +1,4 @@
-VENV ?= $(shell poetry env info --path)
+VENV ?= .venv
 PELICAN ?= $(VENV)/bin/pelican
 PELICANOPTS =
 
@@ -62,20 +62,20 @@ devserver-global:
 	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS) -b 0.0.0.0
 
 fmt:
-	$(VENV)/bin/isort .
-	$(VENV)/bin/black .
+	uv run isort .
+	uv run black .
 
 lint:
-	$(VENV)/bin/flake8 .
-	$(VENV)/bin/isort --check-only --diff .
-	$(VENV)/bin/black --check .
+	uv run flake8 .
+	uv run isort --check-only --diff .
+	uv run black --check .
 
 static:
 	npm run build
 	make statichash
 
 statichash:
-	$(VENV)/bin/invoke staticfiles
+	uv run invoke staticfiles
 
 watch:
 	npm run watch &

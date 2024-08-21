@@ -8,7 +8,7 @@ load_dotenv()
 
 # Site setup
 AUTHOR = env.get('AUTHOR')
-SITENAME = env.get('SITENAME') or 'photos•arsgab•io'
+SITENAME = env.get('SITENAME') or 'The Picture Is an Image'
 SITE_FQDN = env.get('SITE_FQDN') or 'photos.arsgab.io'
 SITEDESC = env.get('SITEDESC') or 'Personal photo archive'
 TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
