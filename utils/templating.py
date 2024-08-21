@@ -1,3 +1,4 @@
+from datetime import date
 from random import shuffle as random_shuffle
 from typing import Iterable, Iterator, NamedTuple
 
@@ -81,6 +82,20 @@ class PageMetadata(NamedTuple):
 def render_page_metadata(ctx: Context) -> str:
     metadata = PageMetadata.from_context(ctx)
     return render_template_partial('pagemeta', {'meta': metadata})
+
+
+@pass_context
+def format_article_date_period(ctx: Context, date_format: str = '%Y-%m-%d') -> str:
+    article = ctx.get('article')
+    if not article:
+        return ''
+    date_start: str = article.date.strftime(date_format)
+    date_end: str = getattr(article, 'date_end', '')
+    try:
+        date_end: date = date.fromisoformat(date_end)
+    except ValueError:
+        return date_start
+    return f'{date_start} ... {date_end.strftime(date_format)}'
 
 
 @pass_context

@@ -16,7 +16,12 @@ from utils.datastructures import (
 )
 from utils.media import get_processed_image_url
 from utils.staticfiles import get_static_url, inline_static_assets
-from utils.templating import get_articles_colors_list, render_page_metadata, wrap_bullets
+from utils.templating import (
+    format_article_date_period,
+    get_articles_colors_list,
+    render_page_metadata,
+    wrap_bullets,
+)
 from utils.url import get_datafile_url, qualify_url
 
 GLOBALS = {
@@ -29,6 +34,7 @@ GLOBALS = {
     'img': get_processed_image_url,
     'pagemeta': render_page_metadata,
     'colors': get_articles_colors_list,
+    'article_date_period': format_article_date_period,
 }
 
 FILTERS = {
