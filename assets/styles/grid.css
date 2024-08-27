@@ -1,5 +1,9 @@
 [data-grid] {
+  --page-margin: 20px;
+
   position: relative;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
 
   & [data-span="1"] {
     width: 8.333%;
@@ -90,6 +94,8 @@
   }
 
   @media (--mobile) {
+    --page-margin: 10px;
+
     & [data-span] {
       width: 91.666%;
     }

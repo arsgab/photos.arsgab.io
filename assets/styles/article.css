@@ -45,6 +45,9 @@ article header {
 }
 
 article figure {
+  --max-height: 96vh;
+  --like-icon: "🤍";
+
   position: relative;
   margin: 5rem 0;
   transition: opacity .5s ease-in-out .25s;
@@ -58,7 +61,7 @@ article figure {
   }
 
   &::before {
-    content: "🤍";
+    content: var(--like-icon);
     display: none;
     position: absolute;
     top: 0;
@@ -93,8 +96,10 @@ article figure {
 
   & picture {
     position: relative;
-    padding-top: calc(100% / var(--ratio));
     overflow: hidden;
+    aspect-ratio: var(--ratio);
+    max-height: var(--max-height);
+    width: auto;
 
     &[data-loaded=true] img {
       opacity: 1;
@@ -124,8 +129,8 @@ article figure {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
     opacity: 0;
     transition: opacity .15s ease-in-out;
     color: rgba(255, 255, 255, .2);
@@ -133,10 +138,10 @@ article figure {
   }
 
   & figcaption {
-    text-align: center;
     opacity: .75;
     font-size: .75em;
-    line-height: 2;
+    line-height: 3;
+    letter-spacing: .2em;
   }
 
   & figcaption a {
@@ -154,12 +159,13 @@ article figure {
         display: block;
         position: absolute;
         right: 100%;
-        top: 25%;
+        top: 30%;
         width: .6em;
         height: .6em;
         margin-right: .5em;
-        border-radius: 100%;
-        background: var(--text-color);
+        border-radius: 50%;
+        border: 1px solid currentColor;
+        opacity: .75;
       }
     }
   }
