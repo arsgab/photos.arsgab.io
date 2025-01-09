@@ -113,6 +113,14 @@ header[role=banner] {
     font-weight: 700;
     line-height: 1.25;
     margin: 1rem 0;
+
+    & i {
+      /* font-family: var(--serif-font-family); */
+      font-style: normal;
+      font-weight: 300;
+      font-size: .7em;
+      opacity: 0.9;
+    }
   }
 }
 
