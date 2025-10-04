@@ -66,5 +66,9 @@
 
 {% block footer %}{% endblock %}
 
+{% if CF_BEACON %}
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ CF_BEACON }}"}'></script>
+{% endif %}
+
 </body>
 </html>

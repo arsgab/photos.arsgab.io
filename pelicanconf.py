@@ -15,6 +15,7 @@ TIMEZONE = env.get('TIMEZONE', 'Europe/Belgrade')
 DEFAULT_DATE = 'fs'
 STATS_SCRIPTS_URL = env.get('STATS_SCRIPTS_URL') or 'https://stat.arsgab.io/stonks'
 STATS_WEBSITE_ID = env.get('STATS_WEBSITE_ID')
+CF_BEACON = env.get('CF_BEACON')
 DEFAULT_OG_IMAGE = env.get('DEFAULT_OG_IMAGE') or 'share.png'
 
 # Build setup
