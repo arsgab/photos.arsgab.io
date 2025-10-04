@@ -1,6 +1,6 @@
+from collections.abc import Iterable, Iterator
 from enum import Enum
 from tomllib import load as toml_load
-from typing import Iterable, Iterator
 
 from pelican.contents import Article
 

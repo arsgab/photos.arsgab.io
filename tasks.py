@@ -70,7 +70,7 @@ def serve(c):
         # Open site in default browser
         import webbrowser
 
-        webbrowser.open("http://{host}:{port}".format(**CONFIG))
+        webbrowser.open('http://{host}:{port}'.format(**CONFIG))
 
     sys.stderr.write('Serving at {host}:{port} ...\n'.format(**CONFIG))
     server.serve_forever()
@@ -103,17 +103,17 @@ def livereload(c):
     theme_path = SETTINGS['THEME']
     watched_globs = [
         CONFIG['settings_base'],
-        '{}/templates/**/*.html'.format(theme_path),
+        f'{theme_path}/templates/**/*.html',
     ]
 
     content_file_extensions = ['.md', '.rst']
     for extension in content_file_extensions:
-        content_glob = '{0}/**/*{1}'.format(SETTINGS['PATH'], extension)
+        content_glob = '{}/**/*{}'.format(SETTINGS['PATH'], extension)
         watched_globs.append(content_glob)
 
     static_file_extensions = ['.css', '.js']
     for extension in static_file_extensions:
-        static_file_glob = '{0}/static/**/*{1}'.format(theme_path, extension)
+        static_file_glob = f'{theme_path}/static/**/*{extension}'
         watched_globs.append(static_file_glob)
 
     for glob in watched_globs:
@@ -123,7 +123,7 @@ def livereload(c):
         # Open site in default browser
         import webbrowser
 
-        webbrowser.open("http://{host}:{port}".format(**CONFIG))
+        webbrowser.open('http://{host}:{port}'.format(**CONFIG))
 
     server.serve(host=CONFIG['host'], port=CONFIG['port'], root=CONFIG['deploy_path'])
 

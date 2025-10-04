@@ -1,6 +1,7 @@
+from collections.abc import Iterable, Iterator
 from datetime import date
 from random import shuffle as random_shuffle
-from typing import Iterable, Iterator, NamedTuple
+from typing import NamedTuple
 
 from jinja2 import pass_context
 from jinja2.filters import do_mark_safe

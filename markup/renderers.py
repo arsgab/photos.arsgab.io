@@ -7,7 +7,7 @@ from pelican import ArticlesGenerator, signals
 from pelican.contents import Article
 
 from markup import renderer_ref
-from markup.processors.picture import Picture, picture_processor_context_ref, render_picture_tag
+from markup.processors.picture import Picture, get_picture_context, render_picture_tag
 from pelicanconf import DATAFILES_PATH
 from utils.datastructures import (
     dict_to_css_variables,
@@ -55,13 +55,13 @@ def setup_jinja_env(generator: ArticlesGenerator) -> Environment:
 
 
 def update_article_context(article_generator: ArticlesGenerator, content: Article) -> None:
-    picture_processor_context = picture_processor_context_ref.get()
-    if not picture_processor_context:
+    ctx = get_picture_context()
+    if not ctx:
         return
-    key, *_ = picture_processor_context.keys()
-    pictures = picture_processor_context.pop(key)
+    key, *_ = ctx.keys()
+    pictures = ctx.pop(key)
     json_ld = Picture.create_json_ld(pictures)
-    setattr(content, 'json_ld', list(json_ld))
+    content.json_ld = list(json_ld)
 
 
 def write_points_geojson(article_generator: ArticlesGenerator) -> None:

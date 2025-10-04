@@ -1,7 +1,8 @@
 import hashlib
 from collections.abc import Iterable
 from functools import cache
-from json import dumps as json_dumps, loads as json_loads
+from json import dumps as json_dumps
+from json import loads as json_loads
 from random import choice as rand_choice
 from string import ascii_lowercase
 

@@ -4,33 +4,44 @@ version = "1.0.0"
 description = "Static site generator for personal photos archive"
 authors = [{name = "Arseny Gabdullin", email = "me@arsgab.io"}]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
     "python-dotenv>=1.0.1",
     "invoke>=2.2.0",
     "pelican[markdown]>=4.9.1",
 ]
 
-[tool.uv]
-dev-dependencies = [
-    "flake8>=7.1.1",
-    "black>=24.8.0",
-    "isort>=5.13.2",
+[dependency-groups]
+dev = [
+    "dotenv>=0.9.9",
+    "ruff>=0.12.0",
 ]
 
-[tool.setuptools]
-py-modules = []
+[tool.uv]
+package = false
 
-[tool.black]
-target-version = ["py312"]
-skip-string-normalization = true
-line_length = 100
+[tool.ruff]
+target-version = "py313"
+line-length = 100
 
-[tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-use_parentheses = true
-line_length = 100
-combine_as_imports = true
-combine_star = true
-known_third_party = ["pelikan"]
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+extend-select = ["W292"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false

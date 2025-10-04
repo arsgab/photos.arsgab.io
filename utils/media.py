@@ -1,10 +1,12 @@
 from base64 import urlsafe_b64encode
+from collections.abc import Iterable, Iterator
 from hashlib import sha256
 from hmac import new as hmac_new
 from os.path import splitext
-from re import VERBOSE, compile as re_compile
+from re import VERBOSE
+from re import compile as re_compile
 from textwrap import wrap
-from typing import Any, Iterable, Iterator, NamedTuple, Optional
+from typing import Any, NamedTuple, Optional
 
 from pelicanconf import (
     IMGPROXY_DEFAULT_QUALITY,
@@ -12,7 +14,11 @@ from pelicanconf import (
     IMGPROXY_KEY,
     IMGPROXY_PLAIN_SOURCE_URL,
     IMGPROXY_SALT,
+)
+from pelicanconf import (
     IMGPROXY_URL_NAMESPACE as URL_NAMESPACE,
+)
+from pelicanconf import (
     IMGPROXY_URL_SOURCE_FQDN as URL_SOURCE_FQDN,
 )
 
@@ -26,10 +32,10 @@ MAX_IMAGE_WIDTH = 1400
 MAX_SOURCE_WIDTH = 9999
 DEFAULT_BREAKPOINTS: tuple[int, ...] = (320, 480, 640, 800, 960, 1024, 1280)
 SIZED_IMAGE_FILENAME_PATTERN = re_compile(
-    r'''
+    r"""
     ^(?P<base>.+)  # base, e.g. istanbul/IMG_1850
     \.(?P<width>\d+)x(?P<height>\d+)$  # {width}x{height}, e.g. 800x600
-''',
+""",
     flags=VERBOSE,
 )
 
@@ -98,8 +104,7 @@ class ImageResize(NamedTuple):
     def media_query_full(self) -> str:
         if self.previous:
             return (
-                f'(min-width: {self.previous.width + 1}px) '
-                f'and ({self.condition}: {self.width}px)'
+                f'(min-width: {self.previous.width + 1}px) and ({self.condition}: {self.width}px)'
             )
         return self.media_query
 

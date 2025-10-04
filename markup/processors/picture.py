@@ -3,9 +3,11 @@ from collections.abc import Iterable, Iterator
 from contextlib import suppress
 from contextvars import ContextVar
 from html.parser import HTMLParser
-from re import Pattern, compile as re_compile
+from re import Pattern
+from re import compile as re_compile
 from typing import Any
-from xml.etree.ElementTree import Element, fromstring as xml_from_string
+from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import fromstring as xml_from_string
 
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
@@ -22,14 +24,24 @@ from utils import (
 PICTURE_DEFAULT_RATIO = 1.777  # 16:9
 PICTURE_RATIO_PRECISION = 3
 PICTURE_JSON_LD_BASE = {
-    "@context": "https://schema.org/",
-    "@type": "ImageObject",
-    "creator": {"@type": "Person", "name": AUTHOR},
+    '@context': 'https://schema.org/',
+    '@type': 'ImageObject',
+    'creator': {'@type': 'Person', 'name': AUTHOR},
 }
 PICTURE_JSON_LD_MAX_ITEMS = 10
-picture_processor_context_ref: ContextVar[defaultdict[int, deque['Picture']]] = ContextVar(
-    'picture_processor_context', default=defaultdict(deque)
+
+PictureContext = defaultdict[int, deque['Picture']]
+_picture_processor_context_ref: ContextVar[PictureContext | None] = ContextVar(
+    'picture_processor_context', default=None
 )
+
+
+def get_picture_context() -> PictureContext:
+    ctx = _picture_processor_context_ref.get()
+    if not ctx:
+        ctx = defaultdict(deque)
+        _picture_processor_context_ref.set(ctx)
+    return ctx
 
 
 class Picture(HTMLParser):
@@ -172,8 +184,7 @@ class PictureBlockProcessor(BlockProcessor):
         picture.index = self._count
         parent.append(picture.create_element())
         picture.close()
-        refs = picture_processor_context_ref.get()
-        refs[id(self)].append(picture)
+        get_picture_context()[id(self)].append(picture)
         return True
 
 

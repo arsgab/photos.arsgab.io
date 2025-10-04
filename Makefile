@@ -62,13 +62,10 @@ devserver-global:
 	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS) -b 0.0.0.0
 
 fmt:
-	uv run isort .
-	uv run black .
+	uv run ruff format
 
 lint:
-	uv run flake8 .
-	uv run isort --check-only --diff .
-	uv run black --check .
+	uv run ruff check --fix
 
 static:
 	npm run build
