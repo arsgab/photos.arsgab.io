@@ -28,7 +28,7 @@
   {% set cover = picture(
     article.cover,
     width=300, ratio=1.0, loading=loading, fetch_priority=fetch_priority, alt=article.title,
-    gravity='so', rt='fill-down'
+    fit='cover', gravity='bottom'
   ) if article.cover else '' %}
   {% set loading = 'lazy' if loop.index > 1 else 'eager' %}
   {% set fetch_priority = 'auto' if loop.index > 1 else 'high' %}

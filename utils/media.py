@@ -10,24 +10,18 @@ from typing import Any, NamedTuple, Optional
 
 from pelicanconf import (
     IMGPROXY_DEFAULT_QUALITY,
-    IMGPROXY_FQDN,
     IMGPROXY_KEY,
-    IMGPROXY_PLAIN_SOURCE_URL,
     IMGPROXY_SALT,
-)
-from pelicanconf import (
-    IMGPROXY_URL_NAMESPACE as URL_NAMESPACE,
-)
-from pelicanconf import (
-    IMGPROXY_URL_SOURCE_FQDN as URL_SOURCE_FQDN,
+    IMGRESIZE_SERVICE_BASE_PATH,
+    IMGRESIZE_SERVICE_FQDN,
+    IMGSTORE_SERVICE_BASE_PATH,
+    IMGSTORE_SERVICE_FQDN,
 )
 
-assert bool(IMGPROXY_KEY), '`IMGPROXY_KEY` not set'
-assert bool(IMGPROXY_SALT), '`IMGPROXY_SALT` not set'
-KEY = bytes.fromhex(IMGPROXY_KEY)
-SALT = bytes.fromhex(IMGPROXY_SALT)
+_KEY = bytes.fromhex(IMGPROXY_KEY or '')
+_SALT = bytes.fromhex(IMGPROXY_SALT or '')
 
-IMAGE_DEFAULT_EXT = '.jpeg'
+DEFAULT_IMAGE_EXTENSION = '.jpeg'
 MAX_IMAGE_WIDTH = 1400
 MAX_SOURCE_WIDTH = 9999
 DEFAULT_BREAKPOINTS: tuple[int, ...] = (320, 480, 640, 800, 960, 1024, 1280)
@@ -42,28 +36,20 @@ SIZED_IMAGE_FILENAME_PATTERN = re_compile(
 
 def get_processed_image_url(
     source_url_or_path: str,
-    encode_source_url: bool = not IMGPROXY_PLAIN_SOURCE_URL,
-    ext: str = 'webp',
+    encode_source_url: bool = False,
+    ext: str = 'auto',
     **options: Any,
 ) -> str:
     if not source_url_or_path:
         return ''
-
     source_url = _qualify_source_image_url(source_url_or_path)
-    if encode_source_url:
-        source_url = _encode_source_image_url(source_url)
-    else:
-        source_url = f'plain/{source_url}'
-    processing_options = '/'.join(f'{k}:{v}' for k, v in options.items() if v is not None)
-    path = f'/{processing_options}/{source_url}' if processing_options else f'/{source_url}'
-    if ext is not None:
-        path = f'{path}.{ext}' if encode_source_url else f'{path}@{ext}'
-    signature = _generate_image_path_signature(path).decode()
-    return f'https://{IMGPROXY_FQDN}/{signature}{path}'
+    options |= {'format': ext, 'metadata': 'none'}
+    processing_options = ','.join(f'{k}={v}' for k, v in options.items() if v is not None)
+    return f'https://{IMGRESIZE_SERVICE_FQDN}{IMGRESIZE_SERVICE_BASE_PATH}{processing_options}/{source_url}'
 
 
 def get_resized_image_url(source_url: str, width: int, ext: str = 'webp', **extra: Any) -> str:
-    return get_processed_image_url(source_url, w=width, ext=ext, **extra)
+    return get_processed_image_url(source_url, width=width, ext=ext, **extra)
 
 
 class ImageDimensions(NamedTuple):
@@ -195,16 +181,11 @@ def _qualify_source_image_url(source_url: str) -> str:
         img_base = f'{img_base}{img_ext}'
         img_ext = None
 
-    source_url = img_base + (img_ext or IMAGE_DEFAULT_EXT)
+    source_url = img_base + (img_ext or DEFAULT_IMAGE_EXTENSION)
     if source_url.startswith('http'):
         return source_url
-    source_url = f'{URL_NAMESPACE}/{source_url}' if URL_NAMESPACE else source_url
-    # Use remote source for images
-    if URL_SOURCE_FQDN:
-        return f'https://{URL_SOURCE_FQDN}/{source_url}'
-    # Use local (filesystem) source for images
-    else:
-        return f'local:///{source_url}'
+
+    return f'https://{IMGSTORE_SERVICE_FQDN}{IMGSTORE_SERVICE_BASE_PATH}{source_url}'
 
 
 def _encode_source_image_url(source_url: str) -> str:
@@ -213,5 +194,5 @@ def _encode_source_image_url(source_url: str) -> str:
 
 
 def _generate_image_path_signature(path: str) -> bytes:
-    digest = hmac_new(KEY, msg=SALT + path.encode(), digestmod=sha256).digest()
+    digest = hmac_new(_KEY, msg=_SALT + path.encode(), digestmod=sha256).digest()
     return urlsafe_b64encode(digest).rstrip(b'=')
